@@ -635,11 +635,11 @@ body, html {
   background: #239aa6;
 }
 
-/* ================= MOBILE VIEW ================= */
+
 @media (max-width: 768px) {
 
   .resetcontainer {
-    flex-direction: column; /* stack */
+    flex-direction: column; 
     padding: 1rem;
     gap: 1rem;
     height: auto;
@@ -658,7 +658,7 @@ body, html {
   border-radius: 20px;
 }
 
-  /* Full width form */
+ 
   .resetside {
     width: 100%;
     display: flex;
@@ -666,20 +666,20 @@ body, html {
     align-items: center; /* center everything */
   }
 
-  /* Center title */
+  
   .reset-title {
     text-align: center;
     width: 100%;
   }
 
-  /* Card styling */
+ 
   .resetcard {
     width: 100%;
     max-width: 350px;
     text-align: center;
   }
 
-  /* Inputs full width */
+ 
   .input-password {
     width: 100%;
   }
