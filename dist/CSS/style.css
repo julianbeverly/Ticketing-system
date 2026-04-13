@@ -46,7 +46,7 @@ html {
 
 /* Card */
 .login-card {
-  background: #fff;
+  /* background: #fff; */
   width: 100%;
   /* border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
@@ -210,7 +210,7 @@ html {
 
 /* Card */
 .otp-card {
-  background: #fff;
+  /* background: #fff; */
   width: 100%;
   /* border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
@@ -489,7 +489,7 @@ html {
   left: 12px;
   top: 30%;
   transform: translateY(-50%);
-  color: #888;
+  color: #9ec7e9;
   font-size: 14px;
 }
 
@@ -925,7 +925,7 @@ body {
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -1940,4 +1940,685 @@ svg {
 
 .btn-submit:hover {
   background-color: #0842a0;
+}
+
+/* Modal Styles reset password */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon {
+  font-size: 3rem;
+  color: #2bb3c0;
+  margin-bottom: 1rem;
+}
+
+.modal-content h3 {
+  color: #0057ff;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.modal-ok-btn {
+  padding: 10px 30px;
+  background: #0057ff;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-ok-btn:hover {
+  background: #239aa6;
+}
+
+
+/* TICKET DETAILS STYLES */
+
+
+/* General layout wrapper for the details view */
+.ticket-details-view {
+  padding: 1rem 2rem;
+}
+
+/* Two-column grid setup for the left card and right side communication log */
+.ticket-details-main {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 1.5rem;
+  /* Align to start so left card stretches based on content */
+  align-items: start;
+}
+
+/* LEFT PANEL (Ticket Info) */
+.td-left-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-color);
+}
+
+.td-header {
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+}
+
+.td-breadcrumb i {
+  font-size: 0.6rem;
+  margin: 0 0.5rem;
+}
+
+.td-id {
+  color: #1d4ed8;
+}
+
+/* Core Attributes Grid Layout */
+.td-attributes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.td-attr-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.td-attr {
+  display: flex;
+  align-items: center;
+  min-width: 220px;
+  gap: 1rem;
+}
+
+.td-lbl {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  width: 90px;
+}
+
+/* Distinctive status buttons (pills) */
+.td-pill {
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.pill-inprogress {
+  background-color: #ffedd5;
+  color: #ea580c;
+}
+
+.pill-critical {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.pill-grey {
+  background-color: #f3f4fa;
+  color: #1f2937;
+}
+
+/* Description Block */
+.td-description-sec {
+  margin-bottom: 1.5rem;
+}
+
+.td-description-sec h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.2rem;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.td-description-sec h3 i {
+  color: #2563eb;
+}
+
+.td-description-sec p {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+}
+
+.td-code {
+  background: #f1f5f9;
+  color: #2563eb;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+/* Attachment Carousel Styling */
+.td-attachment-carousel {
+  margin-bottom: 2.5rem;
+}
+
+.td-carousel-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 280px;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.td-carousel-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.carousel-img-lbl {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: #fff;
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: rgba(0,0,0,0.6);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Nav arrow inside carousel preview */
+.right-btn {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  color: #111;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.carousel-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+.carousel-dots .dot.active {
+  background: #2563eb;
+}
+
+.td-attachment-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+
+.att-name {
+  font-weight: 700;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+}
+
+.att-name i {
+  color: #2563eb;
+  font-size: 1rem;
+}
+
+.att-time {
+  color: #6b7280;
+}
+
+/* Footer Metadata row */
+.td-meta-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.td-meta-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.meta-lbl {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+}
+
+.meta-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* RIGHT PANEL (Communication Log) */
+.td-right-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.comm-header {
+  background: #fff;
+  padding: 1.25rem 1.5rem;
+  /* border-radius: 12px; */
+  /* margin-bottom: 1rem; */
+  position: relative;
+  /* box-shadow: 0 1px 3px rgba(0,0,0,0.05); */
+  border-bottom: 2px solid #f8fafc;
+}
+
+.comm-header h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.comm-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #10b981;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.comm-avatars {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.comm-avatars .avatar, .comm-avatars .avatar-more {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-left: -10px;
+}
+
+.comm-avatars .avatar-more {
+  background: #1d4ed8;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 10;
+}
+
+.comm-history {
+  flex-grow: 1;
+  background: #fff;
+  padding: 1.5rem;
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  /* border-radius: 12px; */
+}
+
+.comm-divider {
+  text-align: center;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.comm-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  z-index: 1;
+}
+
+.comm-divider span {
+  background: #fff;
+  padding: 0 1rem;
+  color: #9ca3af;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 2;
+}
+
+/* Individual Chat Messages */
+.chat-msg {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.avatar-me {
+  background: #0b57d0;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.chat-content {
+  flex-grow: 1;
+}
+
+.chat-head {
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+.chat-time {
+  color: #6b7280;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.right-head {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.4rem;
+}
+
+.right-head .chat-time {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.align-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.chat-bubble {
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 90%;
+}
+
+.chat-bubble p {
+  margin: 0;
+  color: #374151;
+}
+
+/* Recieved chat bubbles styling */
+.chat-bubble.received {
+  background: #f8faff;
+  border-top-left-radius: 0;
+}
+
+/* Inline code snippet styled inside a paragraph */
+.td-code-inline {
+  background: transparent;
+  color: #111;
+  font-family: monospace;
+}
+
+/* Sent chat bubbles styling (representing 'ME') */
+.chat-bubble.sent {
+  background: #0b57d0;
+  color: #fff;
+  border-top-right-radius: 0;
+}
+
+.chat-bubble.sent p {
+  color: #fff;
+}
+
+/* Internal Attachment (Document) within chat */
+.chat-attachment {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  border: 1px solid #e5e7eb;
+}
+
+.att-icon {
+  width: 40px;
+  height: 40px;
+  background: #f8faff;
+  color: #2563eb;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-right: 0.75rem;
+}
+
+.att-det {
+  flex-grow: 1;
+}
+
+.att-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #111827;
+  margin-bottom: 0.2rem;
+}
+
+.att-sub {
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.att-dl {
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.att-dl:hover {
+  color: #2563eb;
+}
+
+/* Internal Image rendering within chat */
+.chat-img {
+  margin-top: 0.75rem;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.chat-img img {
+  width: 100%;
+  display: block;
+}
+
+/* Bottom Action / Input Form Field */
+.comm-input-area {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  /* border-radius: 12px; */
+  padding: 1.5rem;
+  /* margin-top: 1rem; */
+}
+
+.comm-input-area input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+.comm-input-area input::placeholder {
+  color: #9ca3af;
+}
+
+.comm-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comm-icons {
+  display: flex;
+  gap: 1.25rem;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.comm-icons i {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.comm-icons i:hover {
+  color: #111;
+}
+
+.send-msg-btn {
+  background: #0b57d0;
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.send-msg-btn:hover {
+  background: #0842a0;
+}
+
+/* Base Modal Styling for Authentication Responses */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+.modal-content {
+  background: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 90%;
+  animation: modalPop 0.3s ease-out;
+}
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.modal-content p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #111827;
+  font-weight: 500;
+}
+.modal-btn {
+  background: #0b57d0;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.modal-btn:hover {
+  background: #0842a0;
 }

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details - Admin Dashboard</title>
+    <!-- Font Awesome Icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/dist/CSS/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <div class="logo-container">
+                <div class="logo">ResolvedIT</div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="dash.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="nav-item-dropdown">
+                    <!-- Dropdown for Ticket Management is open on this page -->
+                    <a href="#" class="nav-item active" onclick="const submenu = this.nextElementSibling; submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block'; return false;">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Ticket Management</span>
+                        <i class="fa-solid fa-chevron-up" style="margin-left: auto; font-size: 0.8rem;"></i>
+                    </a>
+                    <div class="submenu" style="display: block; padding-left: 1.5rem;">
+                        <a href="ticket.html" class="nav-item" style="padding: 0.5rem 1rem; margin-top: 0.2rem; font-size: 0.9rem; color: #fff;">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Tickets</span>
+                        </a>
+                        <a href="createticket.html" class="nav-item" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Users Management</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Incidents Management</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reporting</span>
+                </a>
+            </nav>
+
+            <div class="logout-container">
+                <a href="../../authenticaton/login.html" class="nav-item logout-link">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header (Search & Actions) -->
+            <header class="top-header">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search directives, tickets, or users...">
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+                    <button class="icon-btn profile-btn"><i class="fa-regular fa-circle-user"></i></button>
+                </div>
+            </header>
+
+            <!-- Ticket Details Content Wrapper -->
+            <div class="dashboard-content ticket-details-view">
+               <div class="ticket-details-main">
+                  
+                  <!-- Left Panel: Ticket Information -->
+                  <div class="td-left-card">
+                      <!-- ID -->
+                      <div class="td-header">
+                        <span class="td-breadcrumb">TICKET DATABASE <i class="fa-solid fa-chevron-right"></i> <span class="td-id">ID: TKT-88421</span></span>
+                      </div>
+                      
+                      <!-- Core Ticket Attributes -->
+                      <div class="td-attributes">
+                         <div class="td-attr-row">
+                             <div class="td-attr">
+                                <span class="td-lbl">STATUS:</span>
+                                <span class="td-pill pill-inprogress">IN-PROGRESS</span>
+                             </div>
+                             <div class="td-attr">
+                                <span class="td-lbl">EMPLOYEE</span>
+                                <span class="td-pill pill-grey">MBOH MAKAZI</span>
+                             </div>
+                         </div>
+                         <div class="td-attr-row">
+                             <div class="td-attr">
+                                <span class="td-lbl">PRIORITY:</span>
+                                <span class="td-pill pill-critical">CRITICAL</span>
+                             </div>
+                             <div class="td-attr">
+                                <span class="td-lbl">TECHNICIAN</span>
+                                <span class="td-pill pill-grey">JULIAN BEVERLY</span>
+                             </div>
+                         </div>
+                      </div>
+
+                      <!-- Detailed Description text -->
+                      <div class="td-description-sec">
+                         <h3><i class="fa-regular fa-file-lines text-blue"></i> Detailed Description</h3>
+                         <p>Intermittent latency spikes observed across all microservices connecting to the production database cluster in <span class="td-code">eu-west-1</span>. Initial monitoring indicates connection pooling saturation during peak hours.</p>
+                      </div>
+
+                      <!-- Attachment Carousel and Evidence -->
+                      <div class="td-attachment-carousel">
+                         <div class="td-carousel-container">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Hardware Attachment">
+                            <div class="carousel-img-lbl">physical_rack_status.jpg (1/3)</div>
+                            <div class="round-btn right-btn"><i class="fa-solid fa-chevron-right"></i></div>
+                         </div>
+                         <div class="carousel-dots">
+                             <span class="dot active"></span>
+                             <span class="dot"></span>
+                             <span class="dot"></span>
+                         </div>
+                         <div class="td-attachment-info">
+                             <div class="att-name"><i class="fa-regular fa-image"></i> INCIDENT ATTACHMENT: DAMAGED HARDWARE</div>
+                             <div class="att-time">Uploaded Oct 24, 09:21 AM</div>
+                         </div>
+                      </div>
+
+                      <!-- Metadata Footer Elements -->
+                      <div class="td-meta-footer">
+                          <div class="td-meta-box">
+                             <span class="meta-lbl">DATE CREATED</span>
+                             <span class="meta-val">Oct 24, 2023 -<br>09:21 AM</span>
+                          </div>
+                          <div class="td-meta-box">
+                             <span class="meta-lbl">CATEGORY</span>
+                             <span class="meta-val">Cloud<br>Infrastructure</span>
+                          </div>
+                          <div class="td-meta-box">
+                             <span class="meta-lbl">INCIDENT TYPE</span>
+                             <span class="meta-val">Database<br>Performance</span>
+                          </div>
+                          <div class="td-meta-box">
+                             <span class="meta-lbl">SUBJECT</span>
+                             <span class="meta-val">Unable to log into<br>system</span>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Right Panel: Communication Log Chat System -->
+                  <div class="td-right-panel">
+                       <div class="comm-header">
+                           <h3>Communication Log</h3>
+                           <div class="comm-meta"><span class="status-dot"></span> 3 PARTICIPANTS ONLINE</div>
+                           <div class="comm-avatars">
+                               <img src="https://i.pravatar.cc/150?u=12" class="avatar" alt="Avatar 1">
+                               <img src="https://i.pravatar.cc/150?u=13" class="avatar" alt="Avatar 2">
+                               <div class="avatar-more">+1</div>
+                           </div>
+                       </div>
+
+                       <div class="comm-history">
+                           <!-- Chat session start timestamp -->
+                           <div class="comm-divider"><span>SESSION START • 09:21 AM</span></div>
+                           
+                           <!-- Chat message (Received) -->
+                           <div class="chat-msg">
+                               <img class="chat-avatar" src="https://i.pravatar.cc/150?u=41" alt="Marcus">
+                               <div class="chat-content">
+                                   <div class="chat-head"><strong>Marcus Thorne</strong> <span class="chat-time">09:45 AM</span></div>
+                                   <div class="chat-bubble received">
+                                       <p>I've analyzed the telemetry. Scaling connection limits to <span class="td-code-inline">2000</span> per instance.</p>
+                                       <!-- Document Attachment Inside Chat -->
+                                       <div class="chat-attachment">
+                                            <div class="att-icon"><i class="fa-regular fa-file"></i></div>
+                                            <div class="att-det">
+                                                <div class="att-title">metrics_dump</div>
+                                                <div class="att-sub">2.4 MB • CSV Document</div>
+                                            </div>
+                                            <i class="fa-solid fa-download att-dl"></i>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                           <!-- Chat message (Sent / Me) -->
+                           <div class="chat-msg me-msg">
+                               <div class="chat-content align-right">
+                                   <div class="chat-head right-head"><span class="chat-time">10:12 AM</span> <strong>Lead Admin</strong></div>
+                                   <div class="chat-bubble sent">
+                                       <p>Awaiting scaling confirmation. @Marcus check if IOPS baseline is holding after the change.</p>
+                                   </div>
+                               </div>
+                               <div class="chat-avatar avatar-me">ME</div>
+                           </div>
+                           
+                           <!-- Chat message (Received with Image) -->
+                           <div class="chat-msg">
+                               <img class="chat-avatar" src="https://i.pravatar.cc/150?u=45" alt="Sarah">
+                               <div class="chat-content">
+                                   <div class="chat-head"><strong>Sarah Chen</strong> <span class="chat-time">10:30 AM</span></div>
+                                   <div class="chat-bubble received">
+                                       <p>Scaling complete. Metrics stabilized. Look at this snapshot from Grafana:</p>
+                                       <div class="chat-img">
+                                           <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80" alt="Grafana graph">
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       
+                       <!-- Message input formulation area -->
+                       <div class="comm-input-area">
+                           <input type="text" placeholder="Update status or mention @colleagues...">
+                           <div class="comm-actions">
+                               <div class="comm-icons">
+                                   <i class="fa-solid fa-paperclip"></i>
+                                   <i class="fa-regular fa-image"></i>
+                                   <i class="fa-solid fa-video"></i>
+                               </div>
+                               <button class="send-msg-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+                           </div>
+                       </div>
+                  </div>
+
+               </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

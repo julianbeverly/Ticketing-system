@@ -25,27 +25,36 @@
                         <!-- <i class="fa-solid fa-lock"></i> -->
                   
                
-                  <form>
+                  <!-- Form that handles sending the reset link -->
+                  <form id="forgetPasswordForm">
                      <div class="input-email">
                           <i class="fa-regular fa-envelope"></i>
-                          <input  type="email" placeholder="Email Address" required>
+                          <!-- Input field for the user's email, marked as required to prevent empty submissions -->
+                          <input type="email" placeholder="Email Address" required>
                       </div>
 
-                          <a href="">
-                              <button type="submit" class="sendlink-btn"><i class="fa-regular fa-paper-plane"></i>    Send Link</button>
-                        </a>
+                      <!-- Submit button to trigger the form submission -->
+                      <button type="submit" class="sendlink-btn"><i class="fa-regular fa-paper-plane"></i> Send Link</button>
                  </form>
              </div>
            </div>
         
     </div>
 
-    
-     
+    <!-- Modal overlay that will be displayed upon successful email submission -->
+    <div class="modal-overlay" id="emailSentModal">
+        <div class="modal-content">
+            <!-- Icon to indicate success -->
+            <i class="fa-regular fa-circle-check modal-icon"></i>
+            <!-- Message displayed to the user -->
+            <p>An email has been sent to your email address.</p>
+            <!-- Button to acknowledge the message and redirect -->
+            <button class="modal-ok-btn" id="modalOkBtn">OK</button>
+        </div>
+    </div>
 
-
-
-
+    <!-- External JavaScript file handling the modals -->
+    <script src="/dist/js/modals.js"></script>
    
 </body>
 </html>

@@ -18,11 +18,12 @@
             <h2 class="reset-title">ResolvedIt</h2>
             <div class="resetcard">
                 <h2>Reset Your Password</h2>
-                <form>
+                <form id="resetForm">
                     <div class="input-password">
-                        <input type="password" placeholder="password" required>
-                        <input type="password" placeholder="confirm password" required>
+                        <input type="password" id="newPassword" placeholder="password" required>
+                        <input type="password" id="confirmPassword" placeholder="confirm password" required>
                     </div>
+                    <button type="submit" class="reset-btn">Submit</button>
                 </form>
               
 
@@ -31,5 +32,16 @@
 
     </div>
     
+    <!-- Modal -->
+    <div id="resetSuccessModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check modal-icon"></i>
+            <h3>Password Successfully Changed</h3>
+            <p>Your password has been updated successfully.</p>
+            <button id="resetOkBtn" class="modal-ok-btn">OK</button>
+        </div>
+    </div>
+
+    <script src="/dist/js/modals.js"></script>
 </body>
 </html>
