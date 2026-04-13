@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin dashboard</title>
+    <!-- Font Awesome Icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/dist/CSS/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar-nav">
+            <div class="logo-container">
+                <div class="logo">ResolvedIT</div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item" onclick="const submenu = this.nextElementSibling; submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block'; return false;">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Ticket Management</span>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem;"></i>
+                    </a>
+                    <div class="submenu" style="display: none; padding-left: 1.5rem;">
+                        <a href="ticket.html" class="nav-item" style="padding: 0.5rem 1rem; margin-top: 0.2rem; font-size: 0.9rem;">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Tickets</span>
+                        </a>
+                        <a href="createticket.html" class="nav-item" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Users Management</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reporting</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Incidents Management</span>
+                </a>
+            </nav>
+
+            <div class="logout-container">
+                <a href="#" class="nav-item logout-link">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search systems or tickets...">
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+                    <button class="icon-btn profile-btn"><i class="fa-regular fa-circle-user"></i></button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+
+                <!-- Metric Cards -->
+                <div class="metrics-grid">
+                    <div class="metric-card card-blue">
+                        <div class="icon-circle"><i class="fa-regular fa-envelope"></i></div>
+                        <h4>TOTAL OPEN<br>TICKETS</h4>
+                        <div class="value">1,284</div>
+                    </div>
+                    <div class="metric-card card-pink">
+                        <div class="icon-circle"><i class="fa-regular fa-circle-check"></i></div>
+                        <h4>TOTAL CLOSED<br>TICKETS</h4>
+                        <div class="value">8,492</div>
+                    </div>
+                    <div class="metric-card card-beige">
+                        <div class="icon-circle"><i class="fa-solid fa-user-group"></i></div>
+                        <h4>TOTAL USERS</h4>
+                        <div class="value">24,103</div>
+                    </div>
+                    <div class="metric-card card-green">
+                        <div class="icon-circle"><i class="fa-solid fa-certificate"></i></div>
+                        <h4>RESOLVED TICKETS</h4>
+                        <div class="value">7,210</div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <!-- Bar Chart -->
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <div>
+                                <h3>Ticket Status Distribution</h3>
+
+                            </div>
+                            <button class="btn-primary">Monthly View</button>
+                        </div>
+                        <div class="bar-chart-container">
+                            <div class="y-axis">
+                                <span>50</span>
+                                <span>37.5</span>
+                                <span>25</span>
+                                <span>12.5</span>
+                            </div>
+                            <div class="chart-grid">
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                            </div>
+                            <div class="bars-container">
+                                <div class="bar-column">
+                                    <div class="bar open-bar" style="height: 98%;"></div>
+                                    <span class="bar-label">OPEN</span>
+                                </div>
+                                <div class="bar-column">
+                                    <div class="bar assigned-bar" style="height: 60%;"></div>
+                                    <span class="bar-label">ASSIGNED</span>
+                                </div>
+                                <div class="bar-column">
+                                    <div class="bar inprogress-bar" style="height: 75%;"></div>
+                                    <span class="bar-label">IN PROGRESS</span>
+                                </div>
+                                <div class="bar-column">
+                                    <div class="bar resolved-bar" style="height: 100%;"></div>
+                                    <span class="bar-label">RESOLVED</span>
+                                </div>
+                                <div class="bar-column">
+                                    <div class="bar closed-bar" style="height: 68%;"></div>
+                                    <span class="bar-label">CLOSED</span>
+                                </div>
+                                <div class="bar-column">
+                                    <div class="bar overdue-bar" style="height: 20%;"></div>
+                                    <span class="bar-label">OVERDUE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLA Line Chart -->
+                <div class="chart-card mt-card">
+                    <div class="chart-header sl-header">
+                        <div>
+                            <h3>Technician SLA Compliance</h3>
+                            <p>SLA fulfillment trends and individual performance (Line View - FR8 Compliance)</p>
+                        </div>
+                        <div class="legend">
+                            <span class="legend-line"></span> COMPLIANCE SCORE %
+                        </div>
+                    </div>
+                    <div class="line-chart-container">
+                        <div class="y-axis">
+                            <span>100%</span>
+                            <span>75%</span>
+                            <span>50%</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="chart-grid line-grid">
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                            <div class="grid-line"></div>
+                        </div>
+
+                        <div class="svg-container">
+                            <svg viewBox="0 0 1000 200" preserveAspectRatio="none">
+                                <path d="M 120 20 C 250 20 280 125 450 135 C 600 140 680 160 850 180" fill="none"
+                                    stroke="#004db5" stroke-width="6" stroke-linecap="round" />
+
+                                <!-- Tooltips/Data points -->
+                                <g class="data-point" transform="translate(120, 20)">
+                                    <circle cx="0" cy="0" r="8" fill="#004db5" />
+                                    <path d="M 0 -8 L 0 8 M -8 0 L 8 0" stroke="white" stroke-width="2" />
+                                </g>
+                                <g class="data-point" transform="translate(450, 135)">
+                                    <circle cx="0" cy="0" r="8" fill="#004db5" />
+                                    <path d="M 0 -8 L 0 8 M -8 0 L 8 0" stroke="white" stroke-width="2" />
+                                </g>
+                                <g class="data-point" transform="translate(680, 160)">
+                                    <circle cx="0" cy="0" r="8" fill="#004db5" />
+                                    <path d="M 0 -8 L 0 8 M -8 0 L 8 0" stroke="white" stroke-width="2" />
+                                </g>
+                                <g class="data-point" transform="translate(850, 180)">
+                                    <circle cx="0" cy="0" r="8" fill="#004db5" />
+                                    <path d="M 0 -8 L 0 8 M -8 0 L 8 0" stroke="white" stroke-width="2" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="x-axis-labels">
+                            <div class="x-label" style="left: 12%;">
+                                <div class="percent">92%</div>
+                                <div class="name">Sarah Mitchell</div>
+                                <div class="role">SENIOR LEAD</div>
+                            </div>
+                            <div class="x-label" style="left: 45%;">
+                                <div class="percent text-orange">45%</div>
+                                <div class="name">Elena Park</div>
+                                <div class="role">TIER 3 SPEC.</div>
+                            </div>
+                            <div class="x-label" style="left: 68%;">
+                                <div class="percent text-red">30%</div>
+                                <div class="name">James Hollings</div>
+                                <div class="role">INFRASTRUCTURE</div>
+                            </div>
+                            <div class="x-label" style="left: 85%;">
+                                <div class="percent text-red">15%</div>
+                                <div class="name">David Wu</div>
+                                <div class="role">TECHNICIAN</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="activity-card mt-card">
+                    <div class="activity-header">
+                        <h3>Recent Activity</h3>
+                        <a href="#" class="view-all">View All Updates</a>
+                    </div>
+
+                    <div class="activity-list">
+                        <!-- Item 1 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-blue">
+                                <i class="fa-regular fa-user"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Sarah Mitchell</strong> assigned ticket <strong
+                                        class="text-blue">#INC-2984</strong> to <strong>Tech Support L2</strong></p>
+                                <p class="activity-sub">System bottleneck detected in regional server cluster.
+                                    Escalating for immediate review.</p>
+                            </div>
+                            <div class="activity-time">2 mins ago</div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-red">
+                                <i class="fa-solid fa-power-off"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>System Alert:</strong> Critical breach attempt blocked
+                                    at Gateway-7</p>
+                                <span class="badge badge-error"><i class="fa-solid fa-circle"
+                                        style="font-size: 6px; margin-right: 4px;"></i> SECURITY PROTOCOL ALPHA</span>
+                            </div>
+                            <div class="activity-time">15 mins ago</div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-blue-outline">
+                                <i class="fa-regular fa-circle-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Ticket #INC-2940</strong> was <strong>Resolved</strong>
+                                </p>
+                                <p class="activity-sub">User "j.doe" password reset and 2FA re-synchronization completed
+                                    successfully.</p>
+                            </div>
+                            <div class="activity-time">42 mins ago</div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-blue-light">
+                                <i class="fa-regular fa-message"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Elena Park</strong> added a comment to <strong
+                                        class="text-blue">#REQ-882</strong></p>
+                                <p class="activity-sub">"The hardware has arrived at the loading dock. Proceeding with
+                                    installation at 14:00."</p>
+                            </div>
+                            <div class="activity-time">1h ago</div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-blue-light">
+                                <i class="fa-solid fa-gear"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>Automated Patching:</strong> Security updates applied
+                                    to 14 nodes</p>
+                                <p class="activity-sub">Patch cycle 2024-B successful for production cluster nodes
+                                    01-14. No reboot required.</p>
+                            </div>
+                            <div class="activity-time">3h ago</div>
+                        </div>
+
+                        <!-- Item 6 -->
+                        <div class="activity-item">
+                            <div class="activity-icon icon-blue-light">
+                                <i class="fa-regular fa-file-lines"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p class="activity-text"><strong>James Hollings</strong> uploaded audit logs for <strong
+                                        class="text-blue">Q3-compliance</strong></p>
+                                <p class="activity-sub">Full system access logs and firewall configuration snapshots
+                                    archived for external audit review.</p>
+                            </div>
+                            <div class="activity-time">5h ago</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

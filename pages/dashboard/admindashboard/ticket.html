@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/dist/CSS/dashboard.css">
+    <link rel="stylesheet" href="/dist/CSS/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar-nav">
+            <div class="logo-container">
+                <div class="logo">ResolvedIT</div>
+            </div>
+            <nav class="nav-menu">
+                <!-- Dashboard link -->
+                <a href="dash.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item active" onclick="const submenu = this.nextElementSibling; submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none'; return false;">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Ticket Management</span>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem;"></i>
+                    </a>
+                    <div class="submenu" style="display: block; padding-left: 1.5rem;">
+                        <!-- The sub-link to view all tickets. Set to 'active' on this page -->
+                        <a href="ticket.html" class="nav-item active" style="padding: 0.5rem 1rem; margin-top: 0.2rem; font-size: 0.9rem;">
+                            <i class="fa-solid fa-list"></i>
+                            
+                            <span>Tickets</span>
+                        </a>
+                        <!-- The sub-link to create a new ticket -->
+                        <a href="createticket.html" class="nav-item" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Link to Users Management section -->
+                <a href="#" class="nav-item">
+                    <!-- Icon for users -->
+                    <i class="fa-solid fa-user-group"></i>
+                    <!-- Label for users management -->
+                    <span>Users Management</span>
+                </a>
+                <!-- Link to Incidents Management section -->
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Incidents Management</span>
+                </a>
+                <!-- Link to Reporting section -->
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reporting</span>
+                </a>
+            </nav>
+
+            <!-- Container placed at the bottom for logout -->
+            <div class="logout-container">
+                <!-- Action link to log out of the application -->
+                <a href="#" class="nav-item logout-link">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- The main container  -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <!-- Text input -->
+                    <input type="text" placeholder="Search directives, tickets, or users...">
+                </div>
+                <div class="header-actions">
+                    <!-- Button for notifications bell -->
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <!-- Button for language-->
+                    <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+                    <!-- Profile button -->
+                    <button class="icon-btn profile-btn"><i class="fa-regular fa-circle-user"></i></button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Breadcrumbs display hierarchical page navigation history -->
+                <div class="breadcrumb">
+                    <!-- Link to previous Operations page -->
+                    <a href="#">Ticket Management</a> &gt; 
+                    <!-- Text showing current specific page location -->
+                    <span>Tickets</span>
+                </div>
+
+                <div class="page-header-title">
+                    <div>
+                        <h1>System Tickets</h1>
+                        <p>Manage and monitor all active support requests across the enterprise.</p>
+                    </div>
+                    <!-- Create Ticket Link the user to createticket.html -->
+                    <a href="createticket.html" class="btn-create-ticket" style="text-decoration: none;">
+                        <!-- Pen icon indicating writing/ -->
+                        <i class="fa-solid fa-pen-to-square"></i> Create Ticket
+                    </a>
+                </div>
+
+                
+                <div class="filter-section">
+                    <span class="filter-label">FILTER BY STATUS</span>
+                    <div class="filter-dropdown">
+                        All Statuses 
+                        <!-- dropdown menu icon-->
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <!-- the main data table -->
+                <div class="tickets-card">
+                    <table class="tickets-table">
+                        <!-- Table header containing column names -->
+                        <thead>
+                            <tr>
+                                <th>TICKET ID</th>
+                                <th>SUBJECT</th>
+                                <th>CATEGORY</th>
+                                <th>PERSONNEL</th>
+                                <th>PRIORITY</th>
+                                <th>STATUS</th>
+                                <th>DATE CREATED</th>
+                                <th>ACTIONS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- The first ticket data row -->
+                            <tr>
+                                <!--Ticket ID, -->
+                                <td><span class="ticket-id">TC-<br>9284</span></td>
+
+                                <td>
+                                    <!-- Groups subject and sub-text -->
+                                    <div class="ticket-subject">
+                                        <strong>Server Cluster Timeout:<br>North Hub</strong>
+                                        <span>Network Infrastructure<br>Failure</span>
+                                    </div>
+                                </td>
+                                <!-- category -->
+                                <td>
+                                    <!-- Container holding category text and respective matching icon -->
+                                    <div class="ticket-category">
+                                        <i class="fa-solid fa-server"></i> Infrastructure
+                                    </div>
+                                </td>
+                                <!--names -->
+                                <td>
+                                    
+                                    <div class="ticket-personnel">
+                                        <div><span class="role-label">T:</span> <span class="name">Sarah Jenkins</span></div>
+                                        <div><span class="role-label">E:</span> <span class="name">Robert Chen</span></div>
+                                    </div>
+                                </td>
+
+                                <td><span class="ticket-priority priority-high">HIGH</span></td>
+                                <td><span class="ticket-status status-inprogress">IN PROGRESS</span></td>
+
+                                <td>
+                                    <!-- date and time -->
+                                    <div class="ticket-date">
+                                        Oct 24, 2023 -<br>09:12 AM
+                                    </div>
+                                </td>
+                                <!-- 'View More'link to view ticket details -->
+                                <td><a href="#" class="ticket-actions">View<br>More</a></td>
+                            </tr>
+
+                            <!-- The second ticket data row.  -->
+                            <tr>
+                                <td><span class="ticket-id">TC-<br>9285</span></td>
+                                <td>
+                                    <div class="ticket-subject">
+                                        <strong>VPN Credential Reset<br>Request</strong>
+                                        <span>Access Control & Security</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-category">
+                                        <!-- Shield icon for Security category -->
+                                        <i class="fa-solid fa-shield-halved"></i> Security
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-personnel">
+                                        <div><span class="role-label">T:</span> <span class="name">John Doe</span></div>
+                                        <div><span class="role-label">E:</span> <span class="name">Anita Kumar</span></div>
+                                    </div>
+                                </td>
+                                <td><span class="ticket-priority priority-low">LOW</span></td>
+                                <td><span class="ticket-status status-resolved">RESOLVED</span></td>
+                                <td>
+                                    <div class="ticket-date">
+                                        Oct 24, 2023 -<br>10:45 AM
+                                    </div>
+                                </td>
+                                <td><a href="#" class="ticket-actions">View<br>More</a></td>
+                            </tr>
+
+                            <!-- The third ticket data row -->
+                            <tr>
+                                <td><span class="ticket-id">TC-<br>9286</span></td>
+                                <td>
+                                    <div class="ticket-subject">
+                                        <strong>ERP Dashboard Loading<br>Error</strong>
+                                        <span>Software Application Bug</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-category">
+                                        <!-- Desktop icon for Software category -->
+                                        <i class="fa-solid fa-desktop"></i> Software
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-personnel">
+                                        <div><span class="role-label">T:</span> <span class="name">Markus Wright</span></div>
+                                        <div><span class="role-label">E:</span> <span class="name">Julian Frost</span></div>
+                                    </div>
+                                </td>
+                                <!-- Priority cell utilizing medium color badging -->
+                                <td><span class="ticket-priority priority-medium">MEDIUM</span></td>
+                                <!-- Status cell utilizing open color badging -->
+                                <td><span class="ticket-status status-open">OPEN</span></td>
+                                <td>
+                                    <div class="ticket-date">
+                                        Oct 24, 2023 -<br>11:20 AM
+                                    </div>
+                                </td>
+                                <td><a href="#" class="ticket-actions">View<br>More</a></td>
+                            </tr>
+
+                            <!-- The fourth ticket data row -->
+                            <tr>
+                                <td><span class="ticket-id">TC-<br>9287</span></td>
+                                <td>
+                                    <div class="ticket-subject">
+                                        <strong>Broken Hardware: HR<br>Printer</strong>
+                                        <span>Physical Device Maintenance</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-category">
+                                        <!-- Print icon for Hardware category -->
+                                        <i class="fa-solid fa-print"></i> Hardware
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ticket-personnel">
+                                        <div><span class="role-label">T:</span> <span class="name">Elena Rodriguez</span></div>
+                                        <div><span class="role-label">E:</span> <span class="name">Samara Blake</span></div>
+                                    </div>
+                                </td>
+                                <td><span class="ticket-priority priority-low">LOW</span></td>
+                                <td><span class="ticket-status status-inprogress">IN PROGRESS</span></td>
+                                <td>
+                                    <div class="ticket-date">
+                                        Oct 24, 2023 -<br>01:15 PM
+                                    </div>
+                                </td>
+                                <td><a href="#" class="ticket-actions">View<br>More</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Container holding the pagination details below the table -->
+                    <div class="pagination-container">
+                        <div>Showing 1-4 of 48 tickets</div>
+                        <!-- Right side controls containing page numbers and arrows -->
+                        <div class="pagination-controls">
+                            <!-- Left arrow backward navigation -->
+                            <span class="page-btn"><i class="fa-solid fa-chevron-left"></i></span>
+                            <!-- Active page 1 button -->
+                            <span class="page-btn active">1</span>
+                            <span class="page-btn">2</span>
+                            <span class="page-btn">3</span>
+                            <!-- Right arrow forward navigation -->
+                            <span class="page-btn"><i class="fa-solid fa-chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>
