@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLA Configuration</title>
+    <!-- Use Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+  </head>
+  <body>
+    <!-- The main layout encompassing sidebar and main content -->
+    <div class="dashboard-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar-nav">
+        <!-- Application Logo -->
+        <div class="logo-container">
+          <div class="logo">ResolvedIT</div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="nav-menu">
+          <!-- Dashboard Link -->
+          <a href="dash.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+          
+          <!-- Ticket Management Dropdown -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item active"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-ticket"></i>
+              <span>Ticket Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            
+            <!-- Submenu Items -->
+            <div class="submenu" style="display: block; padding-left: 1.5rem">
+              <a
+                href="ticket.html"
+                class="nav-item"
+                style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                "
+              >
+                <i class="fa-solid fa-list"></i>
+                <span>Tickets</span>
+              </a>
+              <a
+                href="createticket.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span>Create Ticket</span>
+              </a>
+              <!-- Active SLA Configuration link -->
+              <a
+                href="slaconfig.html"
+                class="nav-item active"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>SLA Configuration</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Users Management Dropdown -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-user-group"></i>
+              <span>Users Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="usermanage.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>Users</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Incidents Management Dropdown -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Incidents Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="incident.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>Incidents</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Reporting Link -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </nav>
+
+        <!-- Logout Section -->
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Top Header Navigation -->
+        <header class="top-header">
+          <!-- Optional top header space (could be used for search/notifications) -->
+          <div class="search-container" style="visibility: hidden">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search..." />
+          </div>
+          <div class="header-actions">
+            <!-- Notification Icon -->
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <!-- Language/Globe Icon -->
+            <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+            <!-- User Profile Icon -->
+            <button class="icon-btn profile-btn">
+              <i class="fa-regular fa-user"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="dashboard-content">
+          <!-- Breadcrumb Navigation -->
+          <div class="breadcrumb">
+            <a href="#">Ticket Management</a> &gt;
+            <span>SLA configuration</span>
+          </div>
+
+          <!-- Page Title and Description -->
+          <div class="page-header-title">
+            <div>
+              <h1 style="color: #0b1f3c; margin-bottom: 0.5rem;">SLA Configuration</h1>
+              <p style="color: #64748b; font-size: 0.95rem; line-height: 1.5; max-width: 800px;">
+                Define high-precision response windows for your service operations. These
+                resolution times act as the structural framework for automated deadline
+                assignment and escalation triggers across all priority tiers.
+              </p>
+            </div>
+          </div>
+
+          <!-- SLA Configuration Card -->
+          <div class="sla-card">
+            <!-- Header of the SLA Card -->
+            <div class="sla-card-header">
+              <h2>Priority Resolution Windows</h2>
+              <i class="fa-solid fa-stopwatch" style="color: #2563eb; font-size: 1.2rem;"></i>
+            </div>
+
+            <!-- High Priority Row -->
+            <div class="sla-row">
+              <div class="sla-info">
+                <!-- Red indicator dot -->
+                <div class="sla-dot" style="background-color: #ef4444;"></div>
+                <div class="sla-text">
+                  <strong>High Priority</strong>
+                  <span>Critical system failures</span>
+                </div>
+              </div>
+              <div class="sla-input-group">
+                <!-- Input for hours -->
+                <input type="number" value="4" class="sla-input" />
+                <span class="sla-unit">HOURS</span>
+              </div>
+              <!-- Progress bar visualization -->
+              <div class="sla-bar-container">
+                <div class="sla-bar" style="background-color: #ef4444; width: 25%;"></div>
+              </div>
+            </div>
+
+            <!-- Medium Priority Row -->
+            <div class="sla-row">
+              <div class="sla-info">
+                <!-- Brown indicator dot -->
+                <div class="sla-dot" style="background-color: #8b4513;"></div>
+                <div class="sla-text">
+                  <strong>Medium Priority</strong>
+                  <span>Functional degradation</span>
+                </div>
+              </div>
+              <div class="sla-input-group">
+                <input type="number" value="24" class="sla-input" />
+                <span class="sla-unit">HOURS</span>
+              </div>
+              <div class="sla-bar-container">
+                <div class="sla-bar" style="background-color: #8b4513; width: 50%;"></div>
+              </div>
+            </div>
+
+            <!-- Low Priority Row -->
+            <div class="sla-row">
+              <div class="sla-info">
+                <!-- Gray indicator dot -->
+                <div class="sla-dot" style="background-color: #4b5563;"></div>
+                <div class="sla-text">
+                  <strong>Low Priority</strong>
+                  <span>General inquiries / minor issues</span>
+                </div>
+              </div>
+              <div class="sla-input-group">
+                <input type="number" value="72" class="sla-input" />
+                <span class="sla-unit">HOURS</span>
+              </div>
+              <div class="sla-bar-container">
+                <div class="sla-bar" style="background-color: #4b5563; width: 100%;"></div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="sla-actions">
+              <!-- Discard Changes text button -->
+              <button class="btn-discard">Discard changes</button>
+              <!-- Save Configuration primary button -->
+              <button class="btn-save">Save Configuration</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

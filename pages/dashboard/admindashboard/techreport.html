@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technician Performance</title>
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- Main styling from style.css -->
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+  </head>
+  <body>
+    <!-- The main layout container -->
+    <div class="dashboard-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar-nav">
+        <!-- Logo -->
+        <div class="logo-container">
+          <div class="logo">ResolvedIT</div>
+        </div>
+        <nav class="nav-menu">
+          <!-- Link to Dashboard -->
+          <a href="dash.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+          <!-- Ticket Management Dropdown Menu -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-ticket"></i>
+              <span>Ticket Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <!-- Ticket submenu is hidden by default here -->
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="ticket.html"
+                class="nav-item"
+                style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                "
+              >
+                <i class="fa-solid fa-list"></i>
+                <span>Tickets</span>
+              </a>
+              <a
+                href="createticket.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span>Create Ticket</span>
+              </a>
+              <a
+                href="slaconfig.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-scale-balanced"></i>
+                <span>SLA Configuration</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Link to Users Management section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-user-group"></i>
+            <span>Users Management</span>
+          </a>
+          <!-- Link to Incidents Management section -->
+          <a href="incident.html" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Incidents Management</span>
+          </a>
+
+          <!-- Reporting section dropdown -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item active"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Reporting</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <div class="submenu" style="display: block; padding-left: 1.5rem">
+              <!-- Sub-menu for Tech Report -->
+              <a
+                href="techreport.html"
+                class="nav-item active"
+                style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                "
+              >
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Tech Report</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Container placed at the bottom for logout -->
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- The main content area -->
+      <main class="main-content">
+        <!-- Top header with search and user actions -->
+        <header class="top-header">
+          <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search technician metrics..." />
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+            <button class="icon-btn profile-btn">
+              <i class="fa-regular fa-circle-user"></i>
+            </button>
+          </div>
+        </header>
+
+        <div class="dashboard-content">
+          <!-- Breadcrumb navigation -->
+          <div class="breadcrumb">
+            <a href="#">REPORTS</a> /
+            <span>TECHNICIAN PERFORMANCE</span>
+          </div>
+
+          <!-- Page Title & Export Actions -->
+          <div class="page-header-title">
+            <div>
+              <h1>Technician Performance</h1>
+            </div>
+
+            <div class="report-actions-wrapper">
+              <button class="btn-export white-btn">
+                <i class="fa-regular fa-file-excel"></i>
+                <span>Export to<br />Excel</span>
+              </button>
+
+              <button class="btn-export blue-btn">
+                <i class="fa-regular fa-file-pdf"></i>
+                <span>Export to<br />PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Performer -->
+          <div class="top-performer-container">
+            <div class="top-performer-card">
+              <div class="tp-label">TOP PERFORMER</div>
+              <div class="tp-name">Marcus Chen</div>
+              <div class="tp-stat">SLA Compliance: 99.8%</div>
+              <i class="fa-solid fa-star tp-icon-bg"></i>
+            </div>
+          </div>
+
+          <!-- Technician Table -->
+          <div class="tickets-card">
+            <div class="table-header-box">
+              <h3>Technician Directory</h3>
+
+              <div class="table-icons">
+                <i class="fa-solid fa-filter"></i>
+                <i class="fa-solid fa-outdent"></i>
+              </div>
+            </div>
+
+            <table class="tickets-table">
+              <thead>
+                <tr>
+                  <th>NAME</th>
+                  <th>PHONE NUMBER</th>
+                  <th>SPECIALTY</th>
+                  <th class="text-right">SLA COMPLIANCE SCORE (%)</th>
+                  <th class="action-col">ACTION</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <!-- ROW -->
+                <tr>
+                  <td>
+                    <div class="user-info">
+                      <div class="avatar blue">JD</div>
+
+                      <div class="ticket-subject">
+                        <strong>Jordan Davids</strong>
+                        <span>j.davids@resolvedit.com</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="phone-number">+1 (555)<br />012-9934</td>
+
+                  <td>
+                    <span class="tag">Network Architecture</span>
+                  </td>
+
+                  <td>
+                    <div class="score-wrap">
+                      <span class="score green">98.2%</span>
+
+                      <div class="progress green-bg">
+                        <div class="fill green-fill w-98"></div>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="action-col">
+                    <a href="#" class="tech-view-btn">View<br />More</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+              <div>Showing 5 of 32 technicians</div>
+
+              <div class="pagination-controls">
+                <span class="page-btn">
+                  <i class="fa-solid fa-chevron-left"></i>
+                </span>
+
+                <span class="page-btn">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL -->
+        <div id="techDetailsModal" class="modal-overlay">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 id="techModalName">Technician Name</h3>
+              <i class="fa-solid fa-times" id="closeTechModalIcon"></i>
+            </div>
+
+            <p class="modal-role">
+              <i class="fa-solid fa-briefcase"></i>
+              <span id="techModalRole">Role</span>
+            </p>
+
+            <div class="modal-box">
+              <p><strong>Phone:</strong> <span id="techModalPhone"></span></p>
+              <p>
+                <strong>SLA Compliance:</strong> <span id="techModalSLA"></span>
+              </p>
+            </div>
+
+            <button id="closeTechModalBtn">Close Overview</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Link to Javascript for Modals logic -->
+    <script src="/dist/js/modals.js"></script>
+  </body>
+</html>

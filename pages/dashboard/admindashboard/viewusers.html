@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VIEW USERS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <aside class="sidebar-nav">
+        <div class="logo-container">
+          <div class="logo">ResolvedIT</div>
+        </div>
+        <nav class="nav-menu">
+          <!-- Dashboard link -->
+          <a href="dash.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'block' ? 'none' : 'block';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-ticket"></i>
+              <span>Ticket Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="ticket.html"
+                class="nav-item"
+                style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                "
+              >
+                <i class="fa-solid fa-list"></i>
+                <span>Tickets</span>
+              </a>
+              <a
+                href="createticket.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span>Create Ticket</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Link to Users Management section -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item active"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-user-group"></i>
+              <span>Users Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+
+            <!-- Submenu -->
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="usermanage.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>Users</span>
+              </a>
+              <a
+                href="viewusers.html"
+                class="nav-item active"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>View Users</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Link to Incidents Management section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Incidents Management</span>
+          </a>
+          <!-- Link to Reporting section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </nav>
+
+        <!-- Container placed at the bottom for logout -->
+        <div class="logout-container">
+          <!-- Action link to log out of the application -->
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+      <main class="main-content">
+        <header class="top-header">
+          <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              placeholder="Search directives, tickets, or users..."
+            />
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+            <button class="icon-btn profile-btn">
+              <i class="fa-regular fa-circle-user"></i>
+            </button>
+          </div>
+        </header>
+        <div class="dashboard-content">
+          <div class="breadcrumb">
+            <a href="usermanage.html">User Management</a> &gt;
+            <!-- Text showing current specific page location -->
+            <span>View Users</span>
+          </div>
+          <div class="page-header-title">
+            <div>
+              <h1>User Management</h1>
+            </div>
+          </div>
+
+          <div class="filter-section">
+            <span class="filter-label">FILTER BY STATUS</span>
+
+            <div class="filter-dropdown">
+              <span id="selectedFilter">All Statuses</span>
+
+              <!-- CLICKABLE ICON ONLY -->
+              <i
+                class="fa-solid fa-chevron-down"
+                id="filterIcon"
+                style="cursor: pointer"
+              ></i>
+            </div>
+
+            <!-- DROPDOWN MENU -->
+            <div class="filter-menu" id="filterMenu" style="display: none">
+              <div class="filter-item">ALL</div>
+              <div class="filter-item">Admin</div>
+              <div class="filter-item">Technician</div>
+              <div class="filter-item">Employee</div>
+            </div>
+          </div>
+          <div class="view-cards">
+            <table class="view-table">
+              <thead>
+                <tr>
+                  <th>USER IDENTITY</th>
+                  <th>ROLE</th>
+                  <th>SPECIALITY</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <!-- first data row -->
+              <tr>
+                <td>
+                  <!-- user names -->
+                  <div class="user-name">
+                    <strong>Sarah Mitchell</strong><br />
+                    <span>sarahmichelle@gmail.com</span>
+                  </div>
+                </td>
+                <td><span class="admin-role">Admin</span></td>
+
+                <td>
+                  <div class="userrole">
+                    <span>Network Security</span>
+                  </div>
+                </td>
+                <td><span class="user-status status-active">Active</span></td>
+                <td>
+                  <a href="" class="ticket-actions">Edit</a>
+                  <i class="fa-solid fa-ban"></i>
+                </td>
+              </tr>
+              <!-- first data row -->
+              <tr>
+                <td>
+                  <!-- user names -->
+                  <div class="user-name">
+                    <strong>Sarah Mitchell</strong><br />
+                    <span>sarahmichelle@gmail.com</span>
+                  </div>
+                </td>
+                <td><span class="admin-role">Admin</span></td>
+
+                <td>
+                  <div class="userrole">
+                    <span>Network Security</span>
+                  </div>
+                </td>
+                <td><span class="user-status status-active">Active</span></td>
+                <td>
+                  <a href="" class="ticket-actions">Edit</a>
+                  <i class="fa-solid fa-ban"></i>
+                </td>
+              </tr>
+              <!-- first data row -->
+              <tr>
+                <td>
+                  <!-- user names -->
+                  <div class="user-name">
+                    <strong>Sarah Mitchell</strong><br />
+                    <span>sarahmichelle@gmail.com</span>
+                  </div>
+                </td>
+                <td><span class="admin-role">Admin</span></td>
+
+                <td>
+                  <div class="userrole">
+                    <span>Network Security</span>
+                  </div>
+                </td>
+                <td><span class="user-status status-active">Active</span></td>
+                <td>
+                  <a href="" class="ticket-actions">Edit</a>
+                  <i class="fa-solid fa-ban"></i>
+                </td>
+              </tr>
+              <!-- first data row -->
+              <tr>
+                <td>
+                  <!-- user names -->
+                  <div class="user-name">
+                    <strong>Sarah Mitchell</strong><br />
+                    <span>sarahmichelle@gmail.com</span>
+                  </div>
+                </td>
+                <td><span class="admin-role">Admin</span></td>
+
+                <td>
+                  <div class="userrole">
+                    <span>Network Security</span>
+                  </div>
+                </td>
+                <td><span class="user-status status-active">Active</span></td>
+                <td>
+                  <a href="" class="ticket-actions">Edit</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const filterIcon = document.getElementById("filterIcon");
+      const filterMenu = document.getElementById("filterMenu");
+      const selectedFilter = document.getElementById("selectedFilter");
+      const filterItems = document.querySelectorAll(".filter-item");
+
+      // OPEN ONLY WHEN ICON IS CLICKED
+      filterIcon.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        filterMenu.style.display =
+          filterMenu.style.display === "block" ? "none" : "block";
+      });
+
+      // CLICKABLE ITEMS
+      filterItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          selectedFilter.textContent = item.textContent;
+          filterMenu.style.display = "none";
+        });
+      });
+
+      // CLOSE WHEN CLICKING OUTSIDE
+      window.addEventListener("click", () => {
+        filterMenu.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

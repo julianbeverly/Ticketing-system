@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar-nav">
+            <div class="logo-container">
+                <div class="logo">ResolvedIT</div>
+            </div>
+            <nav class="nav-menu">
+                <!-- Dashboard link -->
+                <a href="dash.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item" onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'block' ? 'none' : 'block';
+                return false;
+              ">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Ticket Management</span>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                    </a>
+                    <div class="submenu" style="display: none; padding-left: 1.5rem">
+                        <a href="ticket.html" class="nav-item" style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                ">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Tickets</span>
+                        </a>
+                        <a href="createticket.html" class="nav-item" style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Link to Users Management section -->
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item" onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              ">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>Users Management</span>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                    </a>
+
+                    <!-- Submenu -->
+                    <div class="submenu" style="display: none; padding-left: 1.5rem">
+                        <a href="usermanage.html" class="nav-item"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Users</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Link to Incidents Management section -->
+                  <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item active" onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              ">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Incidents Management</span>
+                    <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                </a>
+                   <!-- Submenu -->
+                    <div class="submenu" style="display: none; padding-left: 1.5rem">
+                        <a href="incident.html" class="nav-item active"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Incidents</span>
+                        </a>
+                    </div>
+                <!-- Link to Reporting section -->
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reporting</span>
+                </a>
+            </nav>
+
+            <!-- Container placed at the bottom for logout -->
+            <div class="logout-container">
+                <!-- Action link to log out of the application -->
+                <a href="#" class="nav-item logout-link">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <!-- Top Header (Search & Actions) -->
+            <header class="top-header">
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search directives, tickets, or users..." />
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+                    <button class="icon-btn profile-btn">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </button>
+                </div>
+            </header>
+            <div class="dashboard-content">
+                <div class="breadcrumb">
+                    <a href="#">Incident Management</a> &gt;
+                    <!-- Text showing current specific page location -->
+                    <span>Incidents</span>
+                </div>
+                <div class="page-header-title">
+                    <div>
+                        <h1>User Management</h1>
+                    </div>
+
+                    <button id="openModal" class="btn-create-ticket" style="text-decoration: none">
+                        <!-- Pen icon indicating writing/ -->
+                        <i class="fa-solid fa-user-plus"></i>Add Categories
+                    </button>
+                </div>
+            </div>
+            <!-- Tabs -->
+    <div class="tabs">
+        <div class="tab active">Categories</div>
+        <div class="tab">Types</div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+
+        <div class="table-head">
+            <div>CATEGORY NAME</div>
+            <div>SCOPE & DEFINITION</div>
+            <div>ACTIONS</div>
+        </div>
+
+        <!-- Row -->
+        <div class="row">
+            <strong>Hardware</strong>
+            <p>Broad hardware issues including terminal failures, peripheral malfunctions and lifecycle management.</p>
+            <div class="actions">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+
+        <div class="row">
+            <strong>Software</strong>
+            <p>Application and OS support, including enterprise suite errors and version conflicts.</p>
+            <div class="actions">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+
+        <div class="row">
+            <strong>Network</strong>
+            <p>Connectivity and infrastructure stability, covering LAN/WAN outages, VPN access and DNS routing.</p>
+            <div class="actions">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+
+        <div class="row">
+            <strong>Access</strong>
+            <p>User accounts and permissions, managing SSO failures, role-based access control and credential resets.</p>
+            <div class="actions">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        </div>
+
+    </div>
+     </main>
+    </div>
+
+    <!-- ===============================
+MODAL
+================================= -->
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <!-- Category Name -->
+        <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" placeholder="e.g., Hardware, Cloud Services, Security">
+            <div class="small-text">
+                Unique identifier used across the ticket lifecycle.
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label>Description</label>
+            <textarea placeholder="Provide context on what this category encompasses..."></textarea>
+            <div class="small-text">
+                A detailed description helps support staff triage incidents accurately.
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="modal-footer">
+            <button class="cancel-btn" id="closeModal">Cancel</button>
+            <button class="create-btn">Create Category</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- =========================================
+ADD THIS SECOND MODAL BELOW YOUR CATEGORY MODAL
+========================================= -->
+
+<div class="modal" id="typeModal">
+
+    <div class="modal-box">
+
+        <div class="double-input">
+
+            <div class="form-group">
+                <label>Parent Category</label>
+                <select>
+                    <option>Select a category</option>
+                    <option>Hardware</option>
+                    <option>Software</option>
+                    <option>Network</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Incident Type Name</label>
+                <input type="text" placeholder="Laptop not working">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <textarea placeholder="Provide clear instructions or context..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+            <button class="cancel-btn closeTypeModal">Cancel</button>
+            <button class="create-btn">Create Incident Type</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+
+// Select elements
+const openModalBtn = document.getElementById("openModal");
+const closeModalBtn = document.getElementById("closeModal");
+const modal = document.getElementById("modal");
+
+// Open modal when button clicked
+openModalBtn.onclick = function () {
+    modal.classList.add("show");
+};
+
+// Close modal when cancel clicked
+closeModalBtn.onclick = function () {
+    modal.classList.remove("show");
+};
+
+// Close modal when clicking outside box
+window.onclick = function (e) {
+    if (e.target == modal) {
+        modal.classList.remove("show");
+    }
+};
+</script>
+
+</body>
+
+</html>

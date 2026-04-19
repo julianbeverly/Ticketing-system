@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-layout">
+      <aside class="sidebar-nav">
+        <div class="logo-container">
+          <div class="logo">ResolvedIT</div>
+        </div>
+        <nav class="nav-menu">
+          <!-- Dashboard link -->
+          <a href="dash.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'block' ? 'none' : 'block';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-ticket"></i>
+              <span>Ticket Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="ticket.html"
+                class="nav-item"
+                style="
+                  padding: 0.5rem 1rem;
+                  margin-top: 0.2rem;
+                  font-size: 0.9rem;
+                "
+              >
+                <i class="fa-solid fa-list"></i>
+                <span>Tickets</span>
+              </a>
+              <a
+                href="createticket.html"
+                class="nav-item"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span>Create Ticket</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Link to Users Management section -->
+          <div class="nav-item-dropdown">
+            <a
+              href="#"
+              class="nav-item active"
+              onclick="
+                const submenu = this.nextElementSibling;
+                submenu.style.display =
+                  submenu.style.display === 'none' ? 'block' : 'none';
+                return false;
+              "
+            >
+              <i class="fa-solid fa-user-group"></i>
+              <span>Users Management</span>
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: auto; font-size: 0.8rem"
+              ></i>
+            </a>
+
+            <!-- Submenu -->
+            <div class="submenu" style="display: none; padding-left: 1.5rem">
+              <a
+                href="usermanage.html"
+                class="nav-item active"
+                style="padding: 0.5rem 1rem; font-size: 0.9rem"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>Users</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Link to Incidents Management section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Incidents Management</span>
+          </a>
+          <!-- Link to Reporting section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </nav>
+
+        <!-- Container placed at the bottom for logout -->
+        <div class="logout-container">
+          <!-- Action link to log out of the application -->
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <!-- Top Header (Search & Actions) -->
+        <header class="top-header">
+          <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              placeholder="Search directives, tickets, or users..."
+            />
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+            <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+            <button class="icon-btn profile-btn">
+              <i class="fa-regular fa-circle-user"></i>
+            </button>
+          </div>
+        </header>
+        <div class="dashboard-content">
+          <div class="breadcrumb">
+            <a href="#">User Management</a> &gt;
+            <!-- Text showing current specific page location -->
+            <span>Users</span>
+          </div>
+          <div class="page-header-title">
+            <div>
+              <h1>User Management</h1>
+            </div>
+
+            <button
+              id="addUserBtn"
+              class="btn-create-ticket"
+              style="text-decoration: none"
+            >
+              <!-- Pen icon indicating writing/ -->
+              <i class="fa-solid fa-user-plus"></i>Add Users
+            </button>
+          </div>
+          <div class="users-card">
+            <table class="users-table">
+              <!-- Table header containing column names -->
+              <thead>
+                <tr>
+                  <th>USER IDENTITY</th>
+                  <th>ROLE</th>
+                  <th>SPECIALITY</th>
+                  <th>CONTACT</th>
+                  <th>STATUS</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- first data row -->
+                <tr>
+                  <td>
+                    <!-- user names -->
+                    <div class="user-name">
+                      <strong>Sarah Mitchell</strong><br />
+                      <span>sarahmichelle@gmail.com</span>
+                    </div>
+                  </td>
+                  <td><span class="admin-role">Admin</span></td>
+
+                  <td>
+                    <div class="userrole">
+                      <span>Network Security</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <!-- contact-->
+                    <div class="user-contact">+237 653531387</div>
+                  </td>
+
+                  <td><span class="user-status status-active">Active</span></td>
+                  <td>
+                    <i class="fa-solid fa-pen"></i>
+                    <i class="fa-solid fa-ban"></i>
+                  </td>
+                </tr>
+                <!-- second data row -->
+                <tr>
+                  <td>
+                    <!-- user names -->
+                    <div class="user-name">
+                      <strong>Lum Julian</strong><br />
+                      <span>sarahmichelle@gmail.com</span>
+                    </div>
+                  </td>
+                  <td><span class="tech-role">Technician</span></td>
+
+                  <td>
+                    <div class="userrole">
+                      <span>Network Security</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <!-- contact-->
+                    <div class="user-contact">+237 653531387</div>
+                  </td>
+
+                  <td>
+                    <span class="user-status status-suspend">Suspend</span>
+                  </td>
+                  <td>
+                    <i class="fa-solid fa-pen"></i>
+                    <i class="fa-solid fa-ban"></i>
+                  </td>
+                </tr>
+                <!-- third data row -->
+                <tr>
+                  <td>
+                    <!-- user names -->
+                    <div class="user-name">
+                      <strong>Sarah Mitchell</strong><br />
+                      <span>sarahmichelle@gmail.com</span>
+                    </div>
+                  </td>
+                  <td><span class="employ-role">Employee</span></td>
+
+                  <td>
+                    <div class="userrole">
+                      <span>Network Security</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <!-- contact-->
+                    <div class="user-contact">+237 653531387</div>
+                  </td>
+
+                  <td><span class="user-status status-active">Active</span></td>
+                  <td>
+                    <i class="fa-solid fa-pen"></i>
+                    <i class="fa-solid fa-ban"></i>
+                  </td>
+                </tr>
+                <!-- fourth data row -->
+                <tr>
+                  <td>
+                    <!-- user names -->
+                    <div class="user-name">
+                      <strong>Sarah Mitchell</strong><br />
+                      <span>sarahmichelle@gmail.com</span>
+                    </div>
+                  </td>
+                  <td><span class="admin-role">Admin</span></td>
+
+                  <td>
+                    <div class="userrole">
+                      <span>Network Security</span>
+                    </div>
+                  </td>
+
+                  <td>
+                    <!-- contact-->
+                    <div class="user-contact">+237 653531387</div>
+                  </td>
+
+                  <td>
+                    <span class="user-status status-suspend">Active</span>
+                  </td>
+                  <td>
+                    <a href="" class="user-actions">
+                      <i class="fa-solid fa-pen"></i
+                      ><i class="fa-solid fa-clock-rotate-left"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="pagination-container">
+              <div>Showing 1-4 of 48 users</div>
+              <div class="pagination-controls">
+                <!-- Left arrow backward navigation -->
+                <span class="page-btn"
+                  ><i class="fa-solid fa-chevron-left"></i
+                ></span>
+                <!-- Active page 1 button -->
+                <span class="page-btn active">1</span>
+                <span class="page-btn">2</span>
+                <span class="page-btn">3</span>
+                <!-- Right arrow forward navigation -->
+                <span class="page-btn"
+                  ><i class="fa-solid fa-chevron-right"></i
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal-overlay">
+      <div class="modal">
+        <h3>Create User</h3>
+
+        <!-- ROLE (NOT PRESELECTED) -->
+        <select id="roleSelect">
+          <option value="" selected disabled>-- Select Role --</option>
+          <option value="admin">Admin</option>
+          <option value="technician">Technician</option>
+          <option value="employee">Employee</option>
+        </select>
+
+        <!-- ADMIN -->
+        <div id="adminBox" class="section">
+          <input type="text" placeholder="Admin Name" />
+          <input type="email" placeholder="Admin Email" />
+          <input type="text" placeholder="Contact" />
+        </div>
+
+        <!-- TECHNICIAN -->
+        <div id="techBox" class="section">
+          <input type="text" placeholder="Technician Name" />
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Speciality" />
+          <input type="text" placeholder="Contact" />
+        </div>
+
+        <!-- EMPLOYEE -->
+        <div id="employeeBox" class="section">
+          <input type="text" placeholder="Employee Name" />
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Contact" />
+        </div>
+
+        <!-- ACTION BUTTON (changes dynamically) -->
+        <button id="submitBtn"></button>
+
+        <button id="closeBtn">Cancel</button>
+      </div>
+    </div>
+
+    <script src="/dist/js/modals.js"></script>
+  </body>
+</html>

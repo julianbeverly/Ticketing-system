@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
   // Reset Password Modal Logic
   // Retrieve the reset form element from the DOM using its ID
   const resetForm = document.getElementById("resetForm");
@@ -13,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add an event listener to the form that triggers when the user attempts to submit it
     resetForm.addEventListener("submit", (e) => {
       // Prevent the default form submission behavior (which would reload the page)
-      e.preventDefault(); 
-      
+      e.preventDefault();
+
       // Get the value typed into the "new password" input field
       const newPassword = document.getElementById("newPassword").value;
       // Get the value typed into the "confirm password" input field
       const confirmPassword = document.getElementById("confirmPassword").value;
-      
+
       // Check if the entered passwords do not match
       if (newPassword !== confirmPassword) {
         // Show an alert to the user if passwords don't match
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Stop the function execution here so the modal isn't shown
         return;
       }
-      
+
       // If passwords match, change the modal's display style to "flex" to make it visible
       resetSuccessModal.style.display = "flex";
     });
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Hide the modal by changing its display style back to "none"
       resetSuccessModal.style.display = "none";
       // Redirect the user to the login page after successfully changing the password
-      window.location.href = "login.html"; 
+      window.location.href = "login.html";
     };
 
     // Add a click event listener to the entire window
@@ -51,25 +50,90 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // Forget Password Modal Logic
   // Get the form and modal elements
-  const forgetForm = document.getElementById('forgetPasswordForm');
-  const emailSentModal = document.getElementById('emailSentModal');
-  const modalOkBtn = document.getElementById('modalOkBtn');
+  const forgetForm = document.getElementById("forgetPasswordForm");
+  const emailSentModal = document.getElementById("emailSentModal");
+  const modalOkBtn = document.getElementById("modalOkBtn");
 
   // Check if we are on the forget password page before adding listeners
   if (forgetForm && emailSentModal && modalOkBtn) {
     // Event listener for form submission
-    forgetForm.addEventListener('submit', function(e) {
+    forgetForm.addEventListener("submit", function (e) {
       // Prevent the default HTML form submission which would reload the page
       e.preventDefault();
       // Display the modal by changing its display styling from 'none' to 'flex'
-      emailSentModal.style.display = 'flex';
+      emailSentModal.style.display = "flex";
     });
 
     // Event listener for the modal's OK button click
-    modalOkBtn.addEventListener('click', function() {
+    modalOkBtn.addEventListener("click", function () {
       // Redirect the user back to the login page
-      window.location.href = 'login.html';
+      window.location.href = "login.html";
     });
   }
 
+  // modal for adding users
+  const addUserBtn = document.getElementById("addUserBtn");
+  const modal = document.getElementById("modal");
+  const closeBtn = document.getElementById("closeBtn");
+
+  const roleSelect = document.getElementById("roleSelect");
+
+  const adminBox = document.getElementById("adminBox");
+  const techBox = document.getElementById("techBox");
+  const employeeBox = document.getElementById("employeeBox");
+
+  const submitBtn = document.getElementById("submitBtn");
+
+  // OPEN MODAL
+  addUserBtn.addEventListener("click", () => {
+    modal.style.display = "flex";
+
+    // RESET EVERYTHING WHEN MODAL OPENS
+    roleSelect.value = "";
+
+    adminBox.style.display = "none";
+    techBox.style.display = "none";
+    employeeBox.style.display = "none";
+
+    submitBtn.style.display = "none";
+    submitBtn.textContent = "Select Role First";
+  });
+
+  // CLOSE MODAL
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // ROLE CHANGE
+  roleSelect.addEventListener("change", () => {
+    // show correct section
+    adminBox.style.display = "none";
+    techBox.style.display = "none";
+    employeeBox.style.display = "none";
+
+    // SHOW BUTTON ONLY AFTER SELECTION
+    submitBtn.style.display = "block";
+
+    if (roleSelect.value === "admin") {
+      adminBox.style.display = "block";
+      submitBtn.textContent = "Create Admin";
+    } else if (roleSelect.value === "technician") {
+      techBox.style.display = "block";
+      submitBtn.textContent = "Create Technician";
+    } else if (roleSelect.value === "employee") {
+      employeeBox.style.display = "block";
+      submitBtn.textContent = "Create Employee";
+    }
+  });
+
+  // SUBMIT ACTION
+  submitBtn.addEventListener("click", () => {
+    if (!roleSelect.value) return;
+
+    alert(roleSelect.value + " created successfully!");
+
+    modal.style.display = "none";
+  });
+
+  
 });

@@ -136,7 +136,9 @@
                                 <td><span class="assign-pill pill-high">HIGH</span></td>
                                 <td><span class="assign-pill pill-open">OPEN</span></td>
                                 <td>Oct 24, 2023</td>
-                                <td><button class="btn-assign"><i class="fa-solid fa-user-plus"></i> Assign</button></td>
+                                  <td>
+                                    <a href="#" class="ticket-actions assignBtn"><i class="fa-solid fa-user-plus"></i>Assign</a>  
+                               </td>
                             </tr>
 
                             <!-- Row 2 -->
@@ -157,7 +159,10 @@
                                 <td><span class="assign-pill pill-medium">MEDIUM</span></td>
                                 <td><span class="assign-pill pill-open">OPEN</span></td>
                                 <td>Oct 25, 2023</td>
-                                <td><button class="btn-assign"><i class="fa-solid fa-user-plus"></i> Assign</button></td>
+                                  <td>
+                                    <a href="#" class="ticket-actions assignBtn"><i class="fa-solid fa-user-plus"></i>Assign</a>
+                                    
+                               </td>
                             </tr>
 
                             <!-- Row 3 -->
@@ -178,7 +183,10 @@
                                 <td><span class="assign-pill pill-low">LOW</span></td>
                                 <td><span class="assign-pill pill-open">OPEN</span></td>
                                 <td>Oct 26, 2023</td>
-                                <td><button class="btn-assign"><i class="fa-solid fa-user-plus"></i> Assign</button></td>
+                                <td>
+                                    <a href="#" class="ticket-actions assignBtn"><i class="fa-solid fa-user-plus"></i>Assign</a>
+                                    
+                               </td>
                             </tr>
                         </tbody>
                     </table>
@@ -201,5 +209,94 @@
             </div>
         </main>
     </div>
+
+    
+</div>
+<div id="assignModal" class="modal-overlay">
+
+    <div class="assign-modal-box">
+
+        <!-- Header -->
+        <div class="modal-header">
+            <div>
+                <h2>Ticket Assignment</h2>
+                <p>Configuration for Ticket <span>TC-9305</span></p>
+            </div>
+
+            <button id="closeModal" class="close-btn">&times;</button>
+        </div>
+
+        <!-- Subject -->
+        <div class="input-box">
+            <label>SUBJECT</label>
+            <input type="text" value="New Laptop Setup: Onboarding">
+        </div>
+
+        <!-- Technician -->
+        <div class="input-box">
+            <label>Select Technician</label>
+            <select>
+                <option>Choose a specialist...</option>
+                <option>Julian</option>
+                <option>Sarah</option>
+            </select>
+        </div>
+
+        <!-- Priority -->
+        <div class="input-box">
+            <label>Priority Level</label>
+            <select>
+                <option>Medium</option>
+                <option>Low</option>
+                <option>High</option>
+            </select>
+        </div>
+
+        <!-- SLA -->
+        <div class="sla-box">
+            <label>SLA Selection</label>
+
+            <div class="sla-option active">
+                <input type="radio" checked>
+                Default SLA
+            </div>
+
+            <div class="sla-option">
+                <input type="radio">
+                Custom SLA
+            </div>
+        </div>
+
+        <!-- Buttons -->
+
+        <button class="confirm-btn">
+            Confirm Assignment
+        </button>
+
+        <button class="cancel-reset">
+            Cancel and Reset
+        </button>
+
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const assignButtons = document.querySelectorAll(".assignBtn");
+    const assignModal = document.getElementById("assignModal");
+    const closeModal = document.getElementById("closeModal");
+
+    assignButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            assignModal.style.display = "flex";
+        });
+    });
+
+    closeModal.addEventListener("click", () => {
+        assignModal.style.display = "none";
+    });
+
+});
+</script>
 </body>
 </html>
