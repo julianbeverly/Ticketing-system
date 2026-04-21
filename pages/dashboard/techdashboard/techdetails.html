@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Details - Admin Dashboard</title>
+  <!-- Font Awesome Icons  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/dist/CSS/style.css">
+</head>
+
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar-nav">
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <div class="nav-item-dropdown">
+          <a href="#" class="nav-item active" onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            ">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Ticket Management</span>
+            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+          </a>
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a href="employticket.html" class="nav-item active" style="
+                padding: 0.5rem 1rem;
+                margin-top: 0.2rem;
+                font-size: 0.9rem;
+              ">
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+          </div>
+
+          <!-- Link to Reminder section -->
+          <a href="reminder.html" class="nav-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Reminders</span>
+          </a>
+          <!-- Link to Reporting section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </div>
+
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+    </aside>
+
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header (Search & Actions) -->
+      <header class="top-header">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search directives, tickets, or users...">
+        </div>
+        <div class="header-actions">
+          <a href="technoti.html" class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="bell-dot"></span>
+          </a>
+          <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+          <button class="icon-btn profile-btn"><i class="fa-regular fa-circle-user"></i></button>
+        </div>
+      </header>
+
+      <!-- Ticket Details Content Wrapper -->
+      <div class="dashboard-content ticket-details-view">
+        <div class="ticket-details-main">
+
+          <!-- Left Panel: Ticket Information -->
+          <div class="td-left-card">
+            <div class="breadcrumb">
+              <!-- Link to previous Operations page -->
+              <a href="techticket.html">Ticket Management</a> &gt;
+              <!-- Text showing current specific page location -->
+              <span>Tickets</span>
+            </div>
+
+            <!-- Core Ticket Attributes -->
+            <div class="td-attributes">
+              <div class="td-attr-row">
+                <div class="td-attr">
+                  <span class="td-lbl">STATUS:</span>
+                  <span class="td-pill pill-inprogress">IN-PROGRESS</span>
+                </div>
+                <div class="td-attr">
+                  <span class="td-lbl">EMPLOYEE</span>
+                  <span class="td-pill pill-grey">MBOH MAKAZI</span>
+                </div>
+              </div>
+              <div class="td-attr-row">
+                <div class="td-attr">
+                  <span class="td-lbl">PRIORITY:</span>
+                  <span class="td-pill pill-critical">CRITICAL</span>
+                </div>
+                <div class="td-attr">
+                  <button class="btn-export blue-btn" id="resolveTicketBtn">
+                    <i class="fa-solid fa-check"></i>
+                    <span>RESOLUTION <br />NOTE</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Description text -->
+            <div class="td-description-sec">
+              <h3><i class="fa-regular fa-file-lines text-blue"></i> Detailed Description</h3>
+              <p>Intermittent latency spikes </p>
+            </div>
+
+            <!-- Attachment Carousel and Evidence -->
+            <div class="td-attachment-carousel">
+              <div class="td-carousel-container">
+                <img src="/dist/image/images.jpeg" alt="Hardware Attachment">
+                <!-- <div class="carousel-img-lbl">physical_rack_status.jpg (1/3)</div> -->
+                <div class="round-btn right-btn"><i class="fa-solid fa-chevron-right"></i></div>
+              </div>
+              <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="td-attachment-info">
+                <!-- <div class="att-name"><i class="fa-regular fa-image"></i> INCIDENT ATTACHMENT: DAMAGED HARDWARE</div> -->
+                <div class="att-time">Uploaded Oct 24, 09:21 AM</div>
+              </div>
+            </div>
+
+            <!-- Metadata Footer Elements -->
+            <div class="td-meta-footer">
+              <div class="td-meta-box">
+                <span class="meta-lbl">DATE CREATED</span>
+                <span class="meta-val">Oct 24, 2023 -<br>09:21 AM</span>
+              </div>
+              <div class="td-meta-box">
+                <span class="meta-lbl">CATEGORY</span>
+                <span class="meta-val">Cloud<br>Infrastructure</span>
+              </div>
+              <div class="td-meta-box">
+                <span class="meta-lbl">INCIDENT TYPE</span>
+                <span class="meta-val">Database<br>Performance</span>
+              </div>
+              <div class="td-meta-box">
+                <span class="meta-lbl">SUBJECT</span>
+                <span class="meta-val">Unable to log into<br>system</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Communication Log Chat System -->
+          <div class="td-right-panel">
+            <div class="comm-header">
+              <h3>Communication Log</h3>
+              <div class="comm-meta"><span class="status-dot"></span> 3 PARTICIPANTS ONLINE</div>
+              <div class="comm-avatars">
+                <img src="https://i.pravatar.cc/150?u=12" class="avatar" alt="Avatar 1">
+                <img src="https://i.pravatar.cc/150?u=13" class="avatar" alt="Avatar 2">
+                <div class="avatar-more">+1</div>
+              </div>
+            </div>
+
+            <div class="comm-history">
+              <!-- Chat session start timestamp -->
+              <div class="comm-divider"><span>SESSION START • 09:21 AM</span></div>
+
+              <!-- Chat message (Received) -->
+              <div class="chat-msg">
+                <img class="chat-avatar" src="https://i.pravatar.cc/150?u=41" alt="Marcus">
+                <div class="chat-content">
+                  <div class="chat-head"><strong>Marcus Thorne</strong> <span class="chat-time">09:45 AM</span></div>
+                  <div class="chat-bubble received">
+                    <p>I've analyzed the telemetry. Scaling connection limits to <span
+                        class="td-code-inline">2000</span> per instance.</p>
+                    <!-- Document Attachment Inside Chat -->
+                    <div class="chat-attachment">
+                      <div class="att-icon"><i class="fa-regular fa-file"></i></div>
+                      <div class="att-det">
+                        <div class="att-title">metrics_dump</div>
+                        <div class="att-sub">2.4 MB • CSV Document</div>
+                      </div>
+                      <i class="fa-solid fa-download att-dl"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chat message (Sent / Me) -->
+              <div class="chat-msg me-msg">
+                <div class="chat-content align-right">
+                  <div class="chat-head right-head"><span class="chat-time">10:12 AM</span> <strong>Lead Admin</strong>
+                  </div>
+                  <div class="chat-bubble sent">
+                    <p>Awaiting scaling confirmation. @Marcus check if IOPS baseline is holding after the change.</p>
+                  </div>
+                </div>
+                <div class="chat-avatar avatar-me">ME</div>
+              </div>
+
+              <!-- Chat message (Received with Image) -->
+              <div class="chat-msg">
+                <img class="chat-avatar" src="https://i.pravatar.cc/150?u=45" alt="Sarah">
+                <div class="chat-content">
+                  <div class="chat-head"><strong>Sarah Chen</strong> <span class="chat-time">10:30 AM</span></div>
+                  <div class="chat-bubble received">
+                    <p>Scaling complete. Metrics stabilized. Look at this snapshot from Grafana:</p>
+                    <div class="chat-img">
+                      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80"
+                        alt="Grafana graph">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message input formulation area -->
+            <div class="comm-input-area">
+              <input type="text" placeholder="Update status or mention @colleagues...">
+              <div class="comm-actions">
+                <div class="comm-icons">
+                  <i class="fa-solid fa-paperclip"></i>
+                  <i class="fa-regular fa-image"></i>
+                  <i class="fa-solid fa-video"></i>
+                </div>
+                <button class="send-msg-btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- Resolve Ticket Modal -->
+  <div class="resolve-modal-overlay" id="resolveModal">
+    <div class="resolve-modal-box">
+      <!-- Modal Header -->
+      <div class="resolve-modal-header">
+        <div class="header-text">
+          <h2>Resolve Ticket</h2>
+          <p>Complete the final step for TICK-8902-X</p>
+        </div>
+        <button class="close-modal-btn" id="closeResolveModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="resolve-modal-body">
+        <form id="resolveTicketForm">
+          <!-- Resolution Note Section -->
+          <div class="resolve-form-group">
+            <label for="resolutionNote">RESOLUTION NOTE (REQUIRED)</label>
+            <textarea id="resolutionNote" placeholder="Describe the steps taken to resolve this issue..."
+              required></textarea>
+          </div>
+
+          <!-- Type and Timestamp Row -->
+          <div class="resolve-form-row">
+            <div class="resolve-form-group">
+              <label for="resolutionType">RESOLUTION TYPE</label>
+              <div class="custom-select-wrapper">
+                <select id="resolutionType">
+                  <option value="hardware">Hardware Repair</option>
+                  <option value="software">Software Update</option>
+                  <option value="network">Network configuration</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+            <div class="resolve-form-group">
+              <label for="completionTimestamp">COMPLETION TIMESTAMP</label>
+              <div class="timestamp-display">
+                <i class="fa-regular fa-clock"></i>
+                <input type="text" id="completionTimestamp" readonly>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Box -->
+          <div class="resolve-info-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>By clicking "Mark as Resolved", you certify that all service procedures have been followed and the asset
+              is returned to operational status.</p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="resolve-modal-footer">
+        <button type="button" class="resolve-cancel-btn" id="cancelResolveBtn">Cancel</button>
+        <button type="submit" form="resolveTicketForm" class="resolve-confirm-btn">Confirm & Mark as Resolved</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/dist/js/modals.js"></script>
+</body>
+
+</html>

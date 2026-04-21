@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="/dist/CSS/style.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>Reporting - ResolvedIT</title>
+</head>
+
+<body>
+ 
+  <div class="dashboard-layout">
+
+    
+    <aside class="sidebar-nav">
+    
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <nav class="nav-menu">
+        
+        <a href="techdash.html" class="nav-item">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+
+        
+        <div class="nav-item-dropdown">
+          <a href="#" class="nav-item" onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            ">
+            <i class="fa-solid fa-ticket"></i>
+            <span>My Tickets</span>
+            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+          </a>
+
+          <!-- Submenu items -->
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a href="techticket.html" class="nav-item" style="padding: 0.5rem 1rem; margin-top: 0.2rem; font-size: 0.9rem;">
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Reporting section - Currently active -->
+        <a href="techreport.html" class="nav-item active">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reporting</span>
+        </a>
+
+        <!-- Reminders link -->
+        <a href="reminder.html" class="nav-item">
+          <i class="fa-regular fa-clock"></i>
+          <span>Reminders</span>
+        </a>
+
+        <!-- Logout button at the bottom -->
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+
+    <main class="main-content">
+
+      
+      <header class="top-header">
+        
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Quick search ticket ID..." />
+        </div>
+
+        <!-- Header actions -->
+        <div class="header-actions">
+          <a href="technoti.html" class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="bell-dot"></span>
+          </a>
+          <button class="icon-btn">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
+          
+          <button class="icon-btn profile-btn">
+            <i class="fa-regular fa-circle-user" style="font-size: 1.5rem;"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="dashboard-content" style="padding: 2rem;">
+
+        <!-- Page header -->
+        <div class="report-page-header" style="margin-bottom: 2rem;">
+          <h1 style="font-size: 1.8rem; font-weight: 700; color: #111827; margin-bottom: 0.25rem;">Reporting</h1>
+          <p style="color: #6b7280; font-size: 0.95rem;">Technician Ticket Performance and Work Summary</p>
+        </div>
+
+        <!-- =============== SLA PERFORMANCE CARD =============== -->
+        
+
+        <!-- =============== FILTERS SECTION =============== -->
+        <section class="report-filters">
+          <!-- Date Range Filter -->
+          <div class="filter-group">
+            <label>Date Range</label>
+            <div class="filter-input-row">
+              <input type="date" value="2023-10-01" />
+              <span>to</span>
+              <input type="date" value="2023-10-31" />
+            </div>
+          </div>
+
+          <!-- Status Filter -->
+          <div class="filter-group">
+            <label>Status</label>
+            <select>
+              <option>All Statuses</option>
+              <option>Resolved</option>
+              <option>In Progress</option>
+              <option>Pending</option>
+            </select>
+          </div>
+
+          <!-- Priority Filter -->
+          <div class="filter-group">
+            <label>Priority</label>
+            <select>
+              <option>All Priorities</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+          </div>
+
+          <!-- Apply Button -->
+          <button class="apply-filters-btn">
+            Apply Filters
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </section>
+
+        
+        <section class="report-table-container">
+          <div class="report-table-header">
+            <h2>Detailed Ticket Report</h2>
+            <div class="table-header-btns">
+              <button class="btn-export">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                Export
+              </button>
+              <!-- <a href="#" class="btn-view-history">
+                View All History
+                <i class="fa-solid fa-arrow-right"></i>
+              </a> -->
+            </div>
+          </div>
+
+          <table class="main-report-table">
+            <thead>
+              <tr>
+                <th>Ticket ID</th>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>SLA Met</th>
+                <th>Created</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td class="ticket-id-cell">#RT-8642</td>
+                <td>VPN Connection Failure</td>
+                <td><span class="category-tag cat-network">Network</span></td>
+                <td>
+                  <div class="priority-cell">
+                    <i class="fa-solid fa-circle-exclamation" style="color: #ef4444;"></i>
+                    <span>High</span>
+                  </div>
+                </td>
+                <td><span class="status-tag status-resolved">Resolved</span></td>
+                <td><i class="fa-regular fa-circle-check sla-met-icon" style="color: #10b981;"></i></td>
+                <td>Oct 24, 2023</td>
+                <td><a href="techdetails.html" class="btn-view-details-sm">View Details</a></td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td class="ticket-id-cell">#RT-8810</td>
+                <td>Software License Expired</td>
+                <td><span class="category-tag cat-software">Software</span></td>
+                <td>
+                  <div class="priority-cell">
+                    <i class="fa-solid fa-minus" style="color: #3b82f6;"></i>
+                    <span>Medium</span>
+                  </div>
+                </td>
+                <td><span class="status-tag status-in-progress">In Progress</span></td>
+                <td><i class="fa-regular fa-circle-check sla-met-icon" style="color: #10b981;"></i></td>
+                <td>Oct 23, 2023</td>
+                <td><a href="techdetails.html" class="btn-view-details-sm">View Details</a></td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td class="ticket-id-cell">#RT-8790</td>
+                <td>Blue Screen of Death (HR Dept)</td>
+                <td><span class="category-tag cat-hardware">Hardware</span></td>
+                <td>
+                  <div class="priority-cell">
+                    <i class="fa-solid fa-circle-exclamation" style="color: #ef4444;"></i>
+                    <span>High</span>
+                  </div>
+                </td>
+                <td><span class="status-tag status-overdue">Overdue</span></td>
+                <td><i class="fa-regular fa-circle-xmark sla-met-icon" style="color: #ef4444;"></i></td>
+                <td>Oct 20, 2023</td>
+                <td><a href="techdetails.html" class="btn-view-details-sm">View Details</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Pagination Footer -->
+          <div class="table-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+            <p class="results-count" style="color: #6b7280; font-size: 0.9rem;">Showing 3 of 124 results</p>
+            <div class="pagination" style="display: flex; gap: 0.25rem;">
+              <button class="page-btn">Previous</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">Next</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <!-- End of dashboard-content -->
+
+    </main>
+    <!-- End of main-content -->
+
+  </div>
+  <!-- End of dashboard-layout -->
+</body>
+
+</html>

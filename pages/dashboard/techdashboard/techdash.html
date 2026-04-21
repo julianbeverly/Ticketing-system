@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/dist/CSS/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="dashboard-layout">
+    <aside class="sidebar-nav">
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <div class="nav-item-dropdown">
+          <a href="#" class="nav-item" onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            ">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Ticket Management</span>
+            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+          </a>
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a href="techticket.html" class="nav-item" style="
+                padding: 0.5rem 1rem;
+                margin-top: 0.2rem;
+                font-size: 0.9rem;
+              ">
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+
+          </div>
+
+          <!-- Link to Reminder section -->
+          <a href="reminder.html" class="nav-item">
+            <i class="fa-regular fa-clock"></i>
+            <span>Reminders</span>
+          </a>
+          <!-- Link to Reporting section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </div>
+
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search systems or tickets..." />
+        </div>
+        <div class="header-actions" id="content">
+          <a href="technoti.html" class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="bell-dot"></span>
+          </a>
+          <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+          <button class="icon-btn profile-btn">
+            <i class="fa-regular fa-circle-user"></i>
+          </button>
+        </div>
+      </header>
+      <div class="dashboard-content">
+        <div class="metrics-grid">
+          <div class="metric-card card-blue">
+            <div class="icon-circle">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+            <h4>ASSIGNED<br />TICKETS</h4>
+            <div class="value">1,284</div>
+          </div>
+          <div class="metric-card card-pink">
+            <div class="icon-circle">
+              <i class="fa-regular fa-circle-check"></i>
+            </div>
+            <h4>INPROGRESS<br />TICKETS</h4>
+            <div class="value">8,492</div>
+          </div>
+          <div class="metric-card card-beige">
+            <div class="icon-circle">
+              <!-- <i class="fa-solid fa-user-group"></i> -->
+            </div>
+            <h4>Resolved</h4>
+            <div class="value">24,103</div>
+          </div>
+          <div class="metric-card card-green">
+            <div class="icon-circle">
+              <i class="fa-solid fa-certificate"></i>
+            </div>
+            <h4>total SLA</h4>
+            <div class="value">7,210</div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Recent Activity -->
+      <div class="activity-card mt-card">
+        <div class="activity-header">
+          <h3>Recent Activity</h3>
+          <a href="#" class="view-all">View All Updates</a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</body>
+
+</html>

@@ -3336,7 +3336,8 @@ svg {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.45);
-  display: none; /* hidden by default */
+  display: none;
+  /* hidden by default */
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -3750,189 +3751,1492 @@ svg {
 /* NOTIFICATION */
 
 
-/* ===============================
-NOTIFICATION PAGE (DASHBOARD MODE)
-================================= */
-
-.notification-page {
-  width: 100%;
-  background: #f7f8fc;
-  border-radius: 12px;
-  padding: 30px;
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-/* ===============================
-HEADER
-================================= */
-.notify-top {
+.notification-item:hover {
+  background: #f5f7fa;
+}
+
+.notification-item i {
+  color: #3b82f6;
+  font-size: 18px;
+}
+
+/* ===================== REMINDER PAGE STYLES ===================== */
+
+/* Page header containing title, subtitle, and filter button */
+.reminder-page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
-.bread-text {
-  font-size: 12px;
-  color: #666;
-  letter-spacing: 1px;
-}
-
-.bread-text span {
-  color: #1d4ed8;
+/* Main page title */
+.reminder-page-title {
+  font-size: 1.8rem;
   font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
 }
 
-.notify-top h1 {
-  margin: 10px 0;
-  font-size: 40px;
+/* Subtitle below the page title */
+.reminder-page-subtitle {
+  color: #6b7280;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Filter button on the right side of the header */
+.reminder-filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Filter button hover effect */
+.reminder-filter-btn:hover {
+  background-color: #f3f4f6;
+}
+
+/* Filter button icon styling */
+.reminder-filter-btn i {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Wrapper for each reminder section (Immediate Attention / Approaching Deadlines) */
+.reminder-section {
+  margin-bottom: 2rem;
+}
+
+/* Section header containing title, icon, and count badge */
+.reminder-section-header {
+  margin-bottom: 1rem;
+}
+
+/* Flex container for section title elements */
+.reminder-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Section heading text */
+.reminder-section-title h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+/* Warning icon for the Immediate Attention section */
+.reminder-icon-warning {
+  color: #dc2626;
+  font-size: 1.1rem;
+}
+
+/* Hourglass icon for the Approaching Deadlines section */
+.reminder-icon-deadline {
+  color: #1d4ed8;
+  font-size: 1rem;
+}
+
+/* Count badge showing number of overdue or upcoming items */
+.reminder-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Red variant for overdue count badge */
+.badge-overdue {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+/* Blue variant for upcoming count badge */
+.badge-upcoming {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+/* Individual reminder card container */
+.reminder-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #f3f4f6;
+  transition: box-shadow 0.2s;
+}
+
+
+.reminder-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+
+.reminder-card-urgent {
+  border-left: 4px solid #dc2626;
+}
+
+
+.reminder-card-deadline {
+  border-left: 4px solid #e5e7eb;
+}
+
+.reminder-card-content {
+  flex: 1;
+}
+
+
+.reminder-card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
+
+.reminder-ticket-id {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+
+.reminder-priority-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+
+.priority-urgent {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+
+.priority-critical {
+  background-color: #dc2626;
+  color: #fff;
+}
+
+
+.priority-medium {
+  background-color: #f97316;
+  color: #fff;
+}
+
+
+.priority-high {
+  background-color: #1d4ed8;
+  color: #fff;
+}
+
+
+.reminder-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+
+.reminder-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Individual meta item (icon + text pair) */
+.reminder-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.825rem;
+  color: #6b7280;
+}
+
+/* Meta item icon sizing */
+.reminder-meta-item i {
+  font-size: 0.8rem;
+}
+
+/* Red text for overdue time displays */
+.reminder-overdue-text {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+/* Red color for clock icon inside overdue text */
+.reminder-overdue-text i {
+  color: #dc2626;
+}
+
+/* Blue text for remaining time displays */
+.reminder-timeleft-text {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* Blue color for clock icon inside remaining time text */
+.reminder-timeleft-text i {
+  color: #1d4ed8;
+}
+
+/* View Ticket / View button on the right side of the card */
+.reminder-view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #111827;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+/* View button hover effect */
+.reminder-view-btn:hover {
+  background-color: #f3f4f6;
+}
+
+/* Smaller view button variant for the deadline section */
+.reminder-view-sm {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+}
+
+/* INCIDENT MANAGEMENT */
+.dent-tabs {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f3f4f6;
+  width: fit-content;
+}
+
+/* Individual tab button styling */
+.dent-tab {
+  padding: 0.7rem 2.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  user-select: none;
+}
+
+/* Hover effect on non-active tabs */
+.dent-tab:hover {
+  color: #374151;
+}
+
+/* Active tab styling - blue text with white background */
+.dent-tab.active {
+  color: #1d4ed8;
+  background-color: #fff;
+  border-bottom: 2px solid #1d4ed8;
+}
+
+/* -------- Data Table Card -------- */
+/* Wrapper card for the data table (Types or Categories) */
+.dent-table-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 0.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+}
+
+/* Table header row with column labels */
+.dent-table-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px;
+  padding: 1rem 1.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* Individual data row in the table */
+.dent-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 100px;
+  padding: 1.25rem 1.5rem;
+  align-items: center;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.15s ease;
+}
+
+/* Subtle hover effect on data rows */
+.dent-row:hover {
+  background-color: #fafbfd;
+}
+
+/* Remove bottom border on the last row */
+.dent-row:last-child {
+  border-bottom: none;
+}
+
+/* Row title styling (bold text in the first column) */
+.dent-row strong {
+  font-size: 0.95rem;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Description text in category rows */
+.dent-row p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+/* -------- Category Badge -------- */
+/* Small pill badge showing the parent category name on the Types view */
+.dent-category-badge {
+  display: inline-block;
+  background-color: #f3f4f6;
+  color: #374151;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* -------- Row Action Icons -------- */
+/* Container for edit and more-options icons */
+.dent-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+/* Individual action icon styling */
+.dent-actions i {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect changes icon color to blue */
+.dent-actions i:hover {
+  color: #1d4ed8;
+}
+
+/* -------- Modal Overlay -------- */
+/* Full-screen overlay backdrop for modals */
+.dent-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Show state for modals (toggled via JS) */
+.dent-modal.show {
+  display: flex;
+}
+
+/* -------- Modal Content Box -------- */
+/* The white card that holds the modal form */
+.dent-modal-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 2rem 2.5rem;
+  width: 95%;
+  max-width: 560px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: dent-modal-slide-in 0.3s ease;
+}
+
+/* Slide-in animation when modal appears */
+@keyframes dent-modal-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------- Modal Form Groups -------- */
+/* Each label + input/textarea pair inside the modal */
+.dent-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Labels above form fields */
+.dent-form-group label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Text input fields inside modals */
+.dent-form-group input[type="text"] {
+  width: 100%;
+  background-color: #f8faff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: #111827;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* Focus effect on text inputs */
+.dent-form-group input[type="text"]:focus {
+  border-color: #2563eb;
+  background-color: #fff;
+}
+
+/* Placeholder text color for inputs */
+.dent-form-group input[type="text"]::placeholder {
+  color: #9ca3af;
+}
+
+/* Select dropdown fields inside modals */
+.dent-form-group select {
+  width: 100%;
+  appearance: none;
+  background-color: #111827;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Textarea fields inside modals */
+.dent-form-group textarea {
+  width: 100%;
+  background-color: #f8faff;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #111827;
+  outline: none;
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+/* Focus effect on textarea */
+.dent-form-group textarea:focus {
+  border-color: #2563eb;
+  background-color: #fff;
+}
+
+/* Placeholder text color for textarea */
+.dent-form-group textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* -------- Double Input Row -------- */
+/* Side-by-side layout for Parent Category and Type Name inputs */
+.dent-double-input {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Each input in the double row takes equal width */
+.dent-double-input .dent-form-group {
+  flex: 1;
+}
+
+/* -------- Helper/Small Text -------- */
+/* Small descriptive text beneath form inputs */
+.dent-small-text {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
+}
+
+/* -------- Modal Divider Line -------- */
+/* Horizontal rule separating form content from action buttons */
+.dent-modal-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 1rem 0;
+}
+
+/* -------- Modal Footer (Action Buttons) -------- */
+/* Container for Cancel and Create buttons */
+.dent-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+/* Cancel button styling - plain text with no background */
+.dent-cancel-btn {
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect on cancel button */
+.dent-cancel-btn:hover {
   color: #111827;
 }
 
-.sub-text {
-  color: #6b7280;
-  font-size: 16px;
+/* Create button styling - solid blue with white text */
+.dent-create-btn {
+  background-color: #0b57d0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s ease;
 }
 
-.unread-badge {
-  background: #eef2ff;
-  color: #1d4ed8;
-  padding: 10px 18px;
-  border-radius: 30px;
-  font-weight: 700;
+/* Hover darkens the create button */
+.dent-create-btn:hover {
+  background-color: #0842a0;
 }
 
-/* ===============================
-CARD
-================================= */
-.notification-card {
-  background: #eef2ff;
-  padding: 20px;
-  border-radius: 14px;
+/* Arrow icon inside the create button */
+.dent-create-btn i {
+  font-size: 0.8rem;
 }
 
-/* ===============================
-ITEM
-================================= */
-.notify-item {
+/* ===============================================================
+   RESOLVE TICKET MODAL STYLES (techdetails.html)
+   =============================================================== */
+
+/* Modal Overlay - Darkened background with slight blur for focus */
+.resolve-modal-overlay {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Active state for modal overlay */
+.resolve-modal-overlay.show {
+  display: flex;
+}
+
+/* Modal Content Box */
+.resolve-modal-box {
+  background: #fff;
+  width: 95%;
+  max-width: 580px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modal-fade-down 0.3s ease-out;
+}
+
+/* Animation for modal entry */
+@keyframes modal-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header - Premium blue styling */
+.resolve-modal-header {
+  background-color: #0057ff;
+  color: #fff;
+  padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
-  padding: 20px;
+  align-items: center;
+}
+
+.resolve-modal-header .header-text h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  margin: 0;
+  /* Reset default margin */
+}
+
+.resolve-modal-header .header-text p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0;
+  /* Reset default margin */
+}
+
+/* Close Button in Header */
+.close-modal-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Body Spacing */
+.resolve-modal-body {
+  padding: 2rem;
+}
+
+/* Form Group Layout */
+.resolve-form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resolve-form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Textarea Styling */
+.resolve-form-group textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
-  margin-bottom: 15px;
+  background-color: #f9faff;
+  font-size: 0.95rem;
+  color: #1f2937;
+  outline: none;
+  resize: vertical;
+  transition: all 0.2s;
+}
+
+.resolve-form-group textarea:focus {
+  border-color: #0057ff;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1);
+}
+
+/* Row for Select and Timestamp */
+.resolve-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Custom Select Wrapper */
+.custom-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-select-wrapper select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #f9faff;
+  font-size: 0.95rem;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-select-wrapper i {
+  position: absolute;
+  right: 1rem;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+/* Timestamp Display Styling */
+.timestamp-display {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #f0f4ff;
+  color: #1f2937;
+  gap: 0.75rem;
+}
+
+.timestamp-display input {
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  color: #1f2937;
+  width: 100%;
+  outline: none;
+}
+
+.timestamp-display i {
+  color: #4b5563;
+}
+
+/* Info Box / Certification Styling */
+.resolve-info-box {
+  background-color: #f0f4ff;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+
+.resolve-info-box i {
+  color: #0057ff;
+  font-size: 1.1rem;
+  margin-top: 0.1rem;
+}
+
+.resolve-info-box p {
+  font-size: 0.85rem;
+  color: #1e40af;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Modal Footer Buttons */
+.resolve-modal-footer {
+  padding: 1.5rem 2rem;
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+}
+
+.resolve-cancel-btn {
+  padding: 1rem;
+  background-color: #e0e7ff;
+  color: #374151;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.resolve-cancel-btn:hover {
+  background-color: #d1dbff;
+}
+
+.resolve-confirm-btn {
+  padding: 1rem;
+  background-color: #0057ff;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 87, 255, 0.2);
+  transition: all 0.2s;
+}
+
+.resolve-confirm-btn:hover {
+  background-color: #0046cc;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(0, 87, 255, 0.3);
+}
+
+.resolve-confirm-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .resolve-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .resolve-modal-footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================================================
+   TECHNICIAN NOTIFICATION PAGE (technoti.html) STYLES
+   =============================================================== */
+
+/* Header section within dashboard content */
+.noti-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.noti-page-header .header-titles .sub-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.noti-page-header .header-titles h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.mark-read-btn {
+  background: none;
+  border: none;
+  color: #1d4ed8;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.mark-read-btn:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+/* Notification Card List Container */
+.noti-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+/* Base Notification Card Styling */
+.noti-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.noti-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Accent Bar on the Left */
+.noti-accent-bar {
+  width: 6px;
+  flex-shrink: 0;
+}
+
+/* Icon Wrapper Styles */
+.noti-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem;
+  flex-shrink: 0;
+}
+
+.noti-icon-wrapper i {
+  font-size: 1.25rem;
+}
+
+/* Content Details Sidebar */
+.noti-details {
+  flex-grow: 1;
+  padding: 1.5rem 2rem 1.5rem 0;
+}
+
+.noti-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.noti-top-row h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.noti-time {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.noti-msg {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.noti-msg strong {
+  color: #111827;
+}
+
+/* Action Buttons inside Card */
+.noti-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.noti-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.noti-btn.btn-primary {
+  background-color: #0057ff;
+  color: #fff;
+}
+
+.noti-btn.btn-primary:hover {
+  background-color: #0046cc;
+}
+
+.noti-btn.btn-secondary {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.noti-btn.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+/* Unread Status Styling */
+.noti-card.noti-unread {
+  background-color: #fcfdfe;
+}
+
+.unread-indication-dot {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #0057ff;
+  border-radius: 50%;
+}
+
+/* Special Case: SLA Approaching Urgent Card */
+.noti-card.noti-urgent {
+  background-color: #fffcfb;
+}
+
+/* Color Palette for different notification types */
+.bg-urgent {
+  background-color: #dc2626;
+}
+
+.bg-soft-urgent {
+  background-color: #fee2e2;
+}
+
+.text-urgent {
+  color: #dc2626;
+}
+
+.bg-blue {
+  background-color: #0057ff;
+}
+
+.bg-soft-blue {
+  background-color: #dbeafe;
+}
+
+.text-blue {
+  color: #0057ff;
+}
+
+.bg-green {
+  background-color: #10b981;
+}
+
+.bg-soft-green {
+  background-color: #d1fae5;
+}
+
+.text-green {
+  color: #10b981;
+}
+
+.bg-light-blue {
+  background-color: #3b82f6;
+}
+
+.bg-soft-light-blue {
+  background-color: #eff6ff;
+}
+
+.text-light-blue {
+  color: #3b82f6;
+}
+
+/* Notification Page Footer */
+.noti-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.noti-footer-icon {
+  width: 54px;
+  height: 54px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noti-footer-icon i {
+  font-size: 1.5rem;
+  color: #6b7280;
+}
+
+.noti-footer-stats {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.load-more-btn {
+  background: none;
+  border: none;
+  color: #1d4ed8;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.load-more-btn:hover {
+  text-decoration: underline;
+  color: #1e40af;
+}
+
+/* User Profile Bell specific active styling */
+.active-icon {
+  color: #1d4ed8;
+}
+
+.bell-dot {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: #dc2626;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* ===================== REPORTING PAGE STYLES ===================== */
+
+/* SLA Performance Card Styling */
+.sla-performance-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sla-info {
+  flex: 1;
+}
+
+.sla-info h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.sla-info p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.sla-legend {
+  display: flex;
+  gap: 2rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-met { background-color: #0057ff; }
+.dot-missed { background-color: #cbdcfc; }
+
+/* SLA Circular Gauge Styling */
+.sla-gauge-container {
+  width: 180px;
+  height: 180px;
+  background-color: #0057ff;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
 }
 
-/* Dot */
-.notify-item::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  position: absolute;
-  left: -10px;
-  top: 35px;
-}
-
-.blue-dot::before {
-  background: #1d4ed8;
-}
-
-.red-dot::before {
-  background: #dc2626;
-}
-
-/* Left Section */
-.notify-left {
+.sla-gauge-white-box {
+  width: 140px;
+  height: 140px;
+  background-color: #fff;
+  border-radius: 12px;
   display: flex;
-  gap: 15px;
-}
-
-/* Icon */
-.notify-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.blue-bg {
-  background: #dbeafe;
-  color: #1d4ed8;
+.sla-percentage {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
 }
 
-.red-bg {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-/* Text */
-.notify-content h6 {
-  margin: 0 0 6px;
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.notify-content h3 {
-  margin: 0 0 6px;
-  font-size: 22px;
-}
-
-.notify-content p {
-  margin: 0;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.red-text {
-  color: #b91c1c !important;
-}
-
-/* Time */
-.notify-time {
-  font-size: 13px;
-  color: #6b7280;
-  white-space: nowrap;
-}
-
-/* ===============================
-DIVIDER
-================================= */
-.divider-text {
-  text-align: center;
-  margin: 30px 0;
-  color: #6b7280;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-/* ===============================
-EMPTY BOX
-================================= */
-.empty-box {
-  background: #eef2ff;
-  padding: 30px;
-  text-align: center;
-  border-radius: 12px;
-  color: #6b7280;
-}
-
-/* ===============================
-BUTTON
-================================= */
-.btn-center {
-  text-align: center;
-  margin-top: 25px;
-}
-
-.load-btn {
-  padding: 14px 25px;
-  border: none;
-  border-radius: 10px;
-  background: #eef2ff;
-  color: #1d4ed8;
+.sla-label {
+  font-size: 0.65rem;
   font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+/* Filter Bar Styling */
+.report-filters {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.filter-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-input-row span {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.filter-input-row input[type="date"],
+.filter-group select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #374151;
+  background-color: #fff;
+  outline: none;
+}
+
+.apply-filters-btn {
+  background-color: #1e3a8a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 38px;
+}
+
+.apply-filters-btn:hover {
+  background-color: #1e40af;
+}
+
+/* Reporting Table Styles */
+.report-table-container {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #f3f4f6;
+  overflow-x: auto;
+}
+
+.report-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.report-table-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.table-header-btns {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.btn-export, .btn-view-history {
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.btn-export {
+  color: #374151;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f3f4f6;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.btn-view-history {
+  color: #0057ff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.main-report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.main-report-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.main-report-table td {
+  padding: 1.25rem 1rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+
+.ticket-id-cell {
+  font-weight: 700;
+  color: #111827;
+}
+
+.category-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cat-network { background-color: #eff6ff; color: #3b82f6; }
+.cat-software { background-color: #f0fdf4; color: #16a34a; }
+.cat-hardware { background-color: #fff7ed; color: #ea580c; }
+
+.priority-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.priority-cell i {
+  font-size: 0.75rem;
+}
+
+.status-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-resolved { background-color: #dcfce7; color: #15803d; }
+.status-in-progress { background-color: #ffedd5; color: #9a3412; }
+.status-overdue { background-color: #fee2e2; color: #dc2626; }
+
+.sla-met-icon {
+  font-size: 1.1rem;
+}
+
+.btn-view-details-sm {
+  background-color: #0b57d0;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-view-details-sm:hover {
+  background-color: #0842a0;
 }

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the main stylesheet for all dashboard pages -->
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+    <!-- Font Awesome CDN for icons across the page -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>Incident Management</title>
+</head>
+
+<body>
+    <!-- ==================== MAIN DASHBOARD LAYOUT ==================== -->
+    <div class="dashboard-layout">
+
+        <!-- ==================== SIDEBAR NAVIGATION ==================== -->
+        <aside class="sidebar-nav">
+            <!-- Logo at the top of the sidebar -->
+            <div class="logo-container">
+                <div class="logo">ResolvedIT</div>
+            </div>
+
+            <!-- Navigation menu items -->
+            <nav class="nav-menu">
+                <!-- Dashboard link -->
+                <a href="dash.html" class="nav-item">
+                    <i class="fa-solid fa-table-cells-large"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <!-- Ticket Management dropdown with submenu -->
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item" onclick="
+                        const submenu = this.nextElementSibling;
+                        submenu.style.display =
+                          submenu.style.display === 'block' ? 'none' : 'block';
+                        return false;
+                    ">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span>Ticket Management</span>
+                        <!-- Chevron icon to indicate dropdown -->
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                    </a>
+                    <!-- Submenu items for Ticket Management -->
+                    <div class="submenu" style="display: none; padding-left: 1.5rem">
+                        <a href="ticket.html" class="nav-item" style="
+                          padding: 0.5rem 1rem;
+                          margin-top: 0.2rem;
+                          font-size: 0.9rem;
+                        ">
+                            <i class="fa-solid fa-list"></i>
+                            <span>Tickets</span>
+                        </a>
+                        <a href="createticket.html" class="nav-item" style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Create Ticket</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Users Management dropdown with submenu -->
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item" onclick="
+                        const submenu = this.nextElementSibling;
+                        submenu.style.display =
+                          submenu.style.display === 'none' ? 'block' : 'none';
+                        return false;
+                    ">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>Users Management</span>
+                        <!-- Chevron icon to indicate dropdown -->
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                    </a>
+                    <!-- Submenu items for Users Management -->
+                    <div class="submenu" style="display: none; padding-left: 1.5rem">
+                        <a href="usermanage.html" class="nav-item"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Users</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Incidents Management dropdown with submenu - ACTIVE -->
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-item active" onclick="
+                        const submenu = this.nextElementSibling;
+                        submenu.style.display =
+                          submenu.style.display === 'none' ? 'block' : 'none';
+                        return false;
+                    ">
+                        <!-- Warning triangle icon for incidents -->
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <span>Incidents Management</span>
+                        <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+                    </a>
+                    <!-- Submenu items for Incidents Management -->
+                    <div class="submenu" style="display: block; padding-left: 1.5rem">
+                        <a href="dent.html" class="nav-item active"
+                            style="padding: 0.5rem 1rem; font-size: 0.9rem">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>Incidents</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Reporting link -->
+                <a href="#" class="nav-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Reporting</span>
+                </a>
+            </nav>
+
+            <!-- Logout link positioned at the bottom of the sidebar -->
+            <div class="logout-container">
+                <a href="#" class="nav-item logout-link">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- ==================== MAIN CONTENT AREA ==================== -->
+        <main class="main-content">
+
+            <!-- ========== TOP HEADER BAR (Search & Actions) ========== -->
+            <header class="top-header">
+                <!-- Search bar -->
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search parameters..." />
+                </div>
+                <!-- Header action buttons (notifications, globe, profile) -->
+                <div class="header-actions">
+                    <button class="icon-btn"><i class="fa-regular fa-bell"></i></button>
+                    <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+                    <button class="icon-btn profile-btn">
+                        <i class="fa-regular fa-circle-user"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- ========== DASHBOARD CONTENT ========== -->
+            <div class="dashboard-content">
+
+                <!-- Page header with title and action button -->
+                <div class="page-header-title">
+                    <div>
+                        <!-- Page title changes based on active tab -->
+                        <h1 id="dent-page-title">Incident Management</h1>
+                    </div>
+                    <!-- "Add New Type" button - shown on the Types tab (default) -->
+                    <button id="dent-add-type-btn" class="btn-create-ticket" style="text-decoration: none">
+                        <i class="fa-solid fa-plus"></i>Add New Type
+                    </button>
+                    <!-- "Add New Category" button - shown on the Categories tab (hidden by default) -->
+                    <button id="dent-add-category-btn" class="btn-create-ticket" style="text-decoration: none; display: none;">
+                        <i class="fa-solid fa-plus"></i>Add New Category
+                    </button>
+                </div>
+
+                <!-- ========== TAB SWITCHER ========== -->
+                <!-- Two tabs: Categories and Types. Types is active by default -->
+                <div class="dent-tabs">
+                    <!-- Categories tab - clickable to switch view -->
+                    <div class="dent-tab" id="dent-tab-categories">Categories</div>
+                    <!-- Types tab - active by default -->
+                    <div class="dent-tab active" id="dent-tab-types">Types</div>
+                </div>
+
+                <!-- ==================== TYPES TABLE (Default View) ==================== -->
+                <div class="dent-table-card" id="dent-types-view">
+                    <!-- Table header row with column titles -->
+                    <div class="dent-table-head">
+                        <div>INCIDENT TITLE</div>
+                        <div>PARENT CATEGORY</div>
+                        <div>ACTIONS</div>
+                    </div>
+
+                    <!-- Row 1 - Laptop not working / Hardware -->
+                    <div class="dent-row">
+                        <strong>Laptop not working</strong>
+                        <span class="dent-category-badge">Hardware</span>
+                        <div class="dent-actions">
+                            <!-- Edit icon -->
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 - Email access issue / Software -->
+                    <div class="dent-row">
+                        <strong>Email access issue</strong>
+                        <span class="dent-category-badge">Software</span>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 - VPN Connectivity / Network -->
+                    <div class="dent-row">
+                        <strong>VPN Connectivity</strong>
+                        <span class="dent-category-badge">Network</span>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 4 - Printer failure / Hardware -->
+                    <div class="dent-row">
+                        <strong>Printer failure</strong>
+                        <span class="dent-category-badge">Hardware</span>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ==================== CATEGORIES TABLE (Hidden by default) ==================== -->
+                <div class="dent-table-card" id="dent-categories-view" style="display: none;">
+                    <!-- Table header row with column titles -->
+                    <div class="dent-table-head">
+                        <div>CATEGORY NAME</div>
+                        <div>SCOPE & DEFINITION</div>
+                        <div>ACTIONS</div>
+                    </div>
+
+                    <!-- Row 1 - Hardware category -->
+                    <div class="dent-row">
+                        <strong>Hardware</strong>
+                        <p>Broad hardware issues including terminal failures, peripheral malfunctions, and lifecycle management.</p>
+                        <div class="dent-actions">
+                            <!-- Edit icon -->
+                            <i class="fa-solid fa-pen"></i>
+                            <!-- More options icon (vertical ellipsis) -->
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 2 - Software category -->
+                    <div class="dent-row">
+                        <strong>Software</strong>
+                        <p>Application and OS support, including enterprise software suite errors and version control conflicts.</p>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 - Network category -->
+                    <div class="dent-row">
+                        <strong>Network</strong>
+                        <p>Connectivity and infrastructure stability, covering LAN/WAN outages, VPN access, and DNS routing.</p>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <!-- Row 4 - Access category -->
+                    <div class="dent-row">
+                        <strong>Access</strong>
+                        <p>User accounts and permissions, managing SSO failures, role-based access control, and credential resets.</p>
+                        <div class="dent-actions">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== ADD NEW TYPE MODAL ==================== -->
+    <!-- This modal appears when the "Add New Type" button is clicked -->
+    <div class="dent-modal" id="dent-type-modal">
+        <div class="dent-modal-box">
+
+            <!-- Two-column input row for Parent Category and Incident Type Name -->
+            <div class="dent-double-input">
+                <!-- Parent Category dropdown -->
+                <div class="dent-form-group">
+                    <label>PARENT CATEGORY</label>
+                    <select>
+                        <option>Select a category</option>
+                        <option>Hardware</option>
+                        <option>Software</option>
+                        <option>Network</option>
+                        <option>Access</option>
+                    </select>
+                </div>
+
+                <!-- Incident Type Name text input -->
+                <div class="dent-form-group">
+                    <label>INCIDENT TYPE NAME</label>
+                    <input type="text" placeholder="e.g., Laptop not working, Printer failure" />
+                </div>
+            </div>
+
+            <!-- Description textarea -->
+            <div class="dent-form-group">
+                <label>DESCRIPTION</label>
+                <textarea placeholder="Provide clear instructions or context for when this type should be used..."></textarea>
+            </div>
+
+            <!-- Horizontal divider line above action buttons -->
+            <hr class="dent-modal-divider" />
+
+            <!-- Modal action buttons -->
+            <div class="dent-modal-footer">
+                <!-- Cancel button to close the modal -->
+                <button class="dent-cancel-btn" id="dent-close-type-modal">Cancel</button>
+                <!-- Primary action button to create the incident type -->
+                <button class="dent-create-btn">Create Incident Type <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ADD NEW CATEGORY MODAL ==================== -->
+    <!-- This modal appears when the "Add New Category" button is clicked -->
+    <div class="dent-modal" id="dent-category-modal">
+        <div class="dent-modal-box">
+
+            <!-- Category Name text input -->
+            <div class="dent-form-group">
+                <label>CATEGORY NAME</label>
+                <input type="text" placeholder="e.g., Hardware, Cloud Services, Security" />
+                <!-- Helper text beneath the input -->
+                <div class="dent-small-text">
+                    Unique identifier used across the ticket lifecycle.
+                </div>
+            </div>
+
+            <!-- Description textarea -->
+            <div class="dent-form-group">
+                <label>DESCRIPTION</label>
+                <textarea placeholder="Provide context on what this category encompasses..."></textarea>
+                <!-- Helper text beneath the textarea -->
+                <div class="dent-small-text">
+                    A detailed description helps support staff triage incidents accurately.
+                </div>
+            </div>
+
+            <!-- Horizontal divider line above action buttons -->
+            <hr class="dent-modal-divider" />
+
+            <!-- Modal action buttons -->
+            <div class="dent-modal-footer">
+                <!-- Cancel button to close the modal -->
+                <button class="dent-cancel-btn" id="dent-close-category-modal">Cancel</button>
+                <!-- Primary action button to create the category -->
+                <button class="dent-create-btn">Create Category</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to the modals JavaScript file for interactive behavior -->
+    <script src="/dist/js/modals.js"></script>
+</body>
+
+</html>

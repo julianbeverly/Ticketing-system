@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="/dist/CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>Document</title>
+</head>
+<body>
+     <div class="dashboard-layout">
+        <aside class="sidebar-nav">
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+        <div class="nav-item-dropdown">
+          <a
+            href="#"
+            class="nav-item active"
+            onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            "
+          >
+            <i class="fa-solid fa-ticket"></i>
+            <span>Ticket Management</span>
+            <i
+              class="fa-solid fa-chevron-down"
+              style="margin-left: auto; font-size: 0.8rem"
+            ></i>
+          </a>
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a
+              href="employticket.html"
+              class="nav-item"
+              style="
+                padding: 0.5rem 1rem;
+                margin-top: 0.2rem;
+                font-size: 0.9rem;
+              "
+            >
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+            <a
+              href="create.html"
+              class="nav-item active"
+              style="padding: 0.5rem 1rem; font-size: 0.9rem"
+            >
+              <i class="fa-solid fa-plus"></i>
+              <span>Create Ticket</span>
+            </a>
+          </div>
+        </div>
+        
+      <div class="logout-container">
+        <a href="#" class="nav-item logout-link">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search systems or tickets..." />
+        </div>
+        <div class="header-actions" id="content">
+          <a href="#" id="bellBtn">
+            <i class="fa-regular fa-bell"></i>
+          </a>
+          <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+          <button class="icon-btn profile-btn">
+            <i class="fa-regular fa-circle-user"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+          <!-- Breadcrumbs -->
+          <div class="breadcrumb" style="text-transform: uppercase">
+            <a href="ticket.html" style="color: #6b7280; text-decoration: none"
+              >TICKETS MANAGEMENT</a
+            >
+            &gt;
+            <span style="color: #0b57d0; font-weight: 600"
+              >CREATE NEW TICKET</span
+            >
+          </div>
+
+          <!-- Page Title -->
+          <div class="page-header-title" style="margin-bottom: 0">
+            <div>
+              <h1>Open a Support Case</h1>
+              <p style="color: #6b7280; margin-top: 0.5rem">
+                Report an incident or request technical assistance. Our team
+                will review your request shortly.
+              </p>
+            </div>
+          </div>
+
+          <!-- Create Ticket Form Card -->
+          <div class="create-ticket-card">
+            <form>
+           
+
+              <!-- Category and Type -->
+              <div class="form-row">
+                <div class="form-group half-width">
+                  <label>INCIDENT CATEGORY</label>
+                  <div class="custom-select">
+                    <select>
+                      <option value="" disabled selected hidden>
+                        Select Category
+                      </option>
+                      <option value="1">Hardware</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                </div>
+                <div class="form-group half-width">
+                  <label>INCIDENT TYPE</label>
+                  <div class="custom-select">
+                    <select>
+                      <option value="" disabled selected hidden>
+                        Select Type
+                      </option>
+                      <option value="1">Printer</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                </div>
+              </div>
+
+           
+
+              <!-- Custom Incident Type -->
+              <div class="form-group">
+                <label>CUSTOM INCIDENT TYPE (IF NOT LISTED)</label>
+                <input
+                  type="text"
+                  placeholder="Enter your specific incident type here..."
+                />
+              </div>
+
+              <!-- Subject -->
+              <div class="form-group">
+                <label>SUBJECT</label>
+                <input
+                  type="text"
+                  placeholder="Short summary of the problem (e.g., Cannot connect to VPN)"
+                />
+              </div>
+
+              <!-- Description -->
+              <div class="form-group">
+                <label>DESCRIPTION</label>
+                <textarea
+                  placeholder="Provide as much detail as possible, including steps to reproduce the error..."
+                  rows="5"
+                ></textarea>
+              </div>
+
+              <!-- Priority Level -->
+              <div class="form-group priority-row">
+                <div class="form-group-inner">
+                  <label>PRIORITY LEVEL</label>
+                  <div class="custom-select">
+                    <select>
+                      <option value="low" selected hidden>
+                        Low - General Request
+                      </option>
+                      <option value="medium">Medium - System Issue</option>
+                      <option value="high">High - Critical Failure</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </div>
+                </div>
+                <!-- Display Priority Deadline -->
+                <div class="priority-time"></div>
+              </div>
+
+            
+
+              <!-- File Upload -->
+              <div class="form-group">
+                <label>EVIDENCE & ATTACHMENTS</label>
+                <div class="file-upload-box">
+                  <div class="upload-icon">
+                    <!-- Cloud Upload Icon -->
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                  </div>
+                  <strong>Click to upload or drag and drop</strong>
+                  <p>Supports PNG, JPG, MP4 (Max 25MB)</p>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="form-actions">
+                <button type="button" class="btn-cancel">Cancel</button>
+                <button type="submit" class="btn-submit">
+                  Submit Ticket <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      
+
+    </main>
+
+    </div>
+    
+</body>
+</html>

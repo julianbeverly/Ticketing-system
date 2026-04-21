@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="/dist/CSS/style.css" />
+
+    <title>Notifications</title>
+  </head>
+
+  <body>
+    <div class="dashboard-layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar-nav">
+        <div class="logo-container">
+          <div class="logo">ResolvedIT</div>
+        </div>
+
+        <nav class="nav-menu">
+          <a href="dash.html" class="nav-item">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="employticket.html" class="nav-item">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Ticket Management</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <header class="top-header">
+          <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search notifications..." />
+          </div>
+
+          <div class="header-actions">
+            <a href="notifications.html" class="icon-btn">
+              <i class="fa-regular fa-bell"></i>
+            </a>
+
+            <button class="icon-btn">
+              <i class="fa-solid fa-globe"></i>
+            </button>
+
+            <button class="icon-btn profile-btn">
+              <i class="fa-regular fa-circle-user"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- PAGE CONTENT -->
+        <div class="dashboard-content">
+          <div class="breadcrumb">
+            <a href="employeedash.html">Dashboard</a> &gt;
+            <span>Notifications</span>
+          </div>
+
+          <div class="page-header-title">
+            <div>
+              <h1>Notifications</h1>
+              <p>Latest alerts and updates.</p>
+            </div>
+          </div>
+
+          <div class="tickets-card">
+            <div class="notification-item">
+              <i class="fa-solid fa-ticket"></i>
+              <span>New Ticket Assigned To You</span>
+            </div>
+
+            <div class="notification-item">
+              <i class="fa-solid fa-check-circle"></i>
+              <span>Ticket TC-9284 Resolved</span>
+            </div>
+
+            <div class="notification-item">
+              <i class="fa-solid fa-user"></i>
+              <span>New User Registered</span>
+            </div>
+
+            <div class="notification-item">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>System Alert: Server Timeout</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

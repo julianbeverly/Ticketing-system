@@ -1,134 +1,125 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    />
-    <!-- Main styling from style.css -->
-    <link rel="stylesheet" href="/dist/CSS/style.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <!-- ===============================
-NOTIFICATION PAGE (DASHBOARD CONTENT ONLY)
-================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="notification-page">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <!-- Header Section -->
-  <div class="notify-top">
-    <div>
-      <p class="bread-text">ACCOUNT > <span>NOTIFICATION CENTER</span></p>
-      <h1>Notifications</h1>
-      <p class="sub-text">
-        Real-time alerts and system events requiring your attention.
-      </p>
-    </div>
+<link rel="stylesheet" href="/dist/CSS/style.css">
 
-    <div class="unread-badge">12 Unread</div>
-  </div>
+<title>Notifications</title>
+</head>
 
-  <!-- Notification List -->
-  <div class="notification-card">
+<body>
 
-    <!-- New Submission -->
-    <div class="notify-item blue-dot">
-      <div class="notify-left">
+<div class="dashboard-layout">
 
-        <div class="notify-icon blue-bg">
-          <i class="fa-regular fa-file-lines"></i>
-        </div>
+<!-- SIDEBAR -->
+<aside class="sidebar-nav">
 
-        <div class="notify-content">
-          <h6>NEW SUBMISSION</h6>
-          <h3>New Ticket #1024 submitted by John Doe</h3>
-          <p>Category: Network Access | Severity: Medium</p>
-        </div>
+<div class="logo-container">
+<div class="logo">ResolvedIT</div>
+</div>
 
-      </div>
+<nav class="nav-menu">
 
-      <span class="notify-time">2 mins ago</span>
-    </div>
+<a href="dash.html" class="nav-item">
+<i class="fa-solid fa-table-cells-large"></i>
+<span>Dashboard</span>
+</a>
 
-    <!-- SLA Warning -->
-    <div class="notify-item red-bg-light red-dot">
-      <div class="notify-left">
+<a href="ticket.html" class="nav-item">
+<i class="fa-solid fa-ticket"></i>
+<span>Ticket Management</span>
+</a>
 
-        <div class="notify-icon red-bg">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
+<a href="#" class="nav-item">
+<i class="fa-solid fa-user-group"></i>
+<span>Users Management</span>
+</a>
 
-        <div class="notify-content">
-          <h6 class="red-text">SLA BREACH IMMINENT</h6>
-          <h3>SLA Warning: Ticket #982 is approaching deadline</h3>
-          <p class="red-text">
-            Priority: Critical | Response Target: 4.0h
-          </p>
-        </div>
+</nav>
 
-      </div>
+</aside>
 
-      <span class="notify-time">15 mins ago</span>
-    </div>
 
-    <!-- Assignment -->
-    <div class="notify-item blue-dot">
-      <div class="notify-left">
+<!-- MAIN CONTENT -->
+<main class="main-content">
 
-        <div class="notify-icon blue-bg">
-          <i class="fa-solid fa-user-plus"></i>
-        </div>
+<header class="top-header">
 
-        <div class="notify-content">
-          <h6>ASSIGNMENT UPDATE</h6>
-          <h3>Technician Elena Park assigned to ticket #1024</h3>
-          <p>Elena Park (Senior Network Engineer)</p>
-        </div>
+<div class="search-container">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input type="text" placeholder="Search notifications...">
+</div>
 
-      </div>
+<div class="header-actions">
 
-      <span class="notify-time">1 hour ago</span>
-    </div>
+<a href="notifications.html" class="icon-btn">
+<i class="fa-regular fa-bell"></i>
+</a>
 
-    <!-- Closed -->
-    <div class="notify-item blue-dot">
-      <div class="notify-left">
+<button class="icon-btn">
+<i class="fa-solid fa-globe"></i>
+</button>
 
-        <div class="notify-icon blue-bg">
-          <i class="fa-regular fa-circle-check"></i>
-        </div>
-
-        <div class="notify-content">
-          <h6>CLOSED TICKET</h6>
-          <h3>Ticket #882 has been resolved</h3>
-          <p>Resolution: System reboot successful.</p>
-        </div>
-
-      </div>
-
-      <span class="notify-time">2 hours ago</span>
-    </div>
-
-  </div>
-
-  <!-- Divider -->
-  <div class="divider-text">YESTERDAY - OCT 23</div>
-
-  <!-- Empty State -->
-  <div class="empty-box">
-    No further notifications for this period.
-  </div>
-
-  <!-- Load Button -->
-  <div class="btn-center">
-    <button class="load-btn">Load Older Notifications</button>
-  </div>
+<button class="icon-btn profile-btn">
+<i class="fa-regular fa-circle-user"></i>
+</button>
 
 </div>
 
-  </body>
+</header>
+
+
+
+<!-- PAGE CONTENT -->
+<div class="dashboard-content">
+
+<div class="breadcrumb">
+<a href="dash.html">Dashboard</a> &gt;
+<span>Notifications</span>
+</div>
+
+<div class="page-header-title">
+<div>
+<h1>Notifications</h1>
+<p>Latest alerts and updates.</p>
+</div>
+</div>
+
+
+<div class="tickets-card">
+
+<div class="notification-item">
+<i class="fa-solid fa-ticket"></i>
+<span>New Ticket Assigned To You</span>
+</div>
+
+<div class="notification-item">
+<i class="fa-solid fa-check-circle"></i>
+<span>Ticket TC-9284 Resolved</span>
+</div>
+
+<div class="notification-item">
+<i class="fa-solid fa-user"></i>
+<span>New User Registered</span>
+</div>
+
+<div class="notification-item">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<span>System Alert: Server Timeout</span>
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+</body>
 </html>

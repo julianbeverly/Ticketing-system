@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/dist/CSS/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>Updates - ResolvedIT Technician</title>
+</head>
+
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar-nav">
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="techdash.html" class="nav-item">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+        
+        <div class="nav-item-dropdown">
+          <a href="#" class="nav-item" onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            ">
+            <i class="fa-solid fa-ticket"></i>
+            <span>My Tickets</span>
+            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+          </a>
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a href="techticket.html" class="nav-item" style="padding: 0.5rem 1rem; margin-top: 0.2rem; font-size: 0.9rem;">
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+          </div>
+        </div>
+
+
+
+        <a href="reminder.html" class="nav-item">
+          <i class="fa-regular fa-clock"></i>
+          <span>Reminders</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reporting</span>
+        </a>
+
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search notifications or tickets..." />
+        </div>
+        <div class="header-actions">
+          <a href="technoti.html" class="icon-btn active-icon">
+            <i class="fa-solid fa-bell"></i>
+            <span class="bell-dot"></span>
+          </a>
+          <button class="icon-btn"><i class="fa-solid fa-globe"></i></button>
+          <button class="icon-btn profile-btn"><i class="fa-regular fa-circle-user"></i></button>
+        </div>
+      </header>
+
+      <!-- Notification Content -->
+      <div class="dashboard-content">
+        <div class="noti-page-header">
+          <div class="header-titles">
+            <span class="sub-label">ALERT CENTER</span>
+            <h1>Updates</h1>
+          </div>
+          <button class="mark-read-btn">Mark all as read</button>
+        </div>
+
+        <!-- Notification List -->
+        <div class="noti-card-list">
+          <!-- Notification 1: SLA Approaching (Urgent) -->
+          <div class="noti-card noti-urgent">
+            <div class="noti-accent-bar bg-urgent"></div>
+            <div class="noti-icon-wrapper bg-soft-urgent">
+              <i class="fa-solid fa-stopwatch text-urgent"></i>
+            </div>
+            <div class="noti-details">
+              <div class="noti-top-row">
+                <h3>SLA Approaching</h3>
+                <span class="noti-time">2 mins ago</span>
+              </div>
+              <p class="noti-msg">Ticket <strong>#RT-8842 (Server Migration)</strong> is reaching its response deadline in 15 minutes.</p>
+              <div class="noti-actions">
+                <button class="noti-btn btn-primary">View Ticket</button>
+                <button class="noti-btn btn-secondary">Assign to Me</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification 2: New Ticket Assigned (Unread) -->
+          <div class="noti-card noti-unread">
+            <div class="noti-accent-bar bg-blue"></div>
+            <div class="noti-icon-wrapper bg-soft-blue">
+              <i class="fa-solid fa-ticket text-blue"></i>
+            </div>
+            <div class="noti-details">
+              <div class="noti-top-row">
+                <h3>New Ticket Assigned</h3>
+                <span class="noti-time">1 hour ago</span>
+              </div>
+              <p class="noti-msg"><strong>Finance Dept</strong> has submitted a new priority ticket regarding ERP access issues.</p>
+              <div class="noti-actions">
+                <button class="noti-btn btn-primary">View Ticket</button>
+              </div>
+              <span class="unread-indication-dot"></span>
+            </div>
+          </div>
+
+          <!-- Notification 3: Resolution Confirmed -->
+          <div class="noti-card">
+            <div class="noti-accent-bar bg-green"></div>
+            <div class="noti-icon-wrapper bg-soft-green">
+              <i class="fa-solid fa-circle-check text-green"></i>
+            </div>
+            <div class="noti-details">
+              <div class="noti-top-row">
+                <h3>Resolution Confirmed</h3>
+                <span class="noti-time">Yesterday</span>
+              </div>
+              <p class="noti-msg">User <strong>Marcus Thorne</strong> confirmed resolution for ticket #RT-8810.</p>
+            </div>
+          </div>
+
+          <!-- Notification 4: New Chat Message -->
+          <div class="noti-card">
+            <div class="noti-accent-bar bg-light-blue"></div>
+            <div class="noti-icon-wrapper bg-soft-light-blue">
+              <i class="fa-solid fa-comment-dots text-light-blue"></i>
+            </div>
+            <div class="noti-details">
+              <div class="noti-top-row">
+                <h3>New Chat Message</h3>
+                <span class="noti-time">3 hours ago</span>
+              </div>
+              <p class="noti-msg">New message from <strong>Sarah Jenkins</strong> on Ticket <strong>#RT-8842</strong>.</p>
+              <div class="noti-actions">
+                <button class="noti-btn btn-primary">View Ticket</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notification Footer -->
+        <div class="noti-footer">
+          <div class="noti-footer-icon">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <p class="noti-footer-stats">Showing 4 of 24 notifications</p>
+          <button class="load-more-btn">Load earlier activities</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>

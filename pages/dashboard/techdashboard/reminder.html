@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Link to shared dashboard stylesheet -->
+  <link rel="stylesheet" href="/dist/CSS/style.css" />
+  <!-- Font Awesome icon library for all icons used on this page -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <title>Reminders - ResolvedIT</title>
+</head>
+
+<body>
+  <!-- Main dashboard layout wrapper (sidebar + main content) -->
+  <div class="dashboard-layout">
+
+   
+    <aside class="sidebar-nav">
+      <!-- Logo container at the top of the sidebar -->
+      <div class="logo-container">
+        <div class="logo">ResolvedIT</div>
+      </div>
+
+      <!-- Navigation menu links -->
+      <nav class="nav-menu">
+        <!-- Dashboard link -->
+        <a href="techdash.html" class="nav-item">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Dashboard</span>
+        </a>
+
+        
+        <div class="nav-item-dropdown">
+        
+          <a href="#" class="nav-item" onclick="
+              const submenu = this.nextElementSibling;
+              submenu.style.display =
+                submenu.style.display === 'block' ? 'none' : 'block';
+              return false;
+            ">
+            <i class="fa-solid fa-ticket"></i>
+            <span>My Tickets</span>
+          
+            <i class="fa-solid fa-chevron-down" style="margin-left: auto; font-size: 0.8rem"></i>
+          </a>
+
+        
+          <div class="submenu" style="display: none; padding-left: 1.5rem">
+            <a href="techticket.html" class="nav-item" style="
+                padding: 0.5rem 1rem;
+                margin-top: 0.2rem;
+                font-size: 0.9rem;
+              ">
+              <i class="fa-solid fa-list"></i>
+              <span>Tickets</span>
+            </a>
+          </div>
+
+          <!-- Link to Reporting section -->
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Reporting</span>
+          </a>
+        </div>
+
+
+
+        <!-- Reminders link - currently active page -->
+        <a href="reminder.html" class="nav-item active">
+          <i class="fa-regular fa-clock"></i>
+          <span>Reminders</span>
+        </a>
+
+        <!-- Logout button fixed at the bottom of the sidebar -->
+        <div class="logout-container">
+          <a href="#" class="nav-item logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+  
+    <main class="main-content">
+
+      
+      <header class="top-header">
+     
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search tickets, reminders..." />
+        </div>
+
+        
+        <div class="header-actions">
+    
+          <a href="technoti.html" class="icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="bell-dot"></span>
+          </a>
+       
+          <button class="icon-btn">
+            <i class="fa-solid fa-globe"></i>
+          </button>
+     
+          <button class="icon-btn profile-btn">
+            <i class="fa-regular fa-circle-user"></i>
+          </button>
+        </div>
+      </header>
+
+      
+      <div class="dashboard-content">
+
+     
+        <div class="reminder-page-header">
+          <div>
+            <h1 class="reminder-page-title">Active Reminders</h1>
+            <p class="reminder-page-subtitle">Prioritize your schedule for maximum efficiency</p>
+          </div>
+         
+          <!-- <button class="reminder-filter-btn" id="filterRemindersBtn">
+            <i class="fa-solid fa-sliders"></i>
+            Filter
+          </button> -->
+        </div>
+
+        
+    
+        <div class="reminder-section">
+          <div class="reminder-section-header">
+            <div class="reminder-section-title">
+             
+              <i class="fa-solid fa-triangle-exclamation reminder-icon-warning"></i>
+              <h2>Immediate Attention Required</h2>
+          
+              <span class="reminder-count-badge badge-overdue">3 OVERDUE</span>
+            </div>
+          </div>
+
+        
+          <div class="reminder-card reminder-card-urgent">
+           
+            <div class="reminder-card-content">
+              
+              <div class="reminder-card-top">
+                <span class="reminder-ticket-id">#TCK-8902</span>
+                <span class="reminder-priority-badge priority-urgent">URGENT</span>
+              </div>
+              
+              <h3 class="reminder-card-title">ServerSystem Failure</h3>
+             
+              <div class="reminder-card-meta">
+            
+                
+              
+                <span class="reminder-meta-item reminder-overdue-text">
+                  <i class="fa-regular fa-clock"></i>
+                  Overdue by 45m
+                </span>
+              </div>
+            </div>
+            <!-- View Ticket action button -->
+            <a href="techdetails.html" class="reminder-view-btn">View Ticket</a>
+          </div>
+
+          <!-- Second overdue reminder card - Critical priority -->
+          <div class="reminder-card reminder-card-urgent">
+            <div class="reminder-card-content">
+              
+              <div class="reminder-card-top">
+                <span class="reminder-ticket-id">#TCK-8854</span>
+                <span class="reminder-priority-badge priority-critical">CRITICAL</span>
+              </div>
+          
+              <h3 class="reminder-card-title">Network Outage: Logistics Hub Alpha</h3>
+              
+              <div class="reminder-card-meta">
+              
+                <span class="reminder-meta-item reminder-overdue-text">
+                  <i class="fa-regular fa-clock"></i>
+                  Overdue by 2h 15m
+                </span>
+              </div>
+            </div>
+            <!-- View Ticket action button -->
+            <a href="techdetails.html" class="reminder-view-btn">View Ticket</a>
+          </div>
+        </div>
+
+      
+        <div class="reminder-section">
+        
+          <div class="reminder-section-header">
+            <div class="reminder-section-title">
+            
+              <i class="fa-solid fa-hourglass-half reminder-icon-deadline"></i>
+              <h2>Approaching Deadlines</h2>
+              <!-- Badge showing total number of upcoming deadlines -->
+              <span class="reminder-count-badge badge-upcoming">5 UPCOMING</span>
+            </div>
+          </div>
+
+       
+          <div class="reminder-card reminder-card-deadline">
+            <div class="reminder-card-content">
+             
+              <div class="reminder-card-top">
+                <span class="reminder-ticket-id">#TCK-9012</span>
+                <span class="reminder-priority-badge priority-medium">MEDIUM</span>
+              </div>
+           
+              <h3 class="reminder-card-title">Routine Fiber Inspection</h3>
+      
+              <div class="reminder-card-meta">
+               
+                <span class="reminder-meta-item reminder-timeleft-text">
+                  <i class="fa-regular fa-clock"></i>
+                  28 minutes left
+                </span>
+              </div>
+            </div>
+            <!-- View action button -->
+            <a href="techdetails.html" class="reminder-view-btn reminder-view-sm">View</a>
+          </div>
+
+      
+          <div class="reminder-card reminder-card-deadline">
+            <div class="reminder-card-content">
+            
+              <div class="reminder-card-top">
+                <span class="reminder-ticket-id">#TCK-9018</span>
+                <span class="reminder-priority-badge priority-high">HIGH</span>
+              </div>
+           
+              <h3 class="reminder-card-title">Backup Generator Test - West Wing</h3>
+             
+              <div class="reminder-card-meta">
+            
+               
+                <span class="reminder-meta-item reminder-timeleft-text">
+                  <i class="fa-regular fa-clock"></i>
+                  52 minutes left
+                </span>
+              </div>
+            </div>
+          
+            <a href="techdetails.html" class="reminder-view-btn reminder-view-sm">View</a>
+          </div>
+        </div>
+
+      </div>
+    
+
+    </main>
+   
+
+  </div>
+ 
+</body>
+
+</html>
