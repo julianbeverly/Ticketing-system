@@ -343,8 +343,12 @@
                     <select name="speciality">
                         <option value="" selected disabled>Select a primary discipline</option>
                         <option value="networking">Networking</option>
-                        <option value="software">Software</option>
-                        <option value="hardware">Hardware</option>
+                        <option value="business_analyst">Business Analyst</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="backend">Backend</option>
+                        <option value="ui_ux">UI/UX</option>
+                        <option value="devops">DevOps</option>
+                        <option value="qa">QA</option> 
                     </select>
                 </div>
 
