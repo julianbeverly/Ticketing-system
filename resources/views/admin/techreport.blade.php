@@ -64,6 +64,9 @@
       <main class="main-content">
         <!-- Top header with search and user actions -->
         <header class="top-header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
           <form method="GET" action="{{ route('tech.reporting') }}" style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
             <div class="search-container" style="width: 100%; margin: 0;">
               <i class="fa-solid fa-magnifying-glass" onclick="this.closest('form').submit();" style="cursor: pointer;"></i>
@@ -204,5 +207,21 @@
 
     <!-- Link to Javascript for Modals logic -->
     <script src="/dist/js/modals.js"></script>
-  </body>
+  <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.querySelector(".sidebar-nav");
+        const overlay = document.getElementById("sidebarOverlay");
+        
+        if (menuToggle && sidebar && overlay) {
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("show");
+            });
+            overlay.addEventListener("click", () => {
+                sidebar.classList.remove("active");
+                overlay.classList.remove("show");
+            });
+        }
+    </script>
+</body>
 </html>

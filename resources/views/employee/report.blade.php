@@ -101,6 +101,9 @@
 
         <main class="main-content">
             <header class="top-header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
                 <form method="GET" action="{{ route('employee.ticketreport') }}" style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
                     <div class="search-container" style="width: 100%; margin: 0;">
                         <i class="fa-solid fa-magnifying-glass" onclick="this.closest('form').submit();" style="cursor: pointer;"></i>
@@ -220,5 +223,21 @@
             </div>
         </main>
     </div>
+<script>
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.querySelector(".sidebar-nav");
+        const overlay = document.getElementById("sidebarOverlay");
+        
+        if (menuToggle && sidebar && overlay) {
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("show");
+            });
+            overlay.addEventListener("click", () => {
+                sidebar.classList.remove("active");
+                overlay.classList.remove("show");
+            });
+        }
+    </script>
 </body>
 </html>

@@ -120,6 +120,9 @@
         <main class="main-content">
 
             <header class="top-header">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
                 <form method="GET" action="{{ route('admin.ticketreport') }}" style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
                     @if(request('start_date'))
                         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
@@ -317,6 +320,22 @@
     </div>
   
 
+<script>
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.querySelector(".sidebar-nav");
+        const overlay = document.getElementById("sidebarOverlay");
+        
+        if (menuToggle && sidebar && overlay) {
+            menuToggle.addEventListener("click", () => {
+                sidebar.classList.toggle("active");
+                overlay.classList.toggle("show");
+            });
+            overlay.addEventListener("click", () => {
+                sidebar.classList.remove("active");
+                overlay.classList.remove("show");
+            });
+        }
+    </script>
 </body>
 
 </html>

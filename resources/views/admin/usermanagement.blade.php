@@ -339,12 +339,14 @@
                 <input type="tel" name="phone" placeholder="+237 66789890" />
 
                 <!-- SPECIALTY -->
-                <select name="speciality">
-                    <option value="" selected disabled>Select a primary discipline</option>
-                    <option value="networking">Networking</option>
-                    <option value="software">Software</option>
-                    <option value="hardware">Hardware</option>
-                </select>
+                <div id="specialityField" style="display: none;">
+                    <select name="speciality">
+                        <option value="" selected disabled>Select a primary discipline</option>
+                        <option value="networking">Networking</option>
+                        <option value="software">Software</option>
+                        <option value="hardware">Hardware</option>
+                    </select>
+                </div>
 
                 <!-- BUTTONS -->
                 <button type="submit" id="submitBtn">Create User</button>
@@ -399,13 +401,15 @@
                 style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" />
 
             <!-- SPECIALTY -->
-            <select id="editSpeciality" name="speciality"
-                style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-                <option value="" selected disabled>Select a primary discipline</option>
-                <option value="networking">Networking</option>
-                <option value="software">Software</option>
-                <option value="hardware">Hardware</option>
-            </select>
+            <div id="editSpecialityField" style="display: none;">
+                <select id="editSpeciality" name="speciality"
+                    style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="" selected disabled>Select a primary discipline</option>
+                    <option value="networking">Networking</option>
+                    <option value="software">Software</option>
+                    <option value="hardware">Hardware</option>
+                </select>
+            </div>
 
             <!-- BUTTONS -->
             <button type="submit"
@@ -425,11 +429,14 @@
 
             const role = document.getElementById('roleSelect').value;
             const supervisorFields = document.getElementById('supervisorFields');
+            const specialityField = document.getElementById('specialityField');
 
             if (role === 'technician') {
                 supervisorFields.style.display = 'block';
+                if (specialityField) specialityField.style.display = 'block';
             } else {
                 supervisorFields.style.display = 'none';
+                if (specialityField) specialityField.style.display = 'none';
                 // hide supervisorfields
             }
         }
@@ -437,11 +444,14 @@
         function toggleEditSupervisorFields() {
             const role = document.getElementById('editRole').value;
             const supervisorFields = document.getElementById('editSupervisorFields');
+            const specialityField = document.getElementById('editSpecialityField');
 
             if (role === 'technician') {
                 supervisorFields.style.display = 'block';
+                if (specialityField) specialityField.style.display = 'block';
             } else {
                 supervisorFields.style.display = 'none';
+                if (specialityField) specialityField.style.display = 'none';
             }
         }
         const modal = document.getElementById("sampleModal");
