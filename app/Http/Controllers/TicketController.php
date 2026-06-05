@@ -197,7 +197,12 @@ class TicketController extends Controller
             ? round((($totalTickets - $overdueCount) / $totalTickets) * 100, 1) 
             : 0;
 
-        return view('admin.techreportdetails', compact('user', 'overdueCount', 'slaPerformance'));
+        $tickets = Ticket::with(['category', 'type', 'user'])
+            ->where('technician_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('admin.techreportdetails', compact('user', 'overdueCount', 'slaPerformance', 'tickets'));
     }
 
     /**
@@ -478,6 +483,11 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+        // Fix for "Other" type_id failing the integer exists validation
+        if ($request->input('type_id') === 'other') {
+            $request->merge(['type_id' => null]);
+        }
+
         // Validate all incoming form fields
         $request->validate([
             'user_id'      => 'nullable|exists:users,id',
@@ -708,13 +718,17 @@ class TicketController extends Controller
 
         $ticket->load(['user', 'technician']);
 
-        // Notify Employee (Primary), Admin (CC)
+        // Notify Employee (Primary), Admin (CC), Technician (CC)
         try {
             $employeeEmail = $ticket->user->email;
             $admins = User::where('role', 'admin')->pluck('email')->toArray();
+            $ccEmails = $admins;
+            if ($ticket->technician) {
+                $ccEmails[] = $ticket->technician->email;
+            }
 
             Mail::to($employeeEmail)
-                ->cc($admins)
+                ->cc($ccEmails)
                 ->send(new TicketStatusUpdated($ticket));
         } catch (\Exception $e) {
             \Log::error("Email sending failed on ticket status update: " . $e->getMessage());
@@ -746,9 +760,17 @@ class TicketController extends Controller
             'description' => 'marked the ticket as resolved',
         ]);
 
-        // Notify Employee
+        // Notify Employee (Primary), Admin (CC), Technician (CC)
         try {
-            Mail::to($ticket->user->email)->send(new \App\Mail\TicketResolved($ticket));
+            $admins = User::where('role', 'admin')->pluck('email')->toArray();
+            $ccEmails = $admins;
+            if ($ticket->technician) {
+                $ccEmails[] = $ticket->technician->email;
+            }
+
+            Mail::to($ticket->user->email)
+                ->cc($ccEmails)
+                ->send(new \App\Mail\TicketResolved($ticket));
         } catch (\Exception $e) {
             \Log::error("Email sending failed on ticket resolution: " . $e->getMessage());
         }
@@ -793,16 +815,23 @@ class TicketController extends Controller
             ]);
         }
 
-        // Notify relevant parties about the response
+        // Notify Technician (Primary), Admin (CC), Employee (CC)
         try {
             $admins = User::where('role', 'admin')->pluck('email')->toArray();
             $techEmail = $ticket->technician ? $ticket->technician->email : null;
+            $employeeEmail = $ticket->user->email;
 
-            $mail = Mail::to($admins);
+            $ccEmails = array_merge($admins, [$employeeEmail]);
+
             if ($techEmail) {
-                $mail->cc($techEmail);
+                Mail::to($techEmail)
+                    ->cc($ccEmails)
+                    ->send(new \App\Mail\TicketStatusUpdated($ticket));
+            } else {
+                Mail::to($admins)
+                    ->cc($employeeEmail)
+                    ->send(new \App\Mail\TicketStatusUpdated($ticket));
             }
-            $mail->send(new \App\Mail\TicketStatusUpdated($ticket));
         } catch (\Exception $e) {
             \Log::error("Email sending failed on resolution response: " . $e->getMessage());
         }

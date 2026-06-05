@@ -71,6 +71,73 @@
             </tbody>
           </table>
         </div>
+
+        <div class="tickets-card mt-4" style="margin-top: 2rem;">
+          <div class="table-header-box">
+            <h3>Assigned Tickets</h3>
+          </div>
+
+          <table class="tickets-table">
+            <thead>
+              <tr>
+                <th>TICKET ID</th>
+                <th>SUBJECT</th>
+                <th>CLASSIFICATION</th>
+                <th>EMPLOYEE</th>
+                <th>SLA PRIORITY</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              @forelse($tickets as $ticket)
+                @php
+                    $isOverdue = $ticket->due_at && now()->greaterThan($ticket->due_at) && !in_array($ticket->status, ['resolved', 'closed']);
+                @endphp
+                <tr>
+                  <td style="white-space: nowrap;">
+                    <a href="{{ route('admin.tickets.details', $ticket->id) }}" style="color: #2563eb; text-decoration: none; font-weight: bold;">
+                      {{ $ticket->ticket_id }}
+                    </a>
+                  </td>
+                  <td style="font-weight: bold;">{{ $ticket->subject }}</td>
+                  <td>
+                    <div style="display: flex; flex-direction: column; color: #64748b; font-size: 0.9rem;">
+                      <span>{{ optional($ticket->category)->name }}</span>
+                      <span>{{ optional($ticket->type)->name ?? $ticket->custom_type }}</span>
+                    </div>
+                  </td>
+                  <td style="font-weight: bold;">{{ optional($ticket->user)->name ?? 'Unknown' }}</td>
+                  <td style="white-space: nowrap;">
+                    @if($isOverdue || $ticket->status === 'overdue')
+                      <span style="background: #ffedd5; color: #c2410c; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; white-space: nowrap;">OVERDUE</span>
+                    @else
+                      <span style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; white-space: nowrap;">WITHIN SLA</span>
+                    @endif
+                  </td>
+                  <td style="white-space: nowrap;">
+                    @php
+                        $statusClass = '';
+                        $statusText = strtoupper(str_replace('_', ' ', $ticket->status));
+                        if($ticket->status === 'open') $statusClass = 'background: #e0e7ff; color: #3730a3;';
+                        elseif($ticket->status === 'assigned') $statusClass = 'background: #e0e7ff; color: #3730a3;';
+                        elseif($ticket->status === 'in_progress') $statusClass = 'background: #fef3c7; color: #92400e;';
+                        elseif($ticket->status === 'resolved') $statusClass = 'background: #dcfce7; color: #166534;';
+                        elseif($ticket->status === 'closed') $statusClass = 'font-weight: bold; color: #000;';
+                        elseif($ticket->status === 'overdue') $statusClass = 'background: #fee2e2; color: #dc2626;';
+                    @endphp
+                    <span style="padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; {{ $statusClass }}">
+                        {{ $statusText }}
+                    </span>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="6" style="text-align: center; color: #64748b; padding: 20px;">No tickets assigned to this technician.</td>
+                </tr>
+              @endforelse
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   </div>

@@ -176,7 +176,7 @@
           <div class="filter-section">
             <!-- <span class="filter-label">FILTER</span> -->
             <form action="{{ route('admin.tickets') }}" method="GET" id="statusFilterForm">
-              <div class="modern-select-wrapper" style="min-width: 200px;">
+              <div class="modern-select-wrapper" style="min-width: 200px; position: relative;">
                 <select name="status" onchange="this.form.submit()" class="modern-select" style="padding: 0.5rem 2.5rem 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; appearance: none; transition: all 0.2s;">
                   <option value="">All Statuses</option>
                   <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
@@ -186,7 +186,7 @@
                   <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Closed</option>
                   <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Overdue</option>
                 </select>
-                <i class="fa-solid fa-chevron-down" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; font-size: 0.8rem;"></i>
+                <!-- <i class="fa-solid fa-chevron-down" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; font-size: 0.8rem;"></i> -->
               </div>
             </form>
           </div>

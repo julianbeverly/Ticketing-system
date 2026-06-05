@@ -53,7 +53,14 @@ class SendTicketReminders extends Command
                 try {
                     $this->info("Attempting to send reminder for Ticket {$ticket->ticket_id} to {$ticket->technician->email}...");
                     
-                    Mail::to($ticket->technician->email)->send(new TicketReminder($ticket));
+                    $admins = \App\Models\User::where('role', 'admin')->pluck('email')->toArray();
+                    $employeeEmail = $ticket->user->email;
+                    
+                    $ccEmails = array_merge($admins, [$employeeEmail]);
+
+                    Mail::to($ticket->technician->email)
+                        ->cc($ccEmails)
+                        ->send(new TicketReminder($ticket));
                     
                     $ticket->update(['last_reminder_at' => now()]);
                     $this->info("SUCCESS: Reminder queued for Ticket {$ticket->ticket_id}.");

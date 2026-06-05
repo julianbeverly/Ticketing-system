@@ -39,7 +39,7 @@
         <div class="nav-group-title">Administration</div>
         <a href="{{ route('user.index') }}" class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
             <i class="fa-solid fa-users-gear"></i>
-            <span>Users M</span>
+            <span>Users</span>
         </a>
 
         <a href="{{ route('admin.incidents') }}" class="nav-item {{ request()->routeIs('admin.incidents') ? 'active' : '' }}">

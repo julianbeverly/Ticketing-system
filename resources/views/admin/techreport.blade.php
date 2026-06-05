@@ -119,10 +119,10 @@
             <div class="table-header-box">
               <h3>Technician Directory</h3>
 
-              <div class="table-icons">
+              <!-- <div class="table-icons">
                 <i class="fa-solid fa-filter"></i>
                 <i class="fa-solid fa-outdent"></i>
-              </div>
+              </div> -->
             </div>
 
             <table class="tickets-table">

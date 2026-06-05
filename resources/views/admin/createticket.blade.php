@@ -150,16 +150,16 @@
                   <div class="custom-select">
                     <select name="priority">
                       <option value="low">
-                        Low - General Request
+                        Low
                       </option>
-                      <option value="medium">Medium - System Issue</option>
-                      <option value="high">High - Critical Failure</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
                     </select>
                     <i class="fa-solid fa-chevron-down"></i>
                   </div>
                 </div>
                 <!-- Display Priority Deadline -->
-                <div class="priority-time">2 hours</div>
+                <!-- <div class="priority-time">2 hours</div> -->
               </div>
 
               <!-- File Upload -->

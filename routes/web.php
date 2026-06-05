@@ -108,7 +108,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/employticket', [TicketController::class, 'employeeTickets'])->name('employee.tickets');
         Route::get('/employticketdetails/{ticket}', [TicketController::class, 'employeeDetails'])->name('employee.tickets.details');
         Route::get('/employee/createticket', [TicketController::class, 'employeeCreateTicket'])->name('employee.tickets.create');
-        Route::post('/employee/tickets', [TicketController::class, 'store'])->name('employee.tickets.store');
         Route::post('/tickets/{ticket}/respond', [TicketController::class, 'respondToResolution'])->name('employee.tickets.respond');
         
         Route::get('/employee/ticketreport', [TicketController::class, 'employeeTicketReport'])->name('employee.ticketreport');
@@ -119,6 +118,9 @@ Route::middleware(['auth'])->group(function () {
     // ==========================================
     // SHARED ROUTES (Available to all logged-in users)
     // ==========================================
+    // Ticket Creation
+    Route::post('/tickets/store', [TicketController::class, 'store'])->name('employee.tickets.store');
+
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('employee.profile');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('employee.profile.update');
