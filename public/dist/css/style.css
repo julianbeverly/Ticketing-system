@@ -6517,9 +6517,17 @@ svg {
     box-sizing: border-box !important;
   }
   
+  /* Fix selects not expanding to fill the 100% wide container */
+  #filterForm select {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Fix iOS Safari Date Inputs disappearing */
   div[id^="picker-"] input {
     width: 100% !important;
     flex: 1 1 auto !important;
-    min-width: 0 !important;
+    min-width: 150px !important;
+    min-height: 2.5rem !important;
   }
 }
