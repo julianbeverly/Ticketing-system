@@ -131,12 +131,38 @@ class TicketController extends Controller
 
         $technicians = $query->paginate(10)->withQueryString();
         
-        $technicians->getCollection()->transform(function($tech) {
-            $tech->assigned_count   = Ticket::where('technician_id', $tech->id)->count();
-            $tech->inprogress_count = Ticket::where('technician_id', $tech->id)->where('status', 'in_progress')->count();
-            $tech->resolved_count   = Ticket::where('technician_id', $tech->id)->where('status', 'resolved')->count();
-            $tech->closed_count     = Ticket::where('technician_id', $tech->id)->where('status', 'closed')->count();
-            $tech->overdue_count    = Ticket::where('technician_id', $tech->id)->where('status', 'overdue')->count();
+        $reportType = $request->input('report_type', 'custom');
+
+        $technicians->getCollection()->transform(function($tech) use ($request, $reportType) {
+            $ticketQuery = Ticket::where('technician_id', $tech->id);
+
+            if ($reportType === 'daily' && $request->filled('daily_date')) {
+                $ticketQuery->whereDate('created_at', $request->daily_date);
+            } elseif ($reportType === 'weekly' && $request->filled('weekly_date')) {
+                $weekStr = $request->weekly_date;
+                $start = \Carbon\Carbon::now()->setISODate(
+                    (int) substr($weekStr, 0, 4),
+                    (int) substr($weekStr, 6)
+                )->startOfWeek();
+                $end = $start->copy()->endOfWeek();
+                $ticketQuery->whereBetween('created_at', [$start, $end]);
+            } elseif ($reportType === 'monthly' && $request->filled('monthly_date')) {
+                [$year, $month] = explode('-', $request->monthly_date);
+                $ticketQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+            } elseif ($reportType === 'custom') {
+                if ($request->filled('start_date')) {
+                    $ticketQuery->whereDate('created_at', '>=', $request->start_date);
+                }
+                if ($request->filled('end_date')) {
+                    $ticketQuery->whereDate('created_at', '<=', $request->end_date);
+                }
+            }
+
+            $tech->assigned_count   = (clone $ticketQuery)->count();
+            $tech->inprogress_count = (clone $ticketQuery)->where('status', 'in_progress')->count();
+            $tech->resolved_count   = (clone $ticketQuery)->where('status', 'resolved')->count();
+            $tech->closed_count     = (clone $ticketQuery)->where('status', 'closed')->count();
+            $tech->overdue_count    = (clone $ticketQuery)->where('status', 'overdue')->count();
             return $tech;
         });
 
@@ -147,17 +173,42 @@ class TicketController extends Controller
      * Technician: Show the logged-in technician's OWN performance report.
      * Each technician only sees their own assigned/inprogress/closed ticket counts.
      */
-    public function techOwnReport()
+    public function techOwnReport(Request $request)
     {
         // gets currently logged in user
         $tech = Auth::user();
 
         // Scope all counts to the currently authenticated technician only
-        $tech->assigned_count   = Ticket::where('technician_id', $tech->id)->count();
-        $tech->inprogress_count = Ticket::where('technician_id', $tech->id)->where('status', 'in_progress')->count();
-        $tech->resolved_count   = Ticket::where('technician_id', $tech->id)->where('status', 'resolved')->count();
-        $tech->closed_count     = Ticket::where('technician_id', $tech->id)->where('status', 'closed')->count();
-        $tech->overdue_count    = Ticket::where('technician_id', $tech->id)->where('status', 'overdue')->count();
+        $ticketQuery = Ticket::where('technician_id', $tech->id);
+        $reportType = $request->input('report_type', 'custom');
+
+        if ($reportType === 'daily' && $request->filled('daily_date')) {
+            $ticketQuery->whereDate('created_at', $request->daily_date);
+        } elseif ($reportType === 'weekly' && $request->filled('weekly_date')) {
+            $weekStr = $request->weekly_date;
+            $start = \Carbon\Carbon::now()->setISODate(
+                (int) substr($weekStr, 0, 4),
+                (int) substr($weekStr, 6)
+            )->startOfWeek();
+            $end = $start->copy()->endOfWeek();
+            $ticketQuery->whereBetween('created_at', [$start, $end]);
+        } elseif ($reportType === 'monthly' && $request->filled('monthly_date')) {
+            [$year, $month] = explode('-', $request->monthly_date);
+            $ticketQuery->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        } elseif ($reportType === 'custom') {
+            if ($request->filled('start_date')) {
+                $ticketQuery->whereDate('created_at', '>=', $request->start_date);
+            }
+            if ($request->filled('end_date')) {
+                $ticketQuery->whereDate('created_at', '<=', $request->end_date);
+            }
+        }
+
+        $tech->assigned_count   = (clone $ticketQuery)->count();
+        $tech->inprogress_count = (clone $ticketQuery)->where('status', 'in_progress')->count();
+        $tech->resolved_count   = (clone $ticketQuery)->where('status', 'resolved')->count();
+        $tech->closed_count     = (clone $ticketQuery)->where('status', 'closed')->count();
+        $tech->overdue_count    = (clone $ticketQuery)->where('status', 'overdue')->count();
 
         return view('techdashboard.technicianreport', compact('tech'));
     }
@@ -177,7 +228,36 @@ class TicketController extends Controller
             ? round((($totalTickets - $overdueCount) / $totalTickets) * 100, 1) 
             : 0;
 
-        return view('techdashboard.techreportdetails', compact('user', 'overdueCount', 'slaPerformance'));
+        // ── Date filtering based on report_type (by assignment date = created_at) ─
+        $query = Ticket::with(['category', 'type'])->where('technician_id', $user->id);
+        $reportType = request()->input('report_type', 'custom');
+
+        if ($reportType === 'daily' && request()->filled('daily_date')) {
+            $query->whereDate('created_at', request()->daily_date);
+        } elseif ($reportType === 'weekly' && request()->filled('weekly_date')) {
+            $weekStr = request()->weekly_date;
+            $start = \Carbon\Carbon::now()->setISODate(
+                (int) substr($weekStr, 0, 4),
+                (int) substr($weekStr, 6)
+            )->startOfWeek();
+            $end = $start->copy()->endOfWeek();
+            $query->whereBetween('created_at', [$start, $end]);
+        } elseif ($reportType === 'monthly' && request()->filled('monthly_date')) {
+            [$year, $month] = explode('-', request()->monthly_date);
+            $query->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        } elseif ($reportType === 'custom') {
+            if (request()->filled('start_date')) {
+                $query->whereDate('created_at', '>=', request()->start_date);
+            }
+            if (request()->filled('end_date')) {
+                $query->whereDate('created_at', '<=', request()->end_date);
+            }
+        }
+        // ────────────────────────────────────────────────────────────────────────
+
+        $tickets = $query->orderBy('created_at', 'desc')->get();
+
+        return view('techdashboard.techreportdetails', compact('user', 'overdueCount', 'slaPerformance', 'tickets'));
     }
 
     /**
@@ -189,18 +269,43 @@ class TicketController extends Controller
             abort(404);
         }
 
+        // ── Date filtering based on report_type (filters by assignment date = created_at) ─
+        $query = Ticket::with(['category', 'type', 'user'])
+            ->where('technician_id', $user->id);
+
+        $reportType = request()->input('report_type', 'custom');
+
+        if ($reportType === 'daily' && request()->filled('daily_date')) {
+            $query->whereDate('created_at', request()->daily_date);
+        } elseif ($reportType === 'weekly' && request()->filled('weekly_date')) {
+            $weekStr = request()->weekly_date;
+            $start = \Carbon\Carbon::now()->setISODate(
+                (int) substr($weekStr, 0, 4),
+                (int) substr($weekStr, 6)
+            )->startOfWeek();
+            $end = $start->copy()->endOfWeek();
+            $query->whereBetween('created_at', [$start, $end]);
+        } elseif ($reportType === 'monthly' && request()->filled('monthly_date')) {
+            [$year, $month] = explode('-', request()->monthly_date);
+            $query->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        } elseif ($reportType === 'custom') {
+            if (request()->filled('start_date')) {
+                $query->whereDate('created_at', '>=', request()->start_date);
+            }
+            if (request()->filled('end_date')) {
+                $query->whereDate('created_at', '<=', request()->end_date);
+            }
+        }
+        // ──────────────────────────────────────────────────────────────────────────────────
+
+        $tickets = $query->orderBy('created_at', 'desc')->get();
+
         $totalTickets = Ticket::where('technician_id', $user->id)->count();
         $overdueCount = Ticket::where('technician_id', $user->id)->where('status', 'overdue')->count();
-        
-        // SLA Performance: Percentage of tickets NOT overdue
-        $slaPerformance = $totalTickets > 0 
-            ? round((($totalTickets - $overdueCount) / $totalTickets) * 100, 1) 
-            : 0;
 
-        $tickets = Ticket::with(['category', 'type', 'user'])
-            ->where('technician_id', $user->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $slaPerformance = $totalTickets > 0
+            ? round((($totalTickets - $overdueCount) / $totalTickets) * 100, 1)
+            : 0;
 
         return view('admin.techreportdetails', compact('user', 'overdueCount', 'slaPerformance', 'tickets'));
     }
@@ -214,7 +319,7 @@ class TicketController extends Controller
         $query = Ticket::with(['user', 'technician', 'category', 'type']);
 
         if ($request->filled('status')) {
-            // [ADDED] Check if status filter is actually a technician filter (starts with tech_)
+            // Check if status filter is actually a technician filter (starts with tech_)
             if (str_starts_with($request->status, 'tech_')) {
                 $query->where('technician_id', str_replace('tech_', '', $request->status));
             } else {
@@ -222,13 +327,33 @@ class TicketController extends Controller
             }
         }
 
-        if ($request->filled('start_date')) {
-            $query->whereDate('created_at', '>=', $request->start_date);
-        }
+        // ── Date filtering based on report_type ──────────────────────────
+        $reportType = $request->input('report_type', 'custom');
 
-        if ($request->filled('end_date')) {
-            $query->whereDate('created_at', '<=', $request->end_date);
+        if ($reportType === 'daily' && $request->filled('daily_date')) {
+            $query->whereDate('created_at', $request->daily_date);
+        } elseif ($reportType === 'weekly' && $request->filled('weekly_date')) {
+            // HTML week input returns "YYYY-Www"
+            $weekStr = $request->weekly_date; // e.g. "2026-W23"
+            $start = \Carbon\Carbon::now()->setISODate(
+                (int) substr($weekStr, 0, 4),
+                (int) substr($weekStr, 6)
+            )->startOfWeek();
+            $end = $start->copy()->endOfWeek();
+            $query->whereBetween('created_at', [$start, $end]);
+        } elseif ($reportType === 'monthly' && $request->filled('monthly_date')) {
+            // HTML month input returns "YYYY-MM"
+            [$year, $month] = explode('-', $request->monthly_date);
+            $query->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        } elseif ($reportType === 'custom') {
+            if ($request->filled('start_date')) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            }
+            if ($request->filled('end_date')) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            }
         }
+        // ─────────────────────────────────────────────────────────────────
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -240,7 +365,7 @@ class TicketController extends Controller
 
         $tickets = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 
-        // [ADDED] Fetch all technicians to display in the status filter dropdown
+        // Fetch all technicians to display in the status filter dropdown
         $technicians = User::where('role', 'technician')->get();
 
         return view('admin.ticketreport', compact('tickets', 'technicians'));
@@ -432,6 +557,32 @@ class TicketController extends Controller
                   ->orWhere('subject', 'like', "%{$search}%");
             });
         }
+
+        // ── Date filtering based on report_type ──────────────────────────
+        $reportType = $request->input('report_type', 'custom');
+
+        if ($reportType === 'daily' && $request->filled('daily_date')) {
+            $query->whereDate('created_at', $request->daily_date);
+        } elseif ($reportType === 'weekly' && $request->filled('weekly_date')) {
+            $weekStr = $request->weekly_date;
+            $start = \Carbon\Carbon::now()->setISODate(
+                (int) substr($weekStr, 0, 4),
+                (int) substr($weekStr, 6)
+            )->startOfWeek();
+            $end = $start->copy()->endOfWeek();
+            $query->whereBetween('created_at', [$start, $end]);
+        } elseif ($reportType === 'monthly' && $request->filled('monthly_date')) {
+            [$year, $month] = explode('-', $request->monthly_date);
+            $query->whereYear('created_at', $year)->whereMonth('created_at', $month);
+        } elseif ($reportType === 'custom') {
+            if ($request->filled('start_date')) {
+                $query->whereDate('created_at', '>=', $request->start_date);
+            }
+            if ($request->filled('end_date')) {
+                $query->whereDate('created_at', '<=', $request->end_date);
+            }
+        }
+        // ─────────────────────────────────────────────────────────────────
 
         $tickets = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
 

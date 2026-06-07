@@ -193,65 +193,6 @@
         </div>
       </main>
     </div>
-    <script>
-      const menuToggle = document.getElementById("menuToggle");
-      const sidebar = document.querySelector(".sidebar-nav");
-      const overlay = document.getElementById("sidebarOverlay");
-
-      menuToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("active");
-        overlay.classList.toggle("show");
-      });
-
-      overlay.addEventListener("click", () => {
-        sidebar.classList.remove("active");
-        overlay.classList.remove("show");
-      });
-
-      // Dynamic Type Filtering
-      const categorySelect = document.getElementById('category_id');
-      const typeSelect = document.getElementById('type_id');
-      const customTypeGroup = document.getElementById('custom_type_group');
-      const allTypeOptions = typeSelect.querySelectorAll('option[data-category]');
-
-      categorySelect.addEventListener('change', function() {
-          const selectedCategoryId = this.value;
-          typeSelect.value = '';
-          customTypeGroup.style.display = 'none';
-          
-          allTypeOptions.forEach(option => {
-              if (option.getAttribute('data-category') === selectedCategoryId) {
-                  option.style.display = '';
-              } else {
-                  option.style.display = 'none';
-              }
-          });
-      });
-
-      typeSelect.addEventListener('change', function() {
-          if (this.value === 'other') {
-              customTypeGroup.style.display = 'block';
-              document.getElementById('custom_type').setAttribute('required', 'required');
-          } else {
-              customTypeGroup.style.display = 'none';
-              document.getElementById('custom_type').removeAttribute('required');
-          }
-      });
-
-      // Prevent Double Submission
-      const createTicketForm = document.getElementById('adminCreateTicketForm');
-      const submitBtn = document.getElementById('submitBtn');
-
-      if (createTicketForm) {
-          createTicketForm.addEventListener('submit', function() {
-              if (submitBtn) {
-                  submitBtn.disabled = true;
-                  submitBtn.innerHTML = 'Processing... <i class="fa-solid fa-spinner fa-spin"></i>';
-                  submitBtn.style.opacity = '0.7';
-                  submitBtn.style.cursor = 'not-allowed';
-              }
-          });
-      }
-    </script>
+    
   </body>
 </html>

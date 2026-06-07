@@ -650,21 +650,6 @@
         if (e.target === lightbox) closeLightbox();
     });
   </script>
-<script>
-        const menuToggle = document.getElementById("menuToggle");
-        const sidebar = document.querySelector(".sidebar-nav");
-        const overlay = document.getElementById("sidebarOverlay");
-        
-        if (menuToggle && sidebar && overlay) {
-            menuToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("show");
-            });
-            overlay.addEventListener("click", () => {
-                sidebar.classList.remove("active");
-                overlay.classList.remove("show");
-            });
-        }
-    </script>
+
 </body>
 </html>

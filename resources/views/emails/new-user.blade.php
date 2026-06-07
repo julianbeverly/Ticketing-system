@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Welcome to ResolveIT</h2>
+    <h2>Welcome to Resolve</h2>
 
 <p>Hello {{ $user->name }},</p>
 

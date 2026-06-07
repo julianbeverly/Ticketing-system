@@ -141,12 +141,17 @@
         @include('employee.partials.sidebar')
 
         <main class="main-content">
+            <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div style="flex: 1;"></div>
                 <div class="header-actions">
-                    
                     <a href="{{ route('employee.profile') }}" class="icon-btn profile-btn">
                         <i class="fa-regular fa-circle-user"></i>
                     </a>
                 </div>
+            </header>
 
             <div class="dashboard-content ticket-details-view">
                <div class="ticket-details-main">

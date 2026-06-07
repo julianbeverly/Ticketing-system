@@ -1,4 +1,4 @@
-<aside class="sidebar-nav">
+<aside class="sidebar-nav" id="sidebar">
     <div class="logo-container">
         <div class="logo">Resolve</div>
     </div>
@@ -45,3 +45,24 @@
         </form>
     </div>
 </aside>
+<div id="overlay" class="overlay"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        if(menuToggle && sidebar && overlay) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('active');
+            });
+        }
+    });
+</script>

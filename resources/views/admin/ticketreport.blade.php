@@ -190,22 +190,66 @@
                             @if(request('search'))
                                 <input type="hidden" name="search" value="{{ request('search') }}">
                             @endif
-                            <div class="tr-date-btn" style="padding: 0.5rem 1rem; display: flex; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb;">
-                                <i class="fa-regular fa-calendar"></i>
-                                <input type="date" name="start_date" value="{{ request('start_date') }}" onchange="document.getElementById('filterForm').submit()" style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
-                                <span style="color: #6b7280;">to</span>
-                                <input type="date" name="end_date" value="{{ request('end_date') }}" onchange="document.getElementById('filterForm').submit()" style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+
+                            {{-- ── Report Type Selector ─────────────────────────── --}}
+                            <div style="display: flex; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb; padding: 0.5rem 1rem;">
+                                <i class="fa-solid fa-chart-bar" style="color:#6b7280;"></i>
+                                <select name="report_type" id="reportTypeSelect"
+                                    onchange="handleReportTypeChange()"
+                                    style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151; font-weight: 600; cursor: pointer;">
+                                    <option value="custom"   {{ request('report_type','custom') === 'custom'  ? 'selected' : '' }}>Select type of report</option>
+                                    <option value="daily"    {{ request('report_type') === 'daily'   ? 'selected' : '' }}>Daily</option>
+                                    <option value="weekly"   {{ request('report_type') === 'weekly'  ? 'selected' : '' }}>Weekly</option>
+                                    <option value="monthly"  {{ request('report_type') === 'monthly' ? 'selected' : '' }}>Monthly</option>
+                                    <option value="custom"   {{ request('report_type') === 'custom'  ? 'selected' : '' }}>Date Range</option>
+                                </select>
                             </div>
 
+                            {{-- ── Daily picker ──────────────────────────────────── --}}
+                            <div id="picker-daily" class="tr-date-btn" style="display:none; padding: 0.5rem 1rem; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb;">
+                                <i class="fa-regular fa-calendar" style="color:#6b7280;"></i>
+                                <input type="date" name="daily_date"
+                                    value="{{ request('daily_date') }}"
+                                    onchange="document.getElementById('filterForm').submit()"
+                                    style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+                            </div>
+
+                            {{-- ── Weekly picker ─────────────────────────────────── --}}
+                            <div id="picker-weekly" class="tr-date-btn" style="display:none; padding: 0.5rem 1rem; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb;">
+                                <i class="fa-regular fa-calendar-week" style="color:#6b7280;"></i>
+                                <input type="week" name="weekly_date"
+                                    value="{{ request('weekly_date') }}"
+                                    onchange="document.getElementById('filterForm').submit()"
+                                    style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+                            </div>
+
+                            {{-- ── Monthly picker ────────────────────────────────── --}}
+                            <div id="picker-monthly" class="tr-date-btn" style="display:none; padding: 0.5rem 1rem; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb;">
+                                <i class="fa-regular fa-calendar-days" style="color:#6b7280;"></i>
+                                <input type="month" name="monthly_date"
+                                    value="{{ request('monthly_date') }}"
+                                    onchange="document.getElementById('filterForm').submit()"
+                                    style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+                            </div>
+
+                            {{-- ── Date Range picker ─────────────────────────────── --}}
+                            <div id="picker-custom" class="tr-date-btn" style="display:none; padding: 0.5rem 1rem; align-items: center; gap: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; background: #f9fafb;">
+                                <i class="fa-regular fa-calendar" style="color:#6b7280;"></i>
+                                <input type="date" name="start_date" value="{{ request('start_date') }}" onchange="document.getElementById('filterForm').submit()" style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+                                <span style="color: #6b7280;">to</span>
+                                <input type="date" name="end_date"   value="{{ request('end_date') }}"   onchange="document.getElementById('filterForm').submit()" style="border: none; background: transparent; font-size: 0.85rem; outline: none; color: #374151;">
+                            </div>
+
+                            {{-- Status Filter --}}
                             <div style="position: relative; display: inline-block;">
                                 <select name="status" onchange="document.getElementById('filterForm').submit()" style="padding: 0.5rem 2.5rem 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; appearance: none; transition: all 0.2s;">
                                     <option value="">All Statuses</option>
-                                    <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
-                                    <option value="assigned" {{ request('status') == 'assigned' ? 'selected' : '' }}>Assigned</option>
+                                    <option value="open"        {{ request('status') == 'open'        ? 'selected' : '' }}>Open</option>
+                                    <option value="assigned"    {{ request('status') == 'assigned'    ? 'selected' : '' }}>Assigned</option>
                                     <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                                    <option value="resolved" {{ request('status') == 'resolved' ? 'selected' : '' }}>Resolved</option>
-                                    <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Closed</option>
-                                    <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Overdue</option>
+                                    <option value="resolved"    {{ request('status') == 'resolved'    ? 'selected' : '' }}>Resolved</option>
+                                    <option value="closed"      {{ request('status') == 'closed'      ? 'selected' : '' }}>Closed</option>
+                                    <option value="overdue"     {{ request('status') == 'overdue'     ? 'selected' : '' }}>Overdue</option>
                                     @if(isset($technicians) && $technicians->count() > 0)
                                         <optgroup label="Technicians">
                                             @foreach($technicians as $tech)
@@ -243,7 +287,7 @@
                             <tr>
                                 <th>TICKET ID</th>       {{-- Unique ticket reference number --}}
                                 <th>SUBJECT</th>          {{-- Ticket title and short description --}}
-                                <th>CLASSIFICATION</th>   {{-- Incident category and type --}}
+                                <th>TIME CREATED</th>     {{-- Time the ticket was created --}}
                                 <th>ASSIGNEE</th>         {{-- Assigned technician --}}
                                 <th>SLA PRIORITY</th>     {{-- SLA compliance level --}}
                                 <th>STATUS</th>           {{-- Current resolution status --}}
@@ -264,8 +308,7 @@
                                     </td>
                                     <td>
                                         <div class="ticket-subject">
-                                            <span class="tr-cat-label">{{ optional($ticket->category)->name ?? 'Uncategorized' }}</span>
-                                            <span>{{ optional($ticket->type)->name ?? $ticket->custom_type ?? 'N/A' }}</span>
+                                            <span>{{ $ticket->created_at->format('M d, Y h:i A') }}</span>
                                         </div>
                                     </td>
                                     <td>
@@ -320,22 +363,7 @@
     </div>
   
 
-<script>
-        const menuToggle = document.getElementById("menuToggle");
-        const sidebar = document.querySelector(".sidebar-nav");
-        const overlay = document.getElementById("sidebarOverlay");
-        
-        if (menuToggle && sidebar && overlay) {
-            menuToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("show");
-            });
-            overlay.addEventListener("click", () => {
-                sidebar.classList.remove("active");
-                overlay.classList.remove("show");
-            });
-        }
-    </script>
+
 </body>
 
 </html>

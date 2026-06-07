@@ -188,8 +188,8 @@
                     </div>
                 @endif
 
-                <div class="users-card">
-                    <table class="users-table">
+                <div class="tickets-card">
+                    <table class="tickets-table">
                         <!-- Table header containing column names -->
                         <thead>
                             <tr>
@@ -234,7 +234,6 @@
                                     </td>
                                     <td>
                                         <button type="button" class="contact-link"
-                                            style="border:none; background:none; cursor:pointer;"
                                             data-id="{{ $user->id }}" data-name="{{ $user->name }}"
                                             data-email="{{ $user->email }}" data-role="{{ $user->role }}"
                                             data-phone="{{ $user->phone }}" data-speciality="{{ $user->speciality }}"
@@ -246,11 +245,11 @@
                                             @csrf
                                             @if ($user->status === 'active')
                                                 <button type="button"
-                                                    style="background-color: #ef4444; color: white; padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer;"
+                                                    class="btn-action-black"
                                                     onclick="confirmSuspend(this)">Suspend</button>
                                             @else
                                                 <button type="button"
-                                                    style="background-color: #10b981; color: white; padding: 4px 8px; border-radius: 4px; border: none; cursor: pointer;"
+                                                    class="btn-action-yellow"
                                                     onclick="confirmUnsuspend(this)">Unsuspend</button>
                                             @endif
                                         </form>

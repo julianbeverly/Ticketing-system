@@ -61,6 +61,51 @@
           <div class="tickets-card">
             <div class="table-header-box">
               <h3>Technician Directory</h3>
+
+              {{-- ── Report Type Selector (filters by assignment date) ── --}}
+              <form action="{{ route('tech.own.report') }}" method="GET"
+                    id="filterForm"
+                    style="display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+
+                  <div style="display:flex; align-items:center; gap:0.5rem; border:1px solid #e5e7eb; border-radius:6px; background:#f9fafb; padding:0.5rem 1rem;">
+                      <i class="fa-solid fa-chart-bar" style="color:#6b7280;"></i>
+                      <select name="report_type" id="reportTypeSelect"
+                          onchange="handleReportTypeChange()"
+                          style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151; font-weight:600; cursor:pointer;">
+                          <option value="custom"  {{ request('report_type','custom') === 'custom'  ? 'selected' : '' }}>Select type of report</option>
+                          <option value="daily"   {{ request('report_type') === 'daily'   ? 'selected' : '' }}>Daily</option>
+                          <option value="weekly"  {{ request('report_type') === 'weekly'  ? 'selected' : '' }}>Weekly</option>
+                          <option value="monthly" {{ request('report_type') === 'monthly' ? 'selected' : '' }}>Monthly</option>
+                          <option value="custom"  {{ request('report_type') === 'custom'  ? 'selected' : '' }}>Date Range</option>
+                      </select>
+                  </div>
+
+                  {{-- Daily --}}
+                  <div id="picker-daily" style="display:none; padding:0.5rem 1rem; align-items:center; gap:0.5rem; border:1px solid #e5e7eb; border-radius:6px; background:#f9fafb;">
+                      <i class="fa-regular fa-calendar" style="color:#6b7280;"></i>
+                      <input type="date" name="daily_date" value="{{ request('daily_date') }}" onchange="document.getElementById('filterForm').submit()" style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151;">
+                  </div>
+
+                  {{-- Weekly --}}
+                  <div id="picker-weekly" style="display:none; padding:0.5rem 1rem; align-items:center; gap:0.5rem; border:1px solid #e5e7eb; border-radius:6px; background:#f9fafb;">
+                      <i class="fa-regular fa-calendar-week" style="color:#6b7280;"></i>
+                      <input type="week" name="weekly_date" value="{{ request('weekly_date') }}" onchange="document.getElementById('filterForm').submit()" style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151;">
+                  </div>
+
+                  {{-- Monthly --}}
+                  <div id="picker-monthly" style="display:none; padding:0.5rem 1rem; align-items:center; gap:0.5rem; border:1px solid #e5e7eb; border-radius:6px; background:#f9fafb;">
+                      <i class="fa-regular fa-calendar-days" style="color:#6b7280;"></i>
+                      <input type="month" name="monthly_date" value="{{ request('monthly_date') }}" onchange="document.getElementById('filterForm').submit()" style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151;">
+                  </div>
+
+                  {{-- Date Range --}}
+                  <div id="picker-custom" style="display:none; padding:0.5rem 1rem; align-items:center; gap:0.5rem; border:1px solid #e5e7eb; border-radius:6px; background:#f9fafb;">
+                      <i class="fa-regular fa-calendar" style="color:#6b7280;"></i>
+                      <input type="date" name="start_date" value="{{ request('start_date') }}" onchange="document.getElementById('filterForm').submit()" style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151;">
+                      <span style="color:#6b7280;">to</span>
+                      <input type="date" name="end_date"   value="{{ request('end_date') }}"   onchange="document.getElementById('filterForm').submit()" style="border:none; background:transparent; font-size:0.85rem; outline:none; color:#374151;">
+                  </div>
+              </form>
             </div>
 
             <table class="tickets-table">
@@ -109,22 +154,6 @@
 
   </div>
   <!-- End of dashboard-layout -->
-<script>
-        const menuToggle = document.getElementById("menuToggle");
-        const sidebar = document.querySelector(".sidebar-nav");
-        const overlay = document.getElementById("sidebarOverlay");
-        
-        if (menuToggle && sidebar && overlay) {
-            menuToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("show");
-            });
-            overlay.addEventListener("click", () => {
-                sidebar.classList.remove("active");
-                overlay.classList.remove("show");
-            });
-        }
-    </script>
-</body>
-
+    
+  </body>
 </html>

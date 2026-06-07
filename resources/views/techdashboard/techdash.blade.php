@@ -43,6 +43,9 @@
         <button class="menu-toggle" id="menuToggle">
           <i class="fa-solid fa-bars"></i>
         </button>
+        <div style="display: flex; align-items: center; margin-left: 1rem;">
+          <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">Welcome, Technician</h2>
+        </div>
         <div style="flex: 1;"></div>
         <div class="header-actions" id="content">
           
@@ -154,22 +157,7 @@
 
     </main>
   </div>
-<script>
-        const menuToggle = document.getElementById("menuToggle");
-        const sidebar = document.querySelector(".sidebar-nav");
-        const overlay = document.getElementById("sidebarOverlay");
-        
-        if (menuToggle && sidebar && overlay) {
-            menuToggle.addEventListener("click", () => {
-                sidebar.classList.toggle("active");
-                overlay.classList.toggle("show");
-            });
-            overlay.addEventListener("click", () => {
-                sidebar.classList.remove("active");
-                overlay.classList.remove("show");
-            });
-        }
-    </script>
+
 </body>
 
 </html>

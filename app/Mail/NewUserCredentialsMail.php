@@ -18,7 +18,7 @@ class NewUserCredentialsMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Your ResolveIT Account Credentials')
+        return $this->subject('Your Resolve Account Credentials')
                     ->view('emails.new-user');
     }
 }
