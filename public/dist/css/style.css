@@ -6503,4 +6503,23 @@ svg {
   .dashboard-content {
     padding: 1rem !important;
   }
+
+  /* ===== MOBILE REPORTING FILTERS ===== */
+  /* Prevent date pickers from being squeezed and hiding the calendar icon */
+  #filterForm {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  
+  #filterForm > div {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+  }
+  
+  div[id^="picker-"] input {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
 }
