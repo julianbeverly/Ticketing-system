@@ -361,8 +361,28 @@
         </main>
 
     </div>
-  
 
+<script>
+function handleReportTypeChange() {
+    const type = document.getElementById('reportTypeSelect').value;
+
+    // Hide all pickers first
+    document.querySelectorAll('[id^="picker-"]').forEach(el => {
+        el.style.display = 'none';
+    });
+
+    // Show the relevant picker
+    const picker = document.getElementById('picker-' + type);
+    if (picker) {
+        picker.style.display = 'flex';
+    }
+}
+
+// On page load, restore the correct picker based on current selection
+document.addEventListener('DOMContentLoaded', function() {
+    handleReportTypeChange();
+});
+</script>
 
 </body>
 

@@ -132,6 +132,9 @@
         <main class="main-content">
             <!-- Top Header (Search & Actions) -->
             <header class="top-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <form method="GET" action="{{ route('user.index') }}"
                     style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
                     @if (request('role'))

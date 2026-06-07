@@ -272,6 +272,212 @@
         </div>
       </main>
     </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // ============================================================
+        // 1. BAR CHART — Dynamic period switching via AJAX
+        // ============================================================
+        const periodSelector = document.getElementById('periodSelector');
+        const barChartContainer = document.querySelector('.bar-chart-container');
+
+        if (periodSelector && barChartContainer) {
+            periodSelector.addEventListener('change', function() {
+                const period = this.value;
+                barChartContainer.classList.add('loading');
+
+                fetch(`{{ route('admin.chart.data') }}?period=${period}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        // Calculate the max for Y-axis scaling
+                        const maxCount = Math.max(
+                            data.open || 0,
+                            data.in_progress || 0,
+                            data.closed || 0,
+                            data.overdue || 0,
+                            1  // minimum 1 to avoid division by zero
+                        );
+
+                        // Update Y-axis labels
+                        const yAxisSpans = barChartContainer.querySelectorAll('.y-axis span');
+                        if (yAxisSpans.length >= 4) {
+                            yAxisSpans[0].textContent = maxCount;
+                            yAxisSpans[1].textContent = Math.round(maxCount * 0.75);
+                            yAxisSpans[2].textContent = Math.round(maxCount * 0.5);
+                            yAxisSpans[3].textContent = Math.round(maxCount * 0.25);
+                        }
+
+                        // Update bar heights
+                        const bars = barChartContainer.querySelectorAll('.bar');
+                        const values = [data.open, data.in_progress, data.closed, data.overdue];
+                        bars.forEach((bar, index) => {
+                            const val = values[index] || 0;
+                            bar.style.height = ((val / maxCount) * 100) + '%';
+                            bar.style.transition = 'height 0.5s ease';
+                        });
+
+                        barChartContainer.classList.remove('loading');
+                    })
+                    .catch(err => {
+                        console.error('Failed to load chart data:', err);
+                        barChartContainer.classList.remove('loading');
+                    });
+            });
+        }
+
+        // ============================================================
+        // 2. SLA LINE CHART — Chart.js rendering
+        // ============================================================
+        const slaCanvas = document.getElementById('slaChart');
+        const slaPeriodSelector = document.getElementById('slaPeriodSelector');
+        let slaChart = null;
+
+        // Initial data from server
+        const initialSlaData = @json($slaData);
+
+        function renderSlaChart(data) {
+            const ctx = slaCanvas.getContext('2d');
+
+            // Destroy previous chart instance if it exists
+            if (slaChart) {
+                slaChart.destroy();
+            }
+
+            // If no data, show empty state
+            if (!data || data.length === 0) {
+                slaChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['No technicians found'],
+                        datasets: [{
+                            label: 'No data',
+                            data: [0],
+                            backgroundColor: 'rgba(200,200,200,0.3)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: 'No SLA data available for this period',
+                                font: { size: 14 },
+                                color: '#94a3b8'
+                            }
+                        },
+                        scales: {
+                            y: { display: true, beginAtZero: true, max: 100 },
+                            x: { display: true }
+                        }
+                    }
+                });
+                return;
+            }
+
+            const labels = data.map(d => d.name);
+            const slaScores = data.map(d => d.sla_score);
+            const assigned = data.map(d => d.assigned);
+            const resolved = data.map(d => d.resolved);
+
+            slaChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'SLA Compliance (%)',
+                            data: slaScores,
+                            borderColor: '#0b57d0',
+                            backgroundColor: 'rgba(11, 87, 208, 0.1)',
+                            borderWidth: 2.5,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#0b57d0',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+                            tension: 0.3,
+                            fill: true,
+                            yAxisID: 'y'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'SLA Compliance (%)',
+                                font: { size: 12, weight: '600' },
+                                color: '#64748b'
+                            },
+                            ticks: {
+                                callback: val => val + '%',
+                                font: { size: 11 },
+                                color: '#94a3b8'
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.06)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { size: 11 },
+                                color: '#64748b',
+                                maxRotation: 45,
+                                minRotation: 0
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render the initial SLA chart
+        if (slaCanvas) {
+            renderSlaChart(initialSlaData);
+        }
+
+        // SLA period selector change handler
+        if (slaPeriodSelector && slaCanvas) {
+            slaPeriodSelector.addEventListener('change', function() {
+                const period = this.value;
+
+                fetch(`{{ route('admin.sla.data') }}?period=${period}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        renderSlaChart(data);
+                    })
+                    .catch(err => {
+                        console.error('Failed to load SLA data:', err);
+                    });
+            });
+        }
+
+    });
+    </script>
     
   </body>
 </html>

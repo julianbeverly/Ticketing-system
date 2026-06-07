@@ -19,7 +19,18 @@
         <button class="menu-toggle" id="menuToggle">
           <i class="fa-solid fa-bars"></i>
         </button>
-        <div style="flex: 1;"></div>
+        <form method="GET" action="{{ route('tech.own.report.details') }}" style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
+          @if(request('report_type')) <input type="hidden" name="report_type" value="{{ request('report_type') }}"> @endif
+          @if(request('daily_date')) <input type="hidden" name="daily_date" value="{{ request('daily_date') }}"> @endif
+          @if(request('weekly_date')) <input type="hidden" name="weekly_date" value="{{ request('weekly_date') }}"> @endif
+          @if(request('monthly_date')) <input type="hidden" name="monthly_date" value="{{ request('monthly_date') }}"> @endif
+          @if(request('start_date')) <input type="hidden" name="start_date" value="{{ request('start_date') }}"> @endif
+          @if(request('end_date')) <input type="hidden" name="end_date" value="{{ request('end_date') }}"> @endif
+          <div class="search-container" style="width: 100%; margin: 0;">
+            <i class="fa-solid fa-magnifying-glass" onclick="this.closest('form').submit();" style="cursor: pointer;"></i>
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search tickets..." />
+          </div>
+        </form>
         <div class="header-actions">
           
           <a href="{{ route('employee.profile') }}" class="icon-btn profile-btn">

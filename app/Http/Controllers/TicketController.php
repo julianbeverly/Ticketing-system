@@ -204,6 +204,14 @@ class TicketController extends Controller
             }
         }
 
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $ticketQuery->where(function($q) use ($search) {
+                $q->where('ticket_id', 'like', "%{$search}%")
+                  ->orWhere('subject', 'like', "%{$search}%");
+            });
+        }
+
         $tech->assigned_count   = (clone $ticketQuery)->count();
         $tech->inprogress_count = (clone $ticketQuery)->where('status', 'in_progress')->count();
         $tech->resolved_count   = (clone $ticketQuery)->where('status', 'resolved')->count();
@@ -252,6 +260,14 @@ class TicketController extends Controller
             if (request()->filled('end_date')) {
                 $query->whereDate('created_at', '<=', request()->end_date);
             }
+        }
+
+        if (request()->filled('search')) {
+            $search = request()->search;
+            $query->where(function($q) use ($search) {
+                $q->where('ticket_id', 'like', "%{$search}%")
+                  ->orWhere('subject', 'like', "%{$search}%");
+            });
         }
         // ────────────────────────────────────────────────────────────────────────
 
