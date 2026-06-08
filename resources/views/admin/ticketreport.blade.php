@@ -184,7 +184,7 @@
 
               
                     <div class="table-header-box">
-                        <h3>Activity Detail Log</h3>
+                        <!-- <h3>Activity Detail Log</h3> -->
 
                         <form action="{{ route('admin.ticketreport') }}" method="GET" class="tr-controls" id="filterForm">
                             @if(request('search'))

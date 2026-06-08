@@ -61,11 +61,11 @@
             <div class="submenu" style="display: {{ request()->routeIs('admin.ticketreport') || request()->routeIs('tech.reporting') || request()->routeIs('admin.techreport.details') ? 'block' : 'none' }}; padding-left: 1.5rem">
                 <a href="{{ route('admin.ticketreport') }}" class="nav-item {{ request()->routeIs('admin.ticketreport') ? 'active' : '' }}" style="padding: 0.5rem 1rem; font-size: 0.9rem">
                     <i class="fa-solid fa-chart-line"></i>
-                    <span>Ticketing Activity</span>
+                    <span>Ticket</span>
                 </a>
                 <a href="{{ route('tech.reporting') }}" class="nav-item {{ request()->routeIs('tech.reporting') || request()->routeIs('admin.techreport.details') ? 'active' : '' }}" style="padding: 0.5rem 1rem; font-size: 0.9rem">
                     <i class="fa-solid fa-user-gear"></i>
-                    <span>Technician Performance</span>
+                    <span>Technician</span>
                 </a>
             </div>
         </div>
