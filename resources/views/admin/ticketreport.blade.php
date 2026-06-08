@@ -156,7 +156,7 @@
    
                 <div class="page-header-title">
                     <div>
-                        <h1>Ticketing Activity</h1>
+                        <h1>Tickets</h1>
                     </div>
 
                     {{-- Export buttons — allow downloading the report data --}}
