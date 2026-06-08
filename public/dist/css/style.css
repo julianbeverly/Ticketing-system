@@ -91,7 +91,7 @@ html {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 25px;
-  color: #FBBF24;
+  color: #0057ff;
 }
 
 /* .forgt{
@@ -155,7 +155,7 @@ html {
 }
 
 .login-btn:hover {
-  background: #239aa6;
+  background: #239aa64;
 }
 
 /* Forgot text */
