@@ -250,12 +250,24 @@
                                     <option value="resolved"    {{ request('status') == 'resolved'    ? 'selected' : '' }}>Resolved</option>
                                     <option value="closed"      {{ request('status') == 'closed'      ? 'selected' : '' }}>Closed</option>
                                     <option value="overdue"     {{ request('status') == 'overdue'     ? 'selected' : '' }}>Overdue</option>
-                                    @if(isset($technicians) && $technicians->count() > 0)
+                                    <!-- @if(isset($technicians) && $technicians->count() > 0)
                                         <optgroup label="Technicians">
                                             @foreach($technicians as $tech)
                                                 <option value="tech_{{ $tech->id }}" {{ request('status') == 'tech_'.$tech->id ? 'selected' : '' }}>{{ $tech->name }}</option>
                                             @endforeach
                                         </optgroup>
+                                    @endif -->
+                                </select>
+                                <i class="fa-solid fa-chevron-down" style="position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; font-size: 0.7rem;"></i>
+                            </div>
+                            <div style="position: relative; display: inline-block;">
+                                <select name="status" onchange="document.getElementById('filterForm').submit()" style="padding: 0.5rem 2.5rem 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; appearance: none; transition: all 0.2s;">
+                                    @if(isset($technicians) && $technicians->count() > 0)
+                                        <option value="">Technicians</option>
+                                            @foreach($technicians as $tech)
+                                                <option value="tech_{{ $tech->id }}" {{ request('status') == 'tech_'.$tech->id ? 'selected' : '' }}>{{ $tech->name }}</option>
+                                            @endforeach
+                                     
                                     @endif
                                 </select>
                                 <i class="fa-solid fa-chevron-down" style="position: absolute; right: 0.8rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; font-size: 0.7rem;"></i>
