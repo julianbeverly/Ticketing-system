@@ -342,6 +342,14 @@ class TicketController extends Controller
                 $query->where('status', $request->status);
             }
         }
+        if ($request->filled('technician')) {
+            // Check if status filter is actually a technician filter (starts with tech_)
+            if (str_starts_with($request->technician, 'tech_')) {
+                $query->where('technician_id', str_replace('tech_', '', $request->technician));
+            } else {
+                $query->where('technician_id', $request->technician);
+            }
+        }
 
         // ── Date filtering based on report_type ──────────────────────────
         $reportType = $request->input('report_type', 'custom');
