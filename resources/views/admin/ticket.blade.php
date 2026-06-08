@@ -366,6 +366,111 @@
         </div>
     </div>
 
+    <script>
+      // Assignment Modal Logic
+      document.addEventListener('DOMContentLoaded', function() {
+          const assignModal = document.getElementById('assignModal');
+          const closeBtn = document.getElementById('closeModal');
+          const cancelBtn = document.getElementById('cancelBtn');
+          const assignForm = document.getElementById('assignForm');
+
+          if (!assignForm) {
+              console.error('Assign form not found');
+              return;
+          }
+
+          // Open Modal
+          document.querySelectorAll('.assign-btn-modal').forEach(btn => {
+              btn.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const ticketId = this.dataset.ticketId;
+                  const displayId = this.dataset.displayId;
+                  const subject = this.dataset.subject;
+
+                  document.getElementById('modalTicketId').innerText = displayId;
+                  document.getElementById('modalSubject').value = subject;
+                  document.getElementById('ticket_db_id').value = ticketId;
+                  
+                  // Set the form action dynamically
+                  assignForm.action = `/tickets/${ticketId}/assign`;
+                  
+                  assignModal.style.display = 'flex';
+              });
+          });
+
+          // Close Modal
+          const closeModal = () => {
+              assignModal.style.display = 'none';
+              assignForm.reset();
+              document.getElementById('customSlaContainer').style.display = 'none';
+              // Reset SLA options UI
+              document.querySelectorAll('.sla-option').forEach(opt => {
+                  const radio = opt.querySelector('input');
+                  if(radio && radio.value === 'default') {
+                      opt.style.background = '#eff6ff';
+                      opt.style.borderColor = '#4338ca';
+                      opt.style.color = '#4338ca';
+                      opt.style.fontWeight = 'bold';
+                  } else {
+                      opt.style.background = 'transparent';
+                      opt.style.borderColor = '#d1d5db';
+                      opt.style.color = '#6b7280';
+                      opt.style.fontWeight = 'normal';
+                  }
+              });
+          };
+
+          if (closeBtn) closeBtn.addEventListener('click', closeModal);
+          if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+          
+          window.addEventListener('click', (e) => {
+              if (e.target === assignModal) closeModal();
+          });
+
+          // SLA Option Toggle UI
+          document.querySelectorAll('.sla-option').forEach(option => {
+              option.addEventListener('click', function() {
+                  const radio = this.querySelector('input');
+                  if (!radio) return;
+                  
+                  radio.checked = true;
+                  const value = this.dataset.value;
+                  
+                  // Update UI for all options
+                  document.querySelectorAll('.sla-option').forEach(opt => {
+                      opt.style.background = 'transparent';
+                      opt.style.borderColor = '#d1d5db';
+                      opt.style.color = '#6b7280';
+                      opt.style.fontWeight = 'normal';
+                  });
+                  
+                  // Set active state for clicked one
+                  this.style.background = '#eff6ff';
+                  this.style.borderColor = '#4338ca';
+                  this.style.color = '#4338ca';
+                  this.style.fontWeight = 'bold';
+
+                  // Show/Hide Custom SLA input
+                  const customSlaContainer = document.getElementById('customSlaContainer');
+                  if (value === 'custom') {
+                      customSlaContainer.style.display = 'block';
+                      const input = customSlaContainer.querySelector('input');
+                      if (input) input.focus();
+                  } else {
+                      customSlaContainer.style.display = 'none';
+                  }
+              });
+          });
+
+          // Handle Form Submission
+          assignForm.addEventListener('submit', function(e) {
+              // Close modal immediately
+              assignModal.style.display = 'none';
+              // Allow natural submission so browser reload spinner turns
+          });
+      });
+    </script>
+
     
   </body>
 </html>
