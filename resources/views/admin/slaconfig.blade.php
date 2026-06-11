@@ -61,7 +61,7 @@
           <div class="sla-card">
             <div class="sla-card-header">
               <h2>Priority Resolution Windows</h2>
-              <i class="fa-solid fa-stopwatch" style="color: #2563eb; font-size: 1.2rem;"></i>
+              <i class="fa-solid fa-stopwatch" style="color: #111111; font-size: 1.2rem;"></i>
             </div>
 
             <!-- High Priority Row -->

@@ -339,7 +339,7 @@
               </div>
               <div style="display: flex; gap: 1rem;">
                   <button type="button" id="cancelResolveBtn" style="flex: 1; padding: 0.75rem; background: #f3f4f6; color: #374151; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
-                  <button type="submit" style="flex: 2; padding: 0.75rem; background: #003399; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Confirm & Mark Resolved</button>
+                  <button type="submit" style="flex: 2; padding: 0.75rem; background: #111111; color: #ffff !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Confirm & Mark Resolved</button>
               </div>
           </form>
       </div>

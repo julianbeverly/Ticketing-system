@@ -40,7 +40,7 @@
                       <button type="submit" class="sendlink-btn"><i class="fa-regular fa-paper-plane"></i> Send Link</button>
                  </form>
                  <div style="text-align: center; margin-top: 1rem;">
-                     <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #2563eb; text-decoration: none; font-weight: 600;">
+                     <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #111111; text-decoration: none; font-weight: 600;">
                          <i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i> Back to Login
                      </a>
                  </div>
@@ -56,7 +56,7 @@
             text: "{{ session('success') }}",
             icon: 'success',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#0b57d0'
+            confirmButtonColor: '#FBBF24'
         });
     </script>
     @endif
@@ -68,7 +68,7 @@
             text: "{{ session('error') }}",
             icon: 'error',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#0b57d0'
+            confirmButtonColor: '#FBBF24'
         });
     </script>
     @endif
@@ -80,7 +80,7 @@
             text: "{{ $errors->first() }}",
             icon: 'warning',
             confirmButtonText: 'OK',
-            confirmButtonColor: '#0b57d0'
+            confirmButtonColor: '#FBBF24'
         });
     </script>
     @endif

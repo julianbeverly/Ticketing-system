@@ -178,7 +178,7 @@
                             </select>
                         </form>
 
-                        <button id="addUserBtn" class="btn-create-ticket" style="border: none; cursor: pointer;" onclick="openModal()">
+                        <button id="addUserBtn" class="addusers" style="border: none; cursor: pointer;" onclick="openModal()">
                             <i class="fa-solid fa-user-plus"></i> Add Users
                         </button>
                     </div>
@@ -355,7 +355,7 @@
                 </div>
 
                 <!-- BUTTONS -->
-                <button type="submit" id="submitBtn">Create User</button>
+                <button type="submit" id="submitBtn" style="background-color: #FBBF24;">Create User</button>
                 <button type="button" id="closeBtn" onclick="closeModal()">Cancel</button>
 
             </div>
@@ -419,10 +419,10 @@
 
             <!-- BUTTONS -->
             <button type="submit"
-                style="background: #2563eb; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Save
+                style="background: #FBBF24; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">Save
                 Changes</button>
             <button type="button" onclick="closeEditModal()"
-                style="background: #6c757d; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; margin-left: 0.5rem;">Cancel</button>
+                style="background: red; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; margin-left: 0.5rem;">Cancel</button>
         </form>
     </div>
 

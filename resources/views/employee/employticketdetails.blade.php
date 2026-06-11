@@ -156,7 +156,7 @@
             <div class="dashboard-content ticket-details-view">
                <div class="ticket-details-main">
                   <div class="td-left-card">
-                      <div class="td-header"><span class="td-breadcrumb">MY TICKETS <i class="fa-solid fa-chevron-right"></i> <span class="td-id">ID: {{ $ticket->ticket_id }}</span></span></div>
+                      <div class="td-header"><span class="td-breadcrumb">MY TICKETS <i class="fa-solid fa-chevron-right"></i> <span class="td-id" style="color: #111111;">ID: {{ $ticket->ticket_id }}</span></span></div>
                       
                       <div class="td-attributes">
                          <div class="td-attr-row">

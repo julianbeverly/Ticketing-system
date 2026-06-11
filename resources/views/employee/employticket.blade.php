@@ -163,7 +163,7 @@
                 <tr>
                   <!-- Ticket ID column -->
                   <td>
-                    <span class="ticket-id">{{ $ticket->ticket_id }}</span>
+                    <span class="ticket-id" style="background-color: #ffff;">{{ $ticket->ticket_id }}</span>
                   </td>
 
                   <!-- Subject column with main subject and category sub-text -->

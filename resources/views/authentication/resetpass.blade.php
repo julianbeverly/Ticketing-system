@@ -36,7 +36,7 @@
                     <button type="submit" class="reset-btn">Submit</button>
                 </form>
                 <div style="text-align: center; margin-top: 1rem;">
-                    <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #2563eb; text-decoration: none; font-weight: 600;">
+                    <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #111111; text-decoration: none; font-weight: 600;">
                         <i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i> Back to Login
                     </a>
                 </div>

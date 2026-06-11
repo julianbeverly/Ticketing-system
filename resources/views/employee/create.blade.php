@@ -59,7 +59,7 @@
               >TICKETS MANAGEMENT</a
             >
             &gt;
-            <span style="color: #0b57d0; font-weight: 600"
+            <span style="color: #111111; font-weight: 600"
               >CREATE NEW TICKET</span
             >
           </div>
@@ -205,7 +205,7 @@
               <!-- Action Buttons -->
               <div class="form-actions" style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
                 <button type="button" class="btn-cancel" onclick="window.history.back()" style="background: none; border: none; color: #6b7280; font-weight: 600; cursor: pointer;">Cancel</button>
-                <button type="submit" class="btn-submit" id="submitBtn" style="width: auto; padding: 0.8rem 2rem; background: #0b57d0; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                <button type="submit" class="btn-submit" id="submitBtn" style="width: auto; padding: 0.8rem 2rem; background: #111111; color: #ffff !important; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
                   Submit Ticket <i class="fa-solid fa-paper-plane"></i>
                 </button>
               </div>

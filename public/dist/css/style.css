@@ -52,6 +52,7 @@ html {
   padding: 2rem;
   gap: 2rem;
   align-items: center;
+  background-color: #ffffff;
 }
 
 .sidebar {
@@ -91,7 +92,7 @@ html {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 25px;
-  color: #0057ff;
+  color: #FBBF24;
 }
 
 /* .forgt{
@@ -135,14 +136,14 @@ html {
 }
 
 .input-group input:focus {
-  border-color: #2bb3c0;
+  border-color: #FBBF24;
 }
 
 /* Button */
 .login-btn {
   width: 100%;
   padding: 12px;
-  background: #0057ff;
+  background: #FBBF24;
 
   border: none;
   border-radius: 25px;
@@ -155,14 +156,14 @@ html {
 }
 
 .login-btn:hover {
-  background: #239aa64;
+  /* background: #239aa64; */
 }
 
 /* Forgot text */
 .forgot {
   margin-top: 15px;
   font-size: 12px;
-  color: #e74c3c;
+  color: #0057ff;
   cursor: pointer;
 }
 
@@ -264,7 +265,7 @@ html {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 25px;
-  color: #0057ff;
+  color: #FBBF24;
 }
 
 /* .forgt{
@@ -291,14 +292,14 @@ html {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 15px;
-  color: #111827;
+  color: #111111;
 }
 
 .info {
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 25px;
-  color: #4b5563;
+  color: #111111;
 }
 
 
@@ -328,14 +329,14 @@ html {
 
 
 .otp-inputs input:focus {
-  border-color: #2bb3c0;
+  border-color: #FBBF24;
   /*user can know wch field is active*/
 }
 
 .btn {
   width: 100%;
   padding: 12px;
-  background: #0057ff;
+  background: #FBBF24;
 
   border: none;
   border-radius: 25px;
@@ -348,7 +349,7 @@ html {
 }
 
 .btn:hover {
-  background: #239aa6;
+  /* background: #239aa6; */
 }
 
 .divider {
@@ -367,13 +368,13 @@ html {
 
 .resend-text {
   font-size: 14px;
-  color: #555;
+  color: #0057ff;
 }
 
 .resend-btn {
   background: none;
   border: none;
-  color: #0057ff;
+  color: #FBBF24;
   cursor: pointer;
   padding: 0;
   font-size: 14px;
@@ -515,7 +516,7 @@ html {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 25px;
-  color: #0057ff;
+  color: #FBBF24;
 }
 
 .forgt {
@@ -578,18 +579,18 @@ html {
   /* space for icon */
   border-radius: 6px;
   outline: none;
-  transition: 0.3s;
+  transition: 0.3s;   
 }
 
 /* focus effect */
 .input-email input:focus {
-  border-color: #0057ff;
+  border-color: #FBBF24;
 }
 
 .sendlink-btn {
   width: 100%;
   padding: 12px;
-  background: #0057ff;
+  background: #FBBF24;
 
   color: #fff;
   font-weight: bold;
@@ -600,7 +601,7 @@ html {
 }
 
 .sendlink-btn:hover {
-  background: #239aa6;
+  /* background: #239aa6; */
 }
 
 .sendlink-btn i {
@@ -734,7 +735,7 @@ html {
 .reset-btn {
   width: 100%;
   padding: 12px;
-  background: #0057ff;
+  background: #FBBF24;
 
   border: none;
   border-radius: 25px;
@@ -747,7 +748,7 @@ html {
 }
 
 .reset-btn:hover {
-  background: #239aa6;
+  /* background: #239aa6; */
 }
 
 @media (max-width: 768px) {
@@ -822,7 +823,7 @@ html {
   --text-secondary: #6b7280;
   --text-blue: #1d4ed8;
 
-  --border-color: #e5e7eb;
+  /* --border-color: #e5e7eb; */
 }
 
 /* Ensure background maps nicely across entire canvas */
@@ -911,6 +912,7 @@ body {
   border-radius: 8px;
   font-weight: 500;
   transition: all 0.2s;
+  border: none !important;
 }
 
 .nav-item i {
@@ -1016,7 +1018,7 @@ body {
 }
 
 .profile-btn i {
-  color: #2563eb;
+  color: #111111;
   font-size: 1.5rem;
 }
 
@@ -1376,7 +1378,7 @@ svg {
 }
 
 .view-all {
-  color: #2563eb;
+  color: #111111;
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
@@ -1497,7 +1499,7 @@ svg {
 }
 
 .breadcrumb span {
-  color: #1d4ed8;
+  color: #111111;
   font-weight: 500;
 }
 
@@ -1522,7 +1524,7 @@ svg {
 }
 
 .btn-create-ticket {
-  background-color: #0b57d0;
+  background-color: #111111;
   color: #fff;
   border: none;
   padding: 0.6rem 1.25rem;
@@ -1536,7 +1538,7 @@ svg {
 }
 
 .btn-create-ticket:hover {
-  background-color: #0842a0;
+  /* background-color: #FBBF24; */
 }
 
 /* Filter Box */
@@ -1599,7 +1601,7 @@ svg {
 
 .ticket-id {
   background-color: #e0e7ff;
-  color: #1d4ed8;
+  color: #111111;
   padding: 0.35rem 0.6rem;
   border-radius: 6px;
   font-weight: 700;
@@ -1658,8 +1660,8 @@ svg {
 }
 
 .priority-high {
-  background-color: #fee2e2;
-  color: #dc2626;
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
 }
 
 .priority-low {
@@ -1668,8 +1670,8 @@ svg {
 }
 
 .priority-medium {
-  background-color: #e0e7ff;
-  color: #1d4ed8;
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
 }
 
 .ticket-status {
@@ -1683,27 +1685,31 @@ svg {
 }
 
 .status-inprogress {
-  background-color: #ffedd5;
-  color: #ea580c;
+ background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
 }
 
+
 .status-resolved {
-  background-color: #e0e7ff;
-  color: #1d4ed8;
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
 }
 
 .status-open {
   background-color: #f3f4f6;
   color: #4b5563;
 }
-
+.status-closed {
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
+}
 .ticket-date {
   font-size: 0.85rem;
   color: #6b7280;
   line-height: 1.4;
 }
 
-.ticket-actions {
+/* .ticket-actions {
   display: inline-block;
   padding: 0.35rem 0.9rem;
   background-color: #111111;
@@ -1724,7 +1730,7 @@ svg {
   color: #111111;
   border-color: #FBBF24;
   text-decoration: none;
-}
+} */
 
 /* Yellow variant action button (e.g. Edit) */
 .ticket-actions-yellow {
@@ -1750,29 +1756,14 @@ svg {
   text-decoration: none;
 }
 
-/* Shared utility: black pill button */
-.btn-action-black {
-  display: inline-block;
-  padding: 0.35rem 0.9rem;
-  background-color: #111111;
-  color: #ffffff !important;
-  font-weight: 600;
-  font-size: 0.8rem;
-  border-radius: 20px;
-  border: 2px solid #111111;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-  white-space: nowrap;
-}
 
-.btn-action-black:hover {
+
+/* .btn-action-black:hover {
   background-color: #FBBF24;
   color: #111111 !important;
   border-color: #FBBF24;
   text-decoration: none;
-}
+} */
 
 /* Shared utility: yellow pill button */
 .btn-action-yellow {
@@ -1822,40 +1813,25 @@ svg {
   text-decoration: none;
 }
 
-/* Contact-link / Edit button — yellow pill */
-.contact-link {
-  display: inline-block;
-  padding: 0.35rem 0.9rem;
-  background-color: #FBBF24 !important;
-  color: #111111 !important;
-  font-weight: 600;
-  font-size: 0.8rem;
-  border-radius: 20px;
-  border: 2px solid #FBBF24 !important;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-  white-space: nowrap;
-}
 
-.contact-link:hover {
+
+/* .contact-link:hover {
   background-color: #111111 !important;
   color: #ffffff !important;
   border-color: #111111 !important;
   text-decoration: none;
-}
+} */
 
 /* Ticket ID link styling */
 .ticket-id-link {
-  color: #1d4ed8;
+  color: #111111 !important;
   font-weight: 700;
   font-size: 0.85rem;
   text-decoration: none;
 }
 
 .ticket-id-link:hover {
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 /* Pagination */
@@ -1865,8 +1841,9 @@ svg {
   align-items: center;
   padding: 1rem 1.5rem;
   border-top: 1px solid #f3f4f6;
-  color: #6b7280;
+  color: #111111 !important;
   font-size: 0.85rem;
+  background-color: #ffff !important;
 }
 
 .pagination-controls {
@@ -2355,7 +2332,7 @@ svg {
   width: 48px;
   height: 48px;
   background-color: #e8f0fe;
-  color: #0b57d0;
+  color: #111111;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -3188,8 +3165,8 @@ svg {
 }
 
 .send-msg-btn {
-  background: #0b57d0;
-  color: #fff;
+  background: #111111;
+  color: #ffff !important;
   border: none;
   padding: 0.65rem 1.25rem;
   border-radius: 6px;
@@ -3203,7 +3180,7 @@ svg {
 }
 
 .send-msg-btn:hover {
-  background: #0842a0;
+  /* background: #0842a0; */
 }
 
 /* Base Modal Styling for Authentication Responses */
@@ -3598,6 +3575,19 @@ svg {
   border-bottom: 1px solid #f3f4f6;
   vertical-align: middle;
 }
+.addusers {
+  background-color: #111111;
+  color: #fff !important;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
 .admin-role {
   font-size: 0.75rem;
@@ -3648,8 +3638,8 @@ svg {
 }
 
 .status-active {
-  background-color: #e0e7ff;
-  color: #1d4ed8;
+  background-color: #f3f4f6 !important;
+  color: #4b5563 !important;
 }
 
 .ticket-date {
@@ -3658,6 +3648,38 @@ svg {
   line-height: 1.4;
 }
 
+/* Contact-link / Edit button — yellow pill */
+.contact-link {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background-color: #FBBF24 !important;
+  color: #111111 !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  border: 2px solid #FBBF24 !important;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+/* Shared utility: black pill button */
+.btn-action-black {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background-color: #111111;
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  border: 2px solid #111111;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
 .user-actions {
   color: #111827;
   font-weight: 600;
@@ -3988,8 +4010,8 @@ svg {
 }
 
 .btn-save {
-  background-color: #0b57d0;
-  color: white;
+  background-color: #111111;
+  color: #ffff !important;
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
@@ -4154,7 +4176,32 @@ svg {
   color: #666;
   margin-bottom: 10px;
 }
-
+.newtype {
+    background-color: #111111;
+  color: #fff !important;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.newcategory {
+  background-color: #111111;
+  color: #fff !important;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 /* Table row */
 .row {
   background: #fff;
@@ -4391,6 +4438,14 @@ svg {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
+}
+.ticket-actions{
+  background-color: #111111 !important;   
+  border-radius: 20px; 
+  border: 2px solid #111111; 
+  /* font-weight: 600; 
+  font-size: 0.8rem;  */
+  text-align: center;
 }
 
 .btn-export {
@@ -5012,9 +5067,10 @@ svg {
 
 /* Active tab styling - blue text with white background */
 .dent-tab.active {
-  color: #1d4ed8;
+  color: #FBBF24;
   background-color: #fff;
-  border-bottom: 2px solid #1d4ed8;
+  border: 2px solid #111111;
+  border-radius: 10px;
 }
 
 /* -------- Data Table Card -------- */
@@ -5299,8 +5355,8 @@ svg {
 
 /* Create button styling - solid blue with white text */
 .dent-create-btn {
-  background-color: #0b57d0;
-  color: #fff;
+  background-color: #111111;
+  color: #ffff !important;
   border: none;
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
@@ -5314,9 +5370,9 @@ svg {
 }
 
 /* Hover darkens the create button */
-.dent-create-btn:hover {
+/* .dent-create-btn:hover {
   background-color: #0842a0;
-}
+} */
 
 /* Arrow icon inside the create button */
 .dent-create-btn i {

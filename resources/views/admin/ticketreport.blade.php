@@ -344,7 +344,7 @@
                                     </td>
                                     <td class="action-col">
                                         <a href="{{ route('admin.tickets.details', $ticket->id) }}" class="ticket-actions">
-                                            View<br />More
+                                            View More
                                             <!-- <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem; margin-left: 4px;"></i> -->
                                         </a>
                                     </td>

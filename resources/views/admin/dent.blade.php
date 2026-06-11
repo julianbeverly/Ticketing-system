@@ -180,11 +180,11 @@
                         <h1 id="dent-page-title">{{ request('tab') === 'categories' ? 'Incident Configuration' : 'Incident Management' }}</h1>
                     </div>
                     {{-- if category tab is active hide add type button else show add type --}}
-                    <button id="dent-add-type-btn" class="btn-create-ticket" style="text-decoration: none; display: {{ request('tab') === 'categories' ? 'none' : 'flex' }};">
+                    <button id="dent-add-type-btn" class="newtype" style="text-decoration: none; display: {{ request('tab') === 'categories' ? 'none' : 'flex' }};">
                         <i class="fa-solid fa-plus"></i>Add New Type
                     </button>
                    
-                    <button id="dent-add-category-btn" class="btn-create-ticket" style="text-decoration: none; display: {{ request('tab') === 'categories' ? 'flex' : 'none' }};">
+                    <button id="dent-add-category-btn" class="newcategory" style="text-decoration: none; display: {{ request('tab') === 'categories' ? 'flex' : 'none' }};">
                         <i class="fa-solid fa-plus"></i>Add New Category
                     </button>
                 </div>

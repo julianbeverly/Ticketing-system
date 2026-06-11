@@ -36,7 +36,7 @@
         }
         .ticket-id-link {
             font-weight: 600;
-            color: #2563eb;
+            color: #111111;
             text-decoration: none;
         }
         .action-col {

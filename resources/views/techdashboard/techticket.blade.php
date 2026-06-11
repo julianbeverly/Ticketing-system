@@ -16,10 +16,10 @@
       line-height: 1.5;
     }
     .view-more-btn {
-      background-color: #095ce4ff;
+      background-color: #111111;
       color: #ffffff !important;
       padding: 10px 20px;
-      border-radius: 8px;
+      border-radius: 20px;
       font-weight: 800;
       text-decoration: none;
       display: inline-block;
@@ -30,8 +30,8 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
     .view-more-btn:hover {
-      background-color: #0842a0;
-      transform: translateY(-1px);
+      /* background-color: #0842a0;
+      transform: translateY(-1px); */
     }
     .tickets-table th {
       white-space: nowrap;
@@ -160,7 +160,7 @@
               @forelse($tickets as $ticket)
               <tr>
                 <td>
-                  <div style="background: #e0e7ff; color: #4338ca; padding: 0.5rem; border-radius: 4px; font-weight: bold; text-align: center; width: 60px;">
+                  <div style="background: ; color: #111111; padding: 0.5rem; border-radius: 4px; font-weight: bold; text-align: center; width: 60px;">
                     {{ str_replace('-', "- ", $ticket->ticket_id) }}
                   </div>
                 </td>

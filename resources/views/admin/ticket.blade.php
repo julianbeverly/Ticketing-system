@@ -217,7 +217,7 @@
                 @forelse($tickets as $ticket)
                 <tr>
                   <td>
-                    <div style="background: #e0e7ff; color: #4338ca; padding: 0.5rem; border-radius: 4px; font-weight: bold; text-align: center; width: 60px;">
+                    <div style="background: ; color: ; padding: 0.5rem; border-radius: 4px; font-weight: bold; text-align: center; width: 60px;">
                       {{ str_replace('-', "- ", $ticket->ticket_id) }}
                     </div>
                   </td>
@@ -227,13 +227,13 @@
                   <td>
                     <div class="ticket-personnel" style="font-size: 0.9rem;">
                       <div style="margin-bottom: 2px;">
-                        <span style="color: #6b7280; font-weight: bold;">E:</span> 
-                        <span style="color: #374151;">{{ $ticket->user ? $ticket->user->name : 'Unknown' }}</span>
+                        <span style="color: #111111; font-weight: bold;">E:</span> 
+                        <span style="color: #111111;">{{ $ticket->user ? $ticket->user->name : 'Unknown' }}</span>
                       </div>
                       <div>
-                        <span style="color: #6b7280; font-weight: bold;">T:</span> 
+                        <span style="color: #111111; font-weight: bold;">T:</span> 
                         @if($ticket->technician)
-                          <span style="color: #374151;">{{ $ticket->technician->name }}</span>
+                          <span style="color: #111111;">{{ $ticket->technician->name }}</span>
                         @else
                           <span style="color: #ef4444;">Unassigned</span>
                         @endif
@@ -251,7 +251,7 @@
                   </td>
                   <td>
                     <div class="admin-actions-container">
-                      <button 
+                      <button style="background-color: #111111;   border-radius: 20px; border: 2px solid #111111;"
                         class="btn-action-sm btn-assign-blue assign-btn-modal" 
                         data-ticket-id="{{ $ticket->id }}"
                         data-display-id="{{ $ticket->ticket_id }}"
@@ -259,7 +259,7 @@
                       >
                         <i class="fa-solid fa-user-plus"></i> Assign
                       </button>
-                      <a href="{{ route('admin.tickets.details', $ticket->id) }}" class="btn-action-sm btn-view-light">
+                      <a href="{{ route('admin.tickets.details', $ticket->id) }}" class="btn-action-sm btn-view-light" style="background-color: #FBBF24 ;   border-radius: 20px; border: 1px solid #111111; color: #ffff">
                         </i> View More
                       </a>
                     </div>
@@ -295,7 +295,7 @@
             <div class="modal-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
                 <div>
                     <h2 style="margin: 0; font-size: 1.5rem; color: #111827; font-weight: bold; line-height: 1.2;">Ticket Assignment</h2>
-                    <p style="margin: 2px 0 0; color: #6b7280; font-size: 0.85rem;">Configuration for Ticket <span id="modalTicketId" style="font-weight: bold; color: #4338ca;"></span></p>
+                    <p style="margin: 2px 0 0; color: #6b7280; font-size: 0.85rem;">Configuration for Ticket <span id="modalTicketId" style="font-weight: bold; color: #111111;"></span></p>
                 </div>
                 <button id="closeModal" style="background: none; border: none; font-size: 1.75rem; cursor: pointer; color: #9ca3af; line-height: 1; padding: 0;">&times;</button>
             </div>
@@ -332,12 +332,12 @@
                 <div class="sla-box" style="margin-bottom: 1.5rem;">
                     <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #374151; margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em;">SLA Selection</label>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <div class="sla-option" data-value="default" style="flex: 1; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 1px solid #4338ca; border-radius: 6px; cursor: pointer; background: #eff6ff; color: #4338ca; font-weight: bold;">
-                            <input type="radio" name="sla_type" value="default" checked style="accent-color: #4338ca; width: 1.2rem; height: 1.2rem;">
+                        <div class="sla-option" data-value="default" style="flex: 1; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 1px solid #111111; border-radius: 6px; cursor: pointer; background: #eff6ff; color: #4338ca; font-weight: bold;">
+                            <input type="radio" name="sla_type" value="default" checked style="accent-color: #111111; width: 1.2rem; height: 1.2rem;">
                             Default SLA
                         </div>
                         <div class="sla-option" data-value="custom" style="flex: 1; display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; color: #6b7280;">
-                            <input type="radio" name="sla_type" value="custom" style="accent-color: #4338ca; width: 1.2rem; height: 1.2rem;">
+                            <input type="radio" name="sla_type" value="custom" style="accent-color: #111111; width: 1.2rem; height: 1.2rem;">
                             Custom SLA
                         </div>
                     </div>
@@ -360,7 +360,7 @@
                     </select>
                 </div>
 
-                <button type="submit" style="width: 100%; padding: 0.85rem; background: #003399; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 0.75rem; font-size: 1rem; transition: background 0.2s;">Confirm Assignment</button>
+                <button type="submit" style="width: 100%; padding: 0.85rem; background: #FBBF24; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 0.75rem; font-size: 1rem; transition: background 0.2s;">Confirm Assignment</button>
                 <button type="button" id="cancelBtn" style="width: 100%; padding: 0.85rem; background: #f3f4f6; color: #374151; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: background 0.2s;">Cancel and Reset</button>
             </form>
         </div>

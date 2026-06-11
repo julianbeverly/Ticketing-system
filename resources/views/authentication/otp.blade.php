@@ -29,7 +29,7 @@
 @endif
 
 @if(session('success'))
-    <p style="color:green;">{{ session('success') }}</p>
+    <p style="color:#1d4ed8;">{{ session('success') }}</p>
 @endif
 
 @if ($errors->any())
@@ -67,7 +67,7 @@
 </div>
           <div class="divider"></div>
           <div style="text-align: center; margin-top: 1rem;">
-              <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #2563eb; text-decoration: none; font-weight: 600;">
+              <a href="{{ route('login') }}" style="font-size: 0.85rem; color: #111111; text-decoration: none; font-weight: 600;">
                   <i class="fa-solid fa-arrow-left" style="margin-right: 4px;"></i> Back to Login
               </a>
           </div>
