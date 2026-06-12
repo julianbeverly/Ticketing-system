@@ -216,6 +216,7 @@ html {
   .input-label {
     font-size: 12px;
     margin-bottom: 5px;
+    margin-right: 70%;
   }
 
   /* Button */
