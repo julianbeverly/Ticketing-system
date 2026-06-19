@@ -241,6 +241,7 @@
                                             data-email="{{ $user->email }}" data-role="{{ $user->role }}"
                                             data-phone="{{ $user->phone }}" data-speciality="{{ $user->speciality }}"
                                             data-supname="{{ $user->supervisor_name }}" data-supemail="{{ $user->supervisor_email }}"
+                                            data-company="{{ $user->company_id }}" data-department="{{ $user->department_id }}"
                                             onclick="openEditModal(this)">Edit</button>
                                     </td>
                                     <td>
@@ -354,6 +355,22 @@
                     </select>
                 </div>
 
+                <!-- COMPANY -->
+                <select name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 1rem;">
+                    <option value="" selected disabled>Select Company</option>
+                    @foreach($companies as $company)
+                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                    @endforeach
+                </select>
+
+                <!-- DEPARTMENT -->
+                <select name="department_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="" selected disabled>Select Department</option>
+                    @foreach($departments as $department)
+                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    @endforeach
+                </select>
+
                 <!-- BUTTONS -->
                 <button type="submit" id="submitBtn" style="background-color: #FBBF24;">Create User</button>
                 <button type="button" id="closeBtn" onclick="closeModal()">Cancel</button>
@@ -416,6 +433,22 @@
                     <option value="hardware">Hardware</option>
                 </select>
             </div>
+
+            <!-- COMPANY (EDIT) -->
+            <select id="editCompany" name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="" disabled>Select Company</option>
+                @foreach($companies as $company)
+                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                @endforeach
+            </select>
+
+            <!-- DEPARTMENT (EDIT) -->
+            <select id="editDepartment" name="department_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="" disabled>Select Department</option>
+                @foreach($departments as $department)
+                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                @endforeach
+            </select>
 
             <!-- BUTTONS -->
             <button type="submit"
@@ -489,6 +522,8 @@
                 document.getElementById("editSpeciality").value = btn.dataset.speciality || '';
                 document.getElementById("editSupervisorName").value = btn.dataset.supname || '';
                 document.getElementById("editSupervisorEmail").value = btn.dataset.supemail || '';
+                document.getElementById("editCompany").value = btn.dataset.company || '';
+                document.getElementById("editDepartment").value = btn.dataset.department || '';
                 
                 toggleEditSupervisorFields(); // Show or hide supervisor fields appropriately
 

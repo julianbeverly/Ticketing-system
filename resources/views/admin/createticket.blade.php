@@ -193,6 +193,59 @@
         </div>
       </main>
     </div>
-    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const categorySelect = document.getElementById('category_id');
+        const typeSelect = document.getElementById('type_id');
+        const customTypeGroup = document.getElementById('custom_type_group');
+        const customTypeInput = document.getElementById('custom_type');
+        
+        // Save the original options
+        const allTypeOptions = Array.from(typeSelect.options);
+        
+        function filterTypes() {
+          const selectedCategoryId = categorySelect.value;
+          
+          // Clear current options
+          typeSelect.innerHTML = '';
+          
+          let hasVisibleOptions = false;
+          
+          // Add back the default "Select Type" and matching options
+          allTypeOptions.forEach(option => {
+            if (option.value === "" || option.value === "other" || option.dataset.category === selectedCategoryId) {
+              typeSelect.appendChild(option);
+              if (option.value !== "" && option.value !== "other") {
+                hasVisibleOptions = true;
+              }
+            }
+          });
+          
+          // Reset selection
+          typeSelect.value = "";
+          toggleCustomType();
+        }
+        
+        function toggleCustomType() {
+          if (typeSelect.value === 'other') {
+            customTypeGroup.style.display = 'block';
+            customTypeInput.setAttribute('required', 'required');
+          } else {
+            customTypeGroup.style.display = 'none';
+            customTypeInput.removeAttribute('required');
+            customTypeInput.value = '';
+          }
+        }
+        
+        categorySelect.addEventListener('change', filterTypes);
+        typeSelect.addEventListener('change', toggleCustomType);
+        
+        // Initial setup on page load
+        if(categorySelect.value) {
+          filterTypes();
+        }
+        toggleCustomType();
+      });
+    </script>
   </body>
 </html>

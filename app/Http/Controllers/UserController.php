@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Company;
+use App\Models\Department;
 use App\Mail\NewUserCredentialsMail;
 
 class UserController extends Controller
@@ -29,8 +31,10 @@ class UserController extends Controller
         }
 
         $users = $query->paginate(10)->withQueryString();
+        $companies = Company::all();
+        $departments = Department::all();
 
-        return view('admin.usermanagement', compact('users'));
+        return view('admin.usermanagement', compact('users', 'companies', 'departments'));
     }
 
     public function store(Request $request)
@@ -43,27 +47,36 @@ class UserController extends Controller
             'speciality' => 'nullable|string',
             'supervisor_name' => 'nullable|string|max:255',
             'supervisor_email' => 'nullable|email',
+            'company_id' => 'required|exists:companies,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
 
         $plainPassword = Str::random(10); // generate random password
+
+        $speciality = $request->role === 'technician' ? $request->speciality : null;
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
             'phone' => $request->phone,
-            'speciality' => $request->speciality,
+            'speciality' => $speciality,
             'password' => Hash::make($plainPassword),
             'supervisor_name' => $request->supervisor_name,
             'supervisor_email' => $request->supervisor_email,
+            'company_id' => $request->company_id,
+            'department_id' => $request->department_id,
         ]);
 
-    Mail::to($user->email)->send(
-        new NewUserCredentialsMail($user, $plainPassword)
-    );
-
-    return redirect()->back()->with('success', 'User Added Successfully and email sent');
- }
+        try {
+            Mail::to($user->email)->send(
+                new NewUserCredentialsMail($user, $plainPassword)
+            );
+            return redirect()->back()->with('success', 'User Added Successfully and email sent');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('success', 'User Added Successfully (email could not be sent: ' . $e->getMessage() . ')');
+        }
+    }
     public function edit(User $user)
     {
        return view('admin.edit', ['user' => $user]);
@@ -79,16 +92,22 @@ class UserController extends Controller
             'speciality' => 'nullable|string',
             'supervisor_name' => 'nullable|string|max:255',
             'supervisor_email' => 'nullable|email',
+            'company_id' => 'required|exists:companies,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
+
+        $speciality = $request->role === 'technician' ? $request->speciality : null;
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
             'phone' => $request->phone,
-            'speciality' => $request->speciality,
+            'speciality' => $speciality,
             'supervisor_name' => $request->supervisor_name,
             'supervisor_email' => $request->supervisor_email,
+            'company_id' => $request->company_id,
+            'department_id' => $request->department_id,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User Updated Successfully');

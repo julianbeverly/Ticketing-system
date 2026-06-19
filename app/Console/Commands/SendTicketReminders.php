@@ -55,8 +55,12 @@ class SendTicketReminders extends Command
                     
                     $admins = \App\Models\User::where('role', 'admin')->pluck('email')->toArray();
                     $employeeEmail = $ticket->user->email;
-                    
+                    // Get supervisor email from the assigned technician, if any
+                    $supervisorEmail = $ticket->technician->supervisor_email ?? null;
                     $ccEmails = array_merge($admins, [$employeeEmail]);
+                    if ($supervisorEmail) {
+                        $ccEmails[] = $supervisorEmail;
+                    }
 
                     Mail::to($ticket->technician->email)
                         ->cc($ccEmails)

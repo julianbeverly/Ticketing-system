@@ -29,6 +29,8 @@ class User extends Authenticatable
         'last_seen_at',
         'supervisor_name',
         'supervisor_email',
+        'company_id',
+        'department_id',
     ];
 
     /**
@@ -71,5 +73,15 @@ class User extends Authenticatable
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 }

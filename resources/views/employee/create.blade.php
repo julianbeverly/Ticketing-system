@@ -219,6 +219,73 @@
     </div>
 
     <!-- JavaScript to filter types by selected category and show file names -->
-    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const categorySelect = document.getElementById('category_id');
+        const typeSelect = document.getElementById('type_id');
+        const customTypeGroup = document.getElementById('custom_type_group');
+        const customTypeInput = document.getElementById('custom_type');
+        
+        // Save the original options
+        const allTypeOptions = Array.from(typeSelect.options);
+        
+        function filterTypes() {
+          const selectedCategoryId = categorySelect.value;
+          
+          // Clear current options
+          typeSelect.innerHTML = '';
+          
+          // Add back the default "Select Type" and matching options
+          allTypeOptions.forEach(option => {
+            if (option.value === "" || option.value === "other" || option.dataset.category === selectedCategoryId) {
+              typeSelect.appendChild(option);
+            }
+          });
+          
+          // Try to preserve the old selection if it's still valid
+          let oldVal = "{{ old('type_id') }}";
+          if (oldVal && Array.from(typeSelect.options).some(opt => opt.value === oldVal)) {
+            typeSelect.value = oldVal;
+          } else if (typeSelect.value !== "other") {
+            typeSelect.value = "";
+          }
+          toggleCustomType();
+        }
+        
+        function toggleCustomType() {
+          if (typeSelect.value === 'other') {
+            customTypeGroup.style.display = 'block';
+            customTypeInput.setAttribute('required', 'required');
+          } else {
+            customTypeGroup.style.display = 'none';
+            customTypeInput.removeAttribute('required');
+            customTypeInput.value = '';
+          }
+        }
+        
+        categorySelect.addEventListener('change', filterTypes);
+        typeSelect.addEventListener('change', toggleCustomType);
+        
+        // Initial setup on page load
+        if(categorySelect.value) {
+          filterTypes();
+        }
+        toggleCustomType();
+
+        // File upload UI logic
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        if (fileInput && fileList) {
+          fileInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+              let names = Array.from(this.files).map(f => f.name).join(', ');
+              fileList.textContent = 'Selected: ' + names;
+            } else {
+              fileList.textContent = '';
+            }
+          });
+        }
+      });
+    </script>
 </body>
 </html>

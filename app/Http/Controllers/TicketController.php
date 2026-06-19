@@ -515,6 +515,8 @@ class TicketController extends Controller
         return view('admin.dent', compact('categories', 'types'));
     }
 
+
+
     // EMPLOYEE METHODS
 
     /**

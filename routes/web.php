@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\DentController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DepartmentController;
 
 /****************** Authentication Routes ******************/
 
@@ -52,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/assigntech/{ticket}', [TicketController::class, 'assignTech'])->name('admin.assign');
         Route::post('/tickets/{ticket}/assign', [TicketController::class, 'assignTechnician'])->name('admin.tickets.assign');
         Route::get('/dent', [TicketController::class, 'dent'])->name('admin.incidents');
+        Route::get('/dept', [DepartmentController::class, 'index'])->name('admin.dept');
         
         // Settings & SLA
         Route::get('/slaconfig', [TicketController::class, 'slaConfig'])->name('admin.slaconfig');
@@ -80,6 +83,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/types', [TypeController::class, 'store'])->name('types.store');
         Route::put('/types/{type}', [TypeController::class, 'update'])->name('types.update');
         Route::delete('/types/{type}', [TypeController::class, 'destroy'])->name('types.destroy');
+        
+        // Department Settings (Companies & Departments)
+        Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
+        Route::put('/companies/{company}', [CompanyController::class, 'update'])->name('companies.update');
+        Route::delete('/companies/{company}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+        Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
+        Route::put('/departments/{department}', [DepartmentController::class, 'update'])->name('departments.update');
+        Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
     });
 
     // ==========================================
@@ -131,18 +142,34 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat/online-count', [ChatController::class, 'getOnlineCount'])->name('chat.online');
 });
 
-// use App\Models\User;
+use App\Models\User;
+use App\Models\Company;
+use App\Models\Department;
 
 // Route::get('/create-admin', function () {
-//     User::create([
-//         'name' => 'Admin',
-//         'email' => 'admin@gmail.com',
-//         'password' => bcrypt('admin123'),
-//         'role' => 'admin',
-//         'speciality' => 'IT',
-//         'status' => 'active',
-//         'phone' => '670000000'
-//     ]);
+//     $company = Company::firstOrCreate(
+//         ['name' => 'Default Company'],
+//         ['description' => 'Automatically created default company']
+//     );
 
-//     return "Admin created";
+//     $department = Department::firstOrCreate(
+//         ['name' => 'IT Department'],
+//         ['company_id' => $company->id]
+//     );
+
+//     $user = User::firstOrCreate(
+//         ['email' => 'admin@gmail.com'],
+//         [
+//             'name' => 'Admin',
+//             'password' => bcrypt('admin123'),
+//             'role' => 'admin',
+//             'speciality' => 'IT',
+//             'status' => 'active',
+//             'phone' => '670000000',
+//             'company_id' => $company->id,
+//             'department_id' => $department->id
+//         ]
+//     );
+
+//     return "Admin created successfully!";
 // });

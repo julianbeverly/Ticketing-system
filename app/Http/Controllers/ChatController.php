@@ -48,8 +48,7 @@ class ChatController extends Controller
 
         return response()->json([
             'messages' => $messages,
-            // 'test' => 'Hello, World!',
-            'online_count' => $this->getOnlineCountRaw()
+            'online_count' => $this->getOnlineCountForTicket($ticket)
         ]);
     }
 
@@ -141,12 +140,35 @@ public function sendMessage(Request $request, Ticket $ticket)
     /**
      * Get the count of online users (active in the last 5 minutes).
      */
-    public function getOnlineCount()
+    public function getOnlineCount(Request $request)
     {
+        // If a ticket_id is provided, scope count to that ticket's participants
+        if ($request->filled('ticket_id')) {
+            $ticket = Ticket::find($request->ticket_id);
+            if ($ticket) {
+                return response()->json(['online_count' => $this->getOnlineCountForTicket($ticket)]);
+            }
+        }
         return response()->json(['online_count' => $this->getOnlineCountRaw()]);
     }
 
-    private function getOnlineCountRaw()
+    /**
+     * Count only participants of a specific ticket who are online.
+     * Participants = the employee who owns the ticket + the assigned technician.
+     */
+    private function getOnlineCountForTicket(Ticket $ticket): int
+    {
+        $participantIds = array_filter([
+            $ticket->user_id,
+            $ticket->technician_id,
+        ]);
+
+        return User::whereIn('id', $participantIds)
+            ->where('last_seen_at', '>', now()->subMinutes(5))
+            ->count();
+    }
+
+    private function getOnlineCountRaw(): int
     {
         return User::where('last_seen_at', '>', now()->subMinutes(5))->count();
     }

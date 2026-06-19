@@ -300,7 +300,116 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("deleteOverlay").style.display = "block";
   document.getElementById("deleteModal").style.display = "block";
- }
+  }
+  // ================================================================
+  // DEPARTMENT / COMPANY TAB SWITCHING & MODALS (dept.blade.php)
+  // ================================================================
+
+  // --- Tab Switching Logic ---
+  const deptTabCompanies = document.getElementById("dept-tab-companies");
+  const deptTabDepartments = document.getElementById("dept-tab-departments");
+
+  const deptCompaniesView = document.getElementById("dept-companies-view");
+  const deptDepartmentsView = document.getElementById("dept-departments-view");
+
+  const deptAddCompanyBtn = document.getElementById("dept-add-company-btn");
+  const deptAddDepartmentBtn = document.getElementById("dept-add-department-btn");
+
+  const deptPageTitle = document.getElementById("dept-page-title");
+
+  if (deptTabCompanies && deptTabDepartments) {
+    deptTabCompanies.addEventListener("click", () => {
+      deptTabCompanies.classList.add("active");
+      deptTabDepartments.classList.remove("active");
+
+      deptCompaniesView.style.display = "block";
+      deptDepartmentsView.style.display = "none";
+
+      deptAddCompanyBtn.style.display = "flex";
+      deptAddDepartmentBtn.style.display = "none";
+
+      deptPageTitle.textContent = "Company";
+
+      const tabInput = document.getElementById("active-tab-input");
+      if (tabInput) tabInput.value = "companies";
+      const url = new URL(window.location);
+      url.searchParams.set("tab", "companies");
+      window.history.replaceState({}, "", url);
+    });
+
+    deptTabDepartments.addEventListener("click", () => {
+      deptTabDepartments.classList.add("active");
+      deptTabCompanies.classList.remove("active");
+
+      deptDepartmentsView.style.display = "block";
+      deptCompaniesView.style.display = "none";
+
+      deptAddDepartmentBtn.style.display = "flex";
+      deptAddCompanyBtn.style.display = "none";
+
+      deptPageTitle.textContent = "Department";
+
+      const tabInput = document.getElementById("active-tab-input");
+      if (tabInput) tabInput.value = "departments";
+      const url = new URL(window.location);
+      url.searchParams.set("tab", "departments");
+      window.history.replaceState({}, "", url);
+    });
+  }
+
+  // --- Add New Department Modal Logic ---
+  const deptDepartmentModal = document.getElementById("dept-department-modal");
+  const deptCloseDepartmentModal = document.getElementById("dept-close-department-modal");
+
+  if (deptAddDepartmentBtn && deptDepartmentModal) {
+    deptAddDepartmentBtn.addEventListener("click", () => {
+      deptDepartmentModal.classList.add("show");
+      deptDepartmentModal.style.display = "flex";
+    });
+  }
+
+  if (deptCloseDepartmentModal && deptDepartmentModal) {
+    deptCloseDepartmentModal.addEventListener("click", () => {
+      deptDepartmentModal.classList.remove("show");
+      deptDepartmentModal.style.display = "none";
+    });
+  }
+
+  if (deptDepartmentModal) {
+    deptDepartmentModal.addEventListener("click", (e) => {
+      if (e.target === deptDepartmentModal) {
+        deptDepartmentModal.classList.remove("show");
+        deptDepartmentModal.style.display = "none";
+      }
+    });
+  }
+
+  // --- Add New Company Modal Logic ---
+  const deptCompanyModal = document.getElementById("dept-company-modal");
+  const deptCloseCompanyModal = document.getElementById("dept-close-company-modal");
+
+  if (deptAddCompanyBtn && deptCompanyModal) {
+    deptAddCompanyBtn.addEventListener("click", () => {
+      deptCompanyModal.classList.add("show");
+      deptCompanyModal.style.display = "flex";
+    });
+  }
+
+  if (deptCloseCompanyModal && deptCompanyModal) {
+    deptCloseCompanyModal.addEventListener("click", () => {
+      deptCompanyModal.classList.remove("show");
+      deptCompanyModal.style.display = "none";
+    });
+  }
+
+  if (deptCompanyModal) {
+    deptCompanyModal.addEventListener("click", (e) => {
+      if (e.target === deptCompanyModal) {
+        deptCompanyModal.classList.remove("show");
+        deptCompanyModal.style.display = "none";
+      }
+    });
+  }
 
 });
 

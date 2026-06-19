@@ -137,9 +137,9 @@
 
             
             <header class="top-header">
-        <button class="menu-toggle" id="menuToggle">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+                <button class="menu-toggle" id="menuToggle">
+                  <i class="fa-solid fa-bars"></i>
+                 </button>
                 <form method="GET" action="{{ route('admin.incidents') }}" style="flex: 1; max-width: 500px; display: flex; align-items: center; margin: 0 1.5rem;">
                     <input type="hidden" name="tab" id="active-tab-input" value="{{ request('tab', 'types') }}">
                     <div class="search-container" style="width: 100%; margin: 0;">
@@ -503,7 +503,7 @@
             });
         }
     });
-    </script>
+    </script> 
 
 </body>
 

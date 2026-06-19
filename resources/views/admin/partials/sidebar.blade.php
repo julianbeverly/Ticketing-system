@@ -46,6 +46,10 @@
             <i class="fa-solid fa-shield-halved"></i>
             <span>Incident</span>
         </a>
+        <a href="{{ route('admin.dept') }}" class="nav-item {{ request()->routeIs('admin.dept') ? 'active' : '' }}">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Department</span>
+        </a>
 
         <div class="nav-group-title">Reports & Analytics</div>
         <div class="nav-item-dropdown">

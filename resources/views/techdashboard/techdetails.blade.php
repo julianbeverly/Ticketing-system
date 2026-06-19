@@ -258,37 +258,40 @@
             </div>
 
             @if($ticket->due_at && !in_array($ticket->status, ['resolved', 'closed']))
-            <script>
-                (function() {
-                    const dueDate = new Date("{{ $ticket->due_at->toIso8601String() }}").getTime();
-                    const countdownEl = document.getElementById('slaCountdown');
-
-                    const timer = setInterval(function() {
-                        const now = new Date().getTime();
-                        const distance = dueDate - now;
-
-                        if (distance < 0) {
-                            clearInterval(timer);
-                            countdownEl.innerHTML = "EXPIRED";
-                            countdownEl.style.color = "#dc2626";
-                            return;
-                        }
-
-                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        let display = "";
-                        if (days > 0) display += days + "d ";
-                        display += (hours < 10 ? "0" + hours : hours) + "h "
-                                + (minutes < 10 ? "0" + minutes : minutes) + "m "
-                                + (seconds < 10 ? "0" + seconds : seconds) + "s";
-
-                        countdownEl.innerHTML = display;
-                    }, 1000);
-                })();
-            </script>
+        <script>
+    (function() {
+        const countdownEl = document.getElementById('slaCountdown');
+        if (!countdownEl) return;
+        const dueDateString = "{{ $ticket->due_at ? $ticket->due_at->toIso8601String() : '' }}";
+        const dueTimestamp = Date.parse(dueDateString);
+        if (!dueDateString || isNaN(dueTimestamp)) {
+            countdownEl.innerHTML = "N/A";
+            countdownEl.style.color = "#6b7280"; // grey
+            return;
+        }
+        const dueDate = new Date(dueTimestamp);
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = dueDate - now;
+            if (distance < 0) {
+                clearInterval(timer);
+                countdownEl.innerHTML = "EXPIRED";
+                countdownEl.style.color = "#dc2626";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            let display = "";
+            if (days > 0) display += days + "d ";
+            display += (hours < 10 ? "0" + hours : hours) + "h " +
+                       (minutes < 10 ? "0" + minutes : minutes) + "m " +
+                       (seconds < 10 ? "0" + seconds : seconds) + "s";
+            countdownEl.innerHTML = display;
+        }, 1000);
+    })();
+</script>
             @endif
           </div>
 
