@@ -964,6 +964,12 @@ body {
   flex-direction: column;
   overflow-y: auto;
   background-color: var(--bg-main);
+  scrollbar-width: none; /* Firefox - hide scrollbar */
+}
+
+/* Chrome/Safari - hide scrollbar on main content */
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* Top Header Bar styling */
@@ -1577,6 +1583,10 @@ svg {
   border-radius: 12px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   overflow-x: auto;
+  scrollbar-width: none;
+}
+.tickets-card::-webkit-scrollbar {
+  display: none;
 }
 
 .tickets-table {
@@ -2024,12 +2034,9 @@ svg {
   }
 
   /* Table scroll */
-  .tickets-card {
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 10px;
-  }
-
+  .users-card { width: 100%; overflow-x: auto; background: white; border-radius: 12px; }
+  .tickets-card { width: 100%; overflow-x: auto; background: white; border-radius: 12px; scrollbar-width: none; }
+  .tickets-card::-webkit-scrollbar { display: none; }
   .tickets-table {
     min-width: 950px;
   }

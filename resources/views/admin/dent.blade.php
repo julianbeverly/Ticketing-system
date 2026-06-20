@@ -219,20 +219,21 @@
                                         {{ $type->category->name ?? 'None' }}
                                     </span>
                                 </td>
-                                <td>
-                                    <div class="action-btns">
-                                        <!-- Edit icon -->
+                                <td style="text-align: center;">
+                                    <div style="display: flex; gap: 6px; justify-content: center; align-items: center;">
                                         <button class="btn-icon btn-edit edit-type-btn"
                                             data-id="{{ $type->id }}" 
                                             data-name="{{ $type->name }}" 
-                                            data-category-id="{{ $type->category_id }}">
-                                            <i class="fa-solid fa-pen"></i>
+                                            data-category-id="{{ $type->category_id }}"
+                                            style="background: #FBBF24; color: #111111; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+                                            Edit
                                         </button>
                                         <form action="{{ route('types.destroy', $type) }}" method="POST" style="margin: 0;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn-icon btn-delete" onclick="confirmDelete(this, '{{ addslashes($type->name) }}')">
-                                                <i class="fa-solid fa-trash"></i>
+                                            <button type="button" class="btn-icon btn-delete" onclick="confirmDelete(this, '{{ addslashes($type->name) }}')"
+                                                style="background: #111111; color: #ffffff !important; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+                                                Delete
                                             </button>
                                         </form>
                                     </div>
@@ -270,19 +271,21 @@
                                 <td>
                                     <div style="color: #6b7280; font-size: 0.85rem;">{{ $category->description }}</div>
                                 </td>
-                                <td>
-                                    <div class="action-btns">
+                                <td style="text-align: center;">
+                                    <div style="display: flex; gap: 6px; justify-content: center; align-items: center;">
                                         <button class="btn-icon btn-edit edit-category-btn"
                                             data-id="{{ $category->id }}" 
                                             data-name="{{ $category->name }}"
-                                            data-description="{{ $category->description }}">
-                                            <i class="fa-solid fa-pen"></i>
+                                            data-description="{{ $category->description }}"
+                                            style="background: #FBBF24; color: #111111; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+                                            Edit
                                         </button>
                                         <form action="{{ route('categories.destroy', $category) }}" method="POST" style="margin: 0;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button" class="btn-icon btn-delete" onclick="confirmDelete(this, '{{ addslashes($category->name) }}')">
-                                                <i class="fa-solid fa-trash"></i>
+                                            <button type="button" class="btn-icon btn-delete" onclick="confirmDelete(this, '{{ addslashes($category->name) }}')"
+                                                style="background: #111111; color: #ffffff !important; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer;">
+                                                Delete
                                             </button>
                                         </form>
                                     </div>

@@ -36,6 +36,12 @@ class TicketController extends Controller
             $query->where('status', $request->status);
         }
 
+        if ($request->filled('company')) {
+            $query->whereHas('user', function($q) use ($request) {
+                $q->where('company_id', $request->company);
+            });
+        }
+
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function($q) use ($search) {
@@ -52,7 +58,10 @@ class TicketController extends Controller
         // Fetch all technicians for the assignment modal
         $technicians = User::where('role', 'technician')->get();
 
-        return view('admin.ticket', compact('tickets', 'technicians'));
+        // Fetch all companies for the company filter dropdown
+        $companies = \App\Models\Company::all();
+
+        return view('admin.ticket', compact('tickets', 'technicians', 'companies'));
     }
 
     /**

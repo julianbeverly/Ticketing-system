@@ -34,7 +34,14 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'company_id' => 'required|exists:companies,id',
-            'name' => 'required|string|max:255|unique:departments,name',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                \Illuminate\Validation\Rule::unique('departments')->where(function ($query) use ($request) {
+                    return $query->where('company_id', $request->company_id);
+                })
+            ],
         ]);
 
         Department::create($request->all());
@@ -46,7 +53,14 @@ class DepartmentController extends Controller
     {
         $request->validate([
             'company_id' => 'required|exists:companies,id',
-            'name' => 'required|string|max:255|unique:departments,name,' . $department->id,
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                \Illuminate\Validation\Rule::unique('departments')->where(function ($query) use ($request) {
+                    return $query->where('company_id', $request->company_id);
+                })->ignore($department->id)
+            ],
         ]);
 
         $department->update($request->all());

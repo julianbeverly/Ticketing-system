@@ -62,37 +62,30 @@
       }
       .tickets-table th {
         white-space: nowrap;
-        padding: 10px 8px; /* Reduced padding */
+        padding: 12px 16px;
         text-align: left;
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
       .tickets-table td {
-        padding: 10px 8px;
-        font-size: 0.85rem;
+        padding: 12px 16px;
+        font-size: 0.875rem;
       }
       .tickets-table th:last-child, .tickets-table td:last-child {
-        min-width: 100px;
         text-align: center;
-        padding-right: 15px;
+        padding-right: 16px;
       }
       .tickets-card {
         width: 100%;
-        overflow-x: auto; /* Prevent scrollbar */
+        overflow-x: auto;
         background: white;
         border-radius: 12px;
+        scrollbar-width: none;
       }
+      .tickets-card::-webkit-scrollbar { display: none; }
       .tickets-table {
         width: 100%;
-        table-layout: fixed; /* Force fixed layout to honor widths */
         border-collapse: collapse;
       }
-      .tickets-table th:nth-child(1), .tickets-table td:nth-child(1) { width: 80px; } /* ID */
-      .tickets-table th:nth-child(2), .tickets-table td:nth-child(2) { width: 160px; } /* Subject */
-      .tickets-table th:nth-child(3), .tickets-table td:nth-child(3) { width: 140px; } /* Personnel */
-      .tickets-table th:nth-child(4), .tickets-table td:nth-child(4) { width: 90px; } /* Priority */
-      .tickets-table th:nth-child(5), .tickets-table td:nth-child(5) { width: 100px; } /* Status */
-      .tickets-table th:nth-child(6), .tickets-table td:nth-child(6) { width: 100px; } /* Date */
-      .tickets-table th:nth-child(7), .tickets-table td:nth-child(7) { width: 120px; } /* Actions */
         /* Pagination Styling */
         .pagination-links nav {
             display: flex;
@@ -173,21 +166,24 @@
             </a>
           </div>
           
-          <div class="filter-section">
-            <!-- <span class="filter-label">FILTER</span> -->
-            <form action="{{ route('admin.tickets') }}" method="GET" id="statusFilterForm">
-              <div class="modern-select-wrapper" style="min-width: 200px; position: relative;">
-                <select name="status" onchange="this.form.submit()" class="modern-select" style="padding: 0.5rem 2.5rem 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; appearance: none; transition: all 0.2s;">
-                  <option value="">All Statuses</option>
-                  <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
-                  <option value="assigned" {{ request('status') == 'assigned' ? 'selected' : '' }}>Assigned</option>
-                  <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                  <option value="resolved" {{ request('status') == 'resolved' ? 'selected' : '' }}>Resolved</option>
-                  <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Closed</option>
-                  <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Overdue</option>
+          <div class="filter-section" style="padding: 0 0 1.5rem 0;">
+            <form action="{{ route('admin.tickets') }}" method="GET" id="statusFilterForm" style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                <select name="status" onchange="this.form.submit()" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; min-width: 180px;">
+                    <option value="">All Statuses</option>
+                    <option value="open" {{ request('status') == 'open' ? 'selected' : '' }}>Open</option>
+                    <option value="assigned" {{ request('status') == 'assigned' ? 'selected' : '' }}>Assigned</option>
+                    <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
+                    <option value="resolved" {{ request('status') == 'resolved' ? 'selected' : '' }}>Resolved</option>
+                    <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>Closed</option>
+                    <option value="overdue" {{ request('status') == 'overdue' ? 'selected' : '' }}>Overdue</option>
                 </select>
-                <!-- <i class="fa-solid fa-chevron-down" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #6b7280; font-size: 0.8rem;"></i> -->
-              </div>
+
+                <select name="company" onchange="this.form.submit()" style="padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem; font-weight: 600; color: #374151; background: #f9fafb; cursor: pointer; outline: none; min-width: 180px;">
+                    <option value="">All Companies</option>
+                    @foreach($companies as $company)
+                    <option value="{{ $company->id }}" {{ request('company') == $company->id ? 'selected' : '' }}>{{ $company->name }}</option>
+                    @endforeach
+                </select>
             </form>
           </div>
 

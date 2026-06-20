@@ -191,13 +191,15 @@
                     </div>
                 @endif
 
-                <div class="tickets-card">
-                    <table class="tickets-table">
+                <div class="users-card">
+                    <table class="users-table">
                         <!-- Table header containing column names -->
                         <thead>
                             <tr>
                                 <th>USER IDENTITY</th>
                                 <th>ROLE</th>
+                                <th>DEPARTMENT</th>
+                                <th>COMPANY</th>
                                 <th>SPECIALITY</th>
                                 <th>CONTACT</th>
                                 <th>STATUS</th>
@@ -217,6 +219,14 @@
 
                                     <td>
                                         <span>{{ $user->role }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{ $user->department ? $user->department->name : 'N/A' }}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{ $user->company ? $user->company->name : 'N/A' }}</span>
                                     </td>
 
                                     <td>
