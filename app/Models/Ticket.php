@@ -26,6 +26,7 @@ class Ticket extends Model
         'resolved_at',
         'rejection_note',
         'rejected_at',
+        'sla_breached',
     ];
 
     /**
@@ -38,6 +39,7 @@ class Ticket extends Model
         'last_reminder_at' => 'datetime',
         'resolved_at' => 'datetime',
         'rejected_at' => 'datetime',
+        'sla_breached' => 'boolean',
     ];
 
     /**
@@ -99,5 +101,13 @@ class Ticket extends Model
     public function attachments()
     {
         return $this->hasMany(TicketAttachment::class);
+    }
+
+    /**
+     * Get all activity log entries for this ticket.
+     */
+    public function activities()
+    {
+        return $this->hasMany(TicketActivity::class);
     }
 }

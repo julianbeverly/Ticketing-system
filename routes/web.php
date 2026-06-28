@@ -61,13 +61,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/slaconfig', [TicketController::class, 'updateSlaConfig'])->name('admin.slaconfig.update');
         
         // Reports
-        Route::get('/techreport', [TicketController::class, 'report'])->name('tech.reporting');
-        Route::get('/techreport/{user}', [TicketController::class, 'techReportDetails'])->name('admin.techreport.details');
-        Route::get('/ticketreport', [TicketController::class, 'ticketReport'])->name('admin.ticketreport');
-        Route::get('/ticketreport/export/excel', [TicketController::class, 'exportExcel'])->name('admin.ticketreport.export.excel');
-        Route::get('/ticketreport/export/pdf', [TicketController::class, 'exportPdf'])->name('admin.ticketreport.export.pdf');
-        Route::get('/techreport/export/excel', [TicketController::class, 'exportTechExcel'])->name('admin.techreport.export.excel');
-        Route::get('/techreport/export/pdf', [TicketController::class, 'exportTechPdf'])->name('admin.techreport.export.pdf');
+        Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports');
         
         // Users Management
         Route::get('/users', [UserController::class, 'index'])->name('user.index');

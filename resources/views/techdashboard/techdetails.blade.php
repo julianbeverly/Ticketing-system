@@ -145,8 +145,6 @@
                     <option value="assigned" {{ $ticket->status == 'assigned' ? 'selected' : '' }}>Assigned</option>
                     <option value="in_progress" {{ $ticket->status == 'in_progress' ? 'selected' : '' }}>In Progress</option>
                     <option value="resolved" {{ $ticket->status == 'resolved' ? 'selected' : '' }}>Resolved</option>
-                    <option value="closed" {{ $ticket->status == 'closed' ? 'selected' : '' }}>Closed</option>
-                    <option value="overdue" {{ $ticket->status == 'overdue' ? 'selected' : '' }}>Overdue</option>
                   </select>
                 </div>
               </div>

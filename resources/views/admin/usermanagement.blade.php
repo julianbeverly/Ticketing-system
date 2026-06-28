@@ -366,7 +366,7 @@
                 </div>
 
                 <!-- COMPANY -->
-                <select name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 1rem;">
+                <select id="createCompany" name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: 1rem;" onchange="filterDepartmentsByCompany('createCompany', 'createDepartment')">
                     <option value="" selected disabled>Select Company</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
@@ -374,10 +374,10 @@
                 </select>
 
                 <!-- DEPARTMENT -->
-                <select name="department_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+                <select id="createDepartment" name="department_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="" selected disabled>Select Department</option>
                     @foreach($departments as $department)
-                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                        <option value="{{ $department->id }}" data-company="{{ $department->company_id }}">{{ $department->name }}</option>
                     @endforeach
                 </select>
 
@@ -439,13 +439,17 @@
                     style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="" selected disabled>Select a primary discipline</option>
                     <option value="networking">Networking</option>
-                    <option value="software">Software</option>
-                    <option value="hardware">Hardware</option>
+                    <option value="business_analyst">Business Analyst</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="ui_ux">UI/UX</option>
+                    <option value="devops">DevOps</option>
+                    <option value="qa">QA</option> 
                 </select>
             </div>
 
             <!-- COMPANY (EDIT) -->
-            <select id="editCompany" name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            <select id="editCompany" name="company_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" onchange="filterDepartmentsByCompany('editCompany', 'editDepartment')">
                 <option value="" disabled>Select Company</option>
                 @foreach($companies as $company)
                     <option value="{{ $company->id }}">{{ $company->name }}</option>
@@ -456,7 +460,7 @@
             <select id="editDepartment" name="department_id" required style="width: 100%; margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
                 <option value="" disabled>Select Department</option>
                 @foreach($departments as $department)
-                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                    <option value="{{ $department->id }}" data-company="{{ $department->company_id }}">{{ $department->name }}</option>
                 @endforeach
             </select>
 
@@ -503,6 +507,30 @@
                 if (specialityField) specialityField.style.display = 'none';
             }
         }
+
+        function filterDepartmentsByCompany(companySelectId, departmentSelectId) {
+            const companyId = document.getElementById(companySelectId).value;
+            const deptSelect = document.getElementById(departmentSelectId);
+            const options = deptSelect.querySelectorAll('option');
+
+            let firstValidDept = null;
+
+            options.forEach(opt => {
+                if (!opt.value) {
+                    opt.style.display = ''; // Always show placeholder
+                } else if (opt.dataset.company == companyId) {
+                    opt.style.display = '';
+                    if (!firstValidDept) firstValidDept = opt.value;
+                } else {
+                    opt.style.display = 'none';
+                }
+            });
+
+            const selectedOpt = deptSelect.querySelector('option:checked');
+            if (selectedOpt && selectedOpt.value && selectedOpt.dataset.company != companyId) {
+                deptSelect.value = '';
+            }
+        }
         const modal = document.getElementById("sampleModal");
         const modalOverlay = document.getElementById("modalOverlay");
         const closeBtn = document.getElementById("closeBtn");
@@ -536,6 +564,7 @@
                 document.getElementById("editDepartment").value = btn.dataset.department || '';
                 
                 toggleEditSupervisorFields(); // Show or hide supervisor fields appropriately
+                filterDepartmentsByCompany('editCompany', 'editDepartment'); // Ensure departments are filtered correctly based on current company
 
                 editUserForm.action = `/users/${btn.dataset.id}`;
                 modalOverlay.style.display = "block";
