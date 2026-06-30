@@ -221,11 +221,11 @@ class TicketController extends Controller
             });
         }
 
-        $tech->assigned_count   = (clone $ticketQuery)->count();
-        $tech->inprogress_count = (clone $ticketQuery)->where('status', 'in_progress')->count();
-        $tech->resolved_count   = (clone $ticketQuery)->where('status', 'resolved')->count();
-        $tech->closed_count     = (clone $ticketQuery)->where('status', 'closed')->count();
-        $tech->overdue_count    = (clone $ticketQuery)->where('status', 'overdue')->count();
+        $tech->active_count       = (clone $ticketQuery)->whereIn('status', ['assigned', 'in_progress'])->count();
+        $tech->completed_count    = (clone $ticketQuery)->whereIn('status', ['resolved', 'closed'])->count();
+        $tech->sla_met_count      = (clone $ticketQuery)->whereIn('status', ['resolved', 'closed'])->where('sla_breached', false)->count();
+        $tech->sla_breached_count = (clone $ticketQuery)->whereIn('status', ['resolved', 'closed'])->where('sla_breached', true)->count();
+        $tech->sla_compliance     = $tech->completed_count > 0 ? round(($tech->sla_met_count / $tech->completed_count) * 100, 1) : null;
 
         return view('techdashboard.technicianreport', compact('tech'));
     }
@@ -237,13 +237,20 @@ class TicketController extends Controller
     {
         $user = Auth::user();
 
-        $totalTickets = Ticket::where('technician_id', $user->id)->count();
-        $overdueCount = Ticket::where('technician_id', $user->id)->where('status', 'overdue')->count();
-        
-        // SLA Performance: Percentage of tickets NOT overdue
-        $slaPerformance = $totalTickets > 0 
-            ? round((($totalTickets - $overdueCount) / $totalTickets) * 100, 1) 
-            : 0;
+        $completedTickets = Ticket::where('technician_id', $user->id)
+            ->whereIn('status', ['resolved', 'closed'])->get();
+        $completedCount = $completedTickets->count();
+
+        $totalDays = 0;
+        foreach ($completedTickets as $ticket) {
+            if ($ticket->resolved_at) {
+                $totalDays += ($ticket->created_at->diffInHours($ticket->resolved_at) / 24);
+            }
+        }
+        $avgResolution = $completedCount > 0 ? round($totalDays / $completedCount, 1) . ' days' : 'N/A';
+
+        $slaMetCount = $completedTickets->where('sla_breached', false)->count();
+        $slaCompliance = $completedCount > 0 ? round(($slaMetCount / $completedCount) * 100, 1) . '%' : 'N/A';
 
         // ── Date filtering based on report_type (by assignment date = created_at) ─
         $query = Ticket::with(['category', 'type'])->where('technician_id', $user->id);
@@ -282,7 +289,7 @@ class TicketController extends Controller
 
         $tickets = $query->orderBy('created_at', 'desc')->get();
 
-        return view('techdashboard.techreportdetails', compact('user', 'overdueCount', 'slaPerformance', 'tickets'));
+        return view('techdashboard.techreportdetails', compact('user', 'avgResolution', 'slaCompliance', 'tickets'));
     }
 
     /**
@@ -582,7 +589,7 @@ class TicketController extends Controller
      */
     public function employeeTicketReport(Request $request)
     {
-        $query = Ticket::with(['category', 'type'])
+        $query = Ticket::with(['category', 'type', 'technician.department'])
             ->where('user_id', Auth::id());
 
         if ($request->filled('search')) {

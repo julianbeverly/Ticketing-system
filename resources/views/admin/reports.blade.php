@@ -479,7 +479,7 @@
                     </div>
                     <div class="kpi-card" style="--kpi-color: var(--purple)">
                         <div class="kpi-label">SLA Compliance</div>
-                        <div class="kpi-value">{{ $slaCompliance }}%</div>
+                        <div class="kpi-value">{{ $slaCompliance !== null ? $slaCompliance . '%' : 'N/A' }}</div>
                     </div>
                 </div>
 
@@ -639,7 +639,7 @@
                     </div>
                     <div class="kpi-card" style="--kpi-color: var(--success)">
                         <div class="kpi-label">Overall SLA Compliance</div>
-                        <div class="kpi-value">{{ $overallSlaCompliance }}%</div>
+                        <div class="kpi-value">{{ $overallSlaCompliance !== null ? $overallSlaCompliance . '%' : 'N/A' }}</div>
                     </div>
                     <!-- <div class="kpi-card" style="--kpi-color: var(--warning)">
                         <div class="kpi-label">Tickets Assigned</div>
@@ -705,7 +705,7 @@
                             <tr>
                                 <th>Technician</th>
                                 <th>Assigned</th>
-                                <th>Closed</th>
+                                <th>Completed</th>
                                 <th>Open</th>
                                 <th>Overdue</th>
                                 <th>Avg Resolution</th>
@@ -804,11 +804,11 @@
                     </div>
                     <div class="kpi-card" style="--kpi-color: var(--purple)">
                         <div class="kpi-label">Resolution Rate</div>
-                        <div class="kpi-value">{{ $totalTickets > 0 ? round(($closedTickets/$totalTickets)*100, 1) : 0 }}%</div>
+                        <div class="kpi-value">{{ $totalTickets > 0 ? round(($completedTickets / $totalTickets) * 100, 1) : 0 }}%</div>
                     </div>
                     <div class="kpi-card" style="--kpi-color: var(--warning)">
                         <div class="kpi-label">SLA Compliance</div>
-                        <div class="kpi-value">{{ $slaCompliance }}%</div>
+                        <div class="kpi-value">{{ $slaCompliance !== null ? $slaCompliance . '%' : 'N/A' }}</div>
                     </div>
                 </div>
 

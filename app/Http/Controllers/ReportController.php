@@ -129,9 +129,10 @@ class ReportController extends Controller
         $baseQuery = $this->getFilteredQuery($request);
 
         // ── 1. Company/Department Tab Data ─────────────────────────────────────
-        $totalTickets  = (clone $baseQuery)->count();
-        $openTickets   = (clone $baseQuery)->where('status', '!=', 'closed')->count();
-        $closedTickets = (clone $baseQuery)->where('status', 'closed')->count();
+        $totalTickets      = (clone $baseQuery)->count();
+        $openTickets       = (clone $baseQuery)->where('status', '!=', 'closed')->count();
+        $closedTickets     = (clone $baseQuery)->where('status', 'closed')->count();
+        $completedTickets  = (clone $baseQuery)->whereIn('status', ['resolved', 'closed'])->count();
 
         // Avg Resolution in Days
         $resolvedTickets    = (clone $baseQuery)->whereNotNull('resolved_at')->get();
@@ -143,22 +144,10 @@ class ReportController extends Controller
             ? round($totalDays / $resolvedTickets->count(), 1)
             : 0;
 
-        // SLA Compliance (global)
-        $totalSlaTickets = (clone $baseQuery)->whereNotNull('due_at')->count();
-        $slaCompliantCount = 0;
-        if ($totalSlaTickets > 0) {
-            $slaCompliantCount = (clone $baseQuery)->whereNotNull('due_at')
-                ->where(function($query) {
-                    $query->where(function($q) {
-                        $q->whereIn('status', ['resolved', 'closed'])
-                          ->whereColumn('resolved_at', '<=', 'due_at');
-                    })->orWhere(function($q) {
-                        $q->whereNotIn('status', ['resolved', 'closed'])
-                          ->where('due_at', '>=', now());
-                    });
-                })->count();
-        }
-        $slaCompliance = $totalSlaTickets > 0 ? round(($slaCompliantCount / $totalSlaTickets) * 100) : 0;
+        // SLA Compliance (global) — based on completed tickets (resolved + closed)
+        $completedForSla  = (clone $baseQuery)->whereIn('status', ['resolved', 'closed'])->count();
+        $slaMetForKpi     = (clone $baseQuery)->whereIn('status', ['resolved', 'closed'])->where('sla_breached', false)->count();
+        $slaCompliance    = $completedForSla > 0 ? round(($slaMetForKpi / $completedForSla) * 100) : null;
 
         // Donut Data (Company tab — all statuses)
         $statusCounts = (clone $baseQuery)->select('status', DB::raw('count(*) as count'))->groupBy('status')->get()->pluck('count', 'status')->toArray();
@@ -201,14 +190,14 @@ class ReportController extends Controller
         $deptTable = [];
         foreach ($deptCounts as $dept => $data) {
             $deptData[] = ['dept' => $dept, 'tickets' => $data['total']];
-            $avg = $data['res_count'] > 0 ? round($data['res_days'] / $data['res_count'], 1) : 0;
+            $avg = $data['res_count'] > 0 ? round($data['res_days'] / $data['res_count'], 1) . ' days' : 'N/A';
             $deptTable[] = [
                 'dept'    => $dept,
                 'total'   => $data['total'],
                 'closed'  => $data['closed'],
                 'open'    => $data['open'],
                 'overdue' => $data['overdue'],
-                'avg'     => $avg . ' days',
+                'avg'     => $avg,
             ];
         }
 
@@ -234,10 +223,10 @@ class ReportController extends Controller
 
         // ── 2. Staff Tab Data ──────────────────────────────────────────────────
         $totalTechnicians  = $technicians->count();
-        // Calculate Global SLA compliance to replace Active Technicians KPI
-        $slaCompliantCount = (clone $baseQuery)->whereNotNull('due_at')->where('sla_breached', false)->count();
-        $totalSlaTickets   = (clone $baseQuery)->whereNotNull('due_at')->count();
-        $overallSlaCompliance = $totalSlaTickets > 0 ? round(($slaCompliantCount / $totalSlaTickets) * 100) : 0;
+        // Staff Tab: Overall SLA compliance KPI — based on completed (resolved+closed) tickets
+        $staffCompletedTotal = (clone $baseQuery)->whereNotNull('technician_id')->whereIn('status', ['resolved', 'closed'])->count();
+        $staffSlaMetTotal    = (clone $baseQuery)->whereNotNull('technician_id')->whereIn('status', ['resolved', 'closed'])->where('sla_breached', false)->count();
+        $overallSlaCompliance = $staffCompletedTotal > 0 ? round(($staffSlaMetTotal / $staffCompletedTotal) * 100) : null;
 
         // Build per-technician stats from all tickets
         $staffCounts = [];
@@ -258,15 +247,15 @@ class ReportController extends Controller
                 ];
             }
 
-            $isClosed = $ticket->status === 'closed';
+            $isCompleted = in_array($ticket->status, ['resolved', 'closed']);
 
-            if ($isClosed) {
-                $staffCounts[$techId]['closed']++;
+            if ($isCompleted) {
+                $staffCounts[$techId]['closed']++; // 'closed' key now means 'completed'
                 if ($ticket->resolved_at) {
                     $staffCounts[$techId]['res_days'] += ($ticket->created_at->diffInHours($ticket->resolved_at) / 24);
                     $staffCounts[$techId]['res_count']++;
                 }
-                // SLA tracking for closed tickets
+                // SLA tracking for completed tickets
                 if ($ticket->due_at) {
                     if (!$ticket->sla_breached) {
                         $staffCounts[$techId]['sla_met']++;
@@ -298,16 +287,16 @@ class ReportController extends Controller
 
             $avg           = $data['res_count'] > 0 ? round($data['res_days'] / $data['res_count'], 1) : null;
             $avgDisplay    = $avg !== null ? $avg . ' days' : 'N/A';
-            $totalClosed   = $data['closed'];
-            $slaComplPct   = $totalClosed > 0
-                ? round(($data['sla_met'] / $totalClosed) * 100) . '%'
+            $totalCompleted = $data['closed']; // 'closed' key = resolved + closed
+            $slaComplPct   = $totalCompleted > 0
+                ? round(($data['sla_met'] / $totalCompleted) * 100) . '%'
                 : 'N/A';
 
             // Workload chart: only active tickets
             if ($data['workload'] > 0) {
                 $staffWorkload[] = ['name' => $tech->name, 'assigned' => $data['workload']];
             }
-            // Closed chart
+            // Completed chart
             if ($data['closed'] > 0) {
                 $staffClosed[] = ['name' => $tech->name, 'closed' => $data['closed']];
                 $staffResTime[]  = ['name' => $tech->name, 'days'     => $avg ?? 0];
@@ -316,7 +305,7 @@ class ReportController extends Controller
             $staffTable[] = [
                 'name'         => $tech->name,
                 'assigned'     => $data['workload'],
-                'closed'       => $totalClosed,
+                'closed'       => $totalCompleted,
                 'open'         => $data['open'],
                 'overdue'      => $data['overdue'],
                 'avg'          => $avgDisplay,
@@ -398,7 +387,7 @@ class ReportController extends Controller
 
         return view('admin.reports', compact(
             'companies', 'departments', 'technicians',
-            'totalTickets', 'openTickets', 'closedTickets', 'avgResolutionDays', 'slaCompliance',
+            'totalTickets', 'openTickets', 'closedTickets', 'completedTickets', 'avgResolutionDays', 'slaCompliance',
             'donutData', 'deptData', 'monthlyTrend', 'deptTable',
             'totalTechnicians', 'overallSlaCompliance', 'ticketsAssigned', 'ticketsClosed', 'ticketsOverdue',
             'staffWorkload', 'staffClosed', 'staffTable', 'staffResTime', 'staffDonut',

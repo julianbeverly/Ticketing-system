@@ -202,8 +202,8 @@
                             <tr>
                                 <th>TICKET ID</th>
                                 <th>SUBJECT</th>
-                                <th>TECHNICIAN</th>
-                                <th>SLA PRIORITY</th>
+                                <th>DEPARTMENT</th>
+                                <th>SLA STATUS</th>
                                 <th>STATUS</th>
                                 <th>CREATED AT</th>
                                 <th class="action-col">ACTION</th>
@@ -211,9 +211,6 @@
                         </thead>
                         <tbody>
                             @forelse($tickets as $ticket)
-                                @php
-                                    $isOverdue = $ticket->due_at && \Carbon\Carbon::parse($ticket->due_at)->isPast() && !in_array($ticket->status, ['resolved', 'closed']);
-                                @endphp
                                 <tr>
                                     <td><a href="{{ route('employee.tickets.details', $ticket->id) }}" class="ticket-id-link">{{ $ticket->ticket_id }}</a></td>
                                     <td>
@@ -223,12 +220,12 @@
                                     </td>
                                     <td>
                                         <div class="ticket-subject">
-                                            <span>{{ optional($ticket->technician)->name }}</span>
+                                            <span>{{ optional(optional($ticket->technician)->department)->name ?? 'Unassigned' }}</span>
                                         </div>
                                     </td>
                                     <td>
-                                        @if($isOverdue)
-                                            <span class="ticket-status status-inprogress">Overdue</span>
+                                        @if($ticket->sla_breached)
+                                            <span class="ticket-status status-inprogress">Breached SLA</span>
                                         @else
                                             <span class="ticket-status status-resolved">Within SLA</span>
                                         @endif

@@ -63,8 +63,8 @@
               <tr>
                 <th>TECHNICIAN EMAIL</th>
                 <th>PHONE NUMBER</th>
-                <th>TOTAL OVERDUE TICKETS</th>
-                <th>SLA PERFORMANCE (%)</th>
+                <th>AVG. RESOLUTION</th>
+                <th>SLA COMPLIANCE</th>
               </tr>
             </thead>
             <tbody>
@@ -75,23 +75,27 @@
                 {{-- Phone number, fallback to N/A --}}
                 <td>{{ $user->phone ?? 'N/A' }}</td>
 
-                {{-- Overdue count coloured red if > 0, green if 0 --}}
+                {{-- Avg. Resolution --}}
                 <td>
-                  <span style="color: {{ $overdueCount > 0 ? '#dc2626' : '#059669' }}; font-weight: bold;">
-                    {{ $overdueCount }}
+                  <span style="font-weight: bold;">
+                    {{ $avgResolution }}
                   </span>
                 </td>
 
-                {{-- SLA performance with colour-coded progress bar --}}
+                {{-- SLA Compliance --}}
                 <td>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-weight: bold; color: {{ $slaPerformance >= 90 ? '#059669' : ($slaPerformance >= 70 ? '#d97706' : '#dc2626') }};">
-                      {{ $slaPerformance }}%
-                    </span>
-                    <div style="width: 100px; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">
-                      <div style="width: {{ $slaPerformance }}%; height: 100%; background: {{ $slaPerformance >= 90 ? '#059669' : ($slaPerformance >= 70 ? '#d97706' : '#dc2626') }};"></div>
-                    </div>
-                  </div>
+                    @if($slaCompliance === 'N/A')
+                        <span style="color:#94A3B8;">N/A</span>
+                    @else
+                        @php
+                            $numericSla = (float) rtrim($slaCompliance, '%');
+                        @endphp
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-weight: bold; color: {{ $numericSla >= 80 ? '#059669' : ($numericSla >= 50 ? '#d97706' : '#dc2626') }};">
+                                {{ $slaCompliance }}
+                            </span>
+                        </div>
+                    @endif
                 </td>
               </tr>
             </tbody>
@@ -110,14 +114,13 @@
                 <th>TICKET ID</th>
                 <th>SUBJECT</th>
                 <th>CLASSIFICATION</th>
-                <th>SLA PRIORITY</th>
+                <th>SLA STATUS</th>
                 <th>STATUS</th>
               </tr>
             </thead>
             <tbody>
               @forelse($tickets as $ticket)
                 @php
-                    $isOverdue = $ticket->due_at && now()->greaterThan($ticket->due_at) && !in_array($ticket->status, ['resolved', 'closed']);
                     $statusText = strtoupper(str_replace('_', ' ', $ticket->status));
                     if($ticket->status === 'open') $statusClass = 'background:#e0e7ff; color:#3730a3;';
                     elseif($ticket->status === 'assigned') $statusClass = 'background:#e0e7ff; color:#3730a3;';
@@ -141,10 +144,10 @@
                     </div>
                   </td>
                   <td style="white-space:nowrap;">
-                    @if($isOverdue || $ticket->status === 'overdue')
-                      <span style="background:#ffedd5; color:#c2410c; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:bold; white-space:nowrap;">OVERDUE</span>
+                    @if($ticket->sla_breached)
+                      <span style="background:#fee2e2; color:#dc2626; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:bold; white-space:nowrap;">Breached SLA</span>
                     @else
-                      <span style="background:#dcfce7; color:#166534; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:bold; white-space:nowrap;">WITHIN SLA</span>
+                      <span style="background:#dcfce7; color:#166534; padding:4px 12px; border-radius:12px; font-size:0.75rem; font-weight:bold; white-space:nowrap;">Within SLA</span>
                     @endif
                   </td>
                   <td style="white-space:nowrap;">

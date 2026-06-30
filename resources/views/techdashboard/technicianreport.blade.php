@@ -123,11 +123,11 @@
               <thead>
                 <tr>
                   <th>NAME</th>
-                   <th>ASSIGNED</th>
-                  <th>INPROGRESS</th>
-                  <th>RESOLVED</th>
-                  <th>CLOSED</th>
-                  <th>OVERDUE</th>
+                  <th>ACTIVE</th>
+                  <th>COMPLETED</th>
+                  <th>SLA MET</th>
+                  <th>SLA BREACHED</th>
+                  <th>SLA COMPLIANCE</th>
                   <th class="action-col">ACTION</th>
                 </tr>
               </thead>
@@ -139,12 +139,19 @@
                       <strong>{{ $tech->name }}</strong>
                     </div>
                   </td>
-                  {{-- Tickets currently assigned to this technician --}}
-                  <td>{{ $tech->assigned_count }}</td>
-                  <td>{{ $tech->inprogress_count }}</td>
-                  <td>{{ $tech->resolved_count }}</td>
-                  <td>{{ $tech->closed_count }}</td>
-                  <td>{{ $tech->overdue_count }}</td>
+                  <td>{{ $tech->active_count }}</td>
+                  <td>{{ $tech->completed_count }}</td>
+                  <td><span style="color:#059669; font-weight:600;">{{ $tech->sla_met_count }}</span></td>
+                  <td><span style="color:#dc2626; font-weight:600;">{{ $tech->sla_breached_count }}</span></td>
+                  <td>
+                      @if($tech->sla_compliance === null)
+                          <span style="color:#94A3B8;">N/A</span>
+                      @else
+                          <span style="font-weight:700; color: {{ $tech->sla_compliance >= 80 ? '#059669' : ($tech->sla_compliance >= 50 ? '#D97706' : '#dc2626') }};">
+                              {{ $tech->sla_compliance }}%
+                          </span>
+                      @endif
+                  </td>
                   <td class="action-col">
                     <a href="{{ route('tech.own.report.details') }}" class="tech-view-btn">View More</a>
                   </td>
