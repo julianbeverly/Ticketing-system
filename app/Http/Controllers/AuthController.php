@@ -38,8 +38,8 @@ class AuthController extends Controller
         }
 
         // Generate OTP
-        $otp = rand(100000, 999999);
-        // $otp = 111111;
+        // $otp = rand(100000, 999999);
+        $otp = 111111;
 
         // Save OTP in session (NO DATABASE TABLE NEEDED)
         session([
@@ -49,7 +49,7 @@ class AuthController extends Controller
         ]);
 
         // Send OTP to email
-        Mail::to($user->email)->send(new OtpMail($otp));
+        // Mail::to($user->email)->send(new OtpMail($otp));
 
         // Go to OTP page
         return redirect()->route('authentication.otp')
