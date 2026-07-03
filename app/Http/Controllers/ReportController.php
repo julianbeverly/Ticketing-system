@@ -110,6 +110,13 @@ class ReportController extends Controller
 
     public function index(Request $request)
     {
+        if (!$request->has('report_type')) {
+            $request->merge([
+                'report_type' => 'monthly',
+                'monthly_date' => Carbon::now()->format('Y-m'),
+            ]);
+        }
+
         $activeTab = $request->input('active_tab', 'company');
 
         $companies   = Company::all();
@@ -152,11 +159,11 @@ class ReportController extends Controller
         // Donut Data (Company tab — all statuses)
         $statusCounts = (clone $baseQuery)->select('status', DB::raw('count(*) as count'))->groupBy('status')->get()->pluck('count', 'status')->toArray();
         $donutData = [
-            ['name' => 'Open',        'value' => $statusCounts['open'] ?? 0,        'color' => '#3B82F6'],
-            ['name' => 'Assigned',    'value' => $statusCounts['assigned'] ?? 0,    'color' => '#8B5CF6'],
-            ['name' => 'In Progress', 'value' => $statusCounts['in_progress'] ?? 0, 'color' => '#F59E0B'],
-            ['name' => 'Resolved',    'value' => $statusCounts['resolved'] ?? 0,    'color' => '#10B981'],
-            ['name' => 'Closed',      'value' => $statusCounts['closed'] ?? 0,      'color' => '#64748B'],
+            ['name' => 'Open',        'value' => $statusCounts['open'] ?? 0,        'color' => '#df3846'],
+            ['name' => 'Assigned',    'value' => $statusCounts['assigned'] ?? 0,    'color' => '#ffc000'],
+            ['name' => 'In Progress', 'value' => $statusCounts['in_progress'] ?? 0, 'color' => '#028ab6'],
+            ['name' => 'Resolved',    'value' => $statusCounts['resolved'] ?? 0,    'color' => '#32a249'],
+            ['name' => 'Closed',      'value' => $statusCounts['closed'] ?? 0,      'color' => '#063765'],
         ];
         $donutData = array_values(array_filter($donutData, fn($item) => $item['value'] > 0));
 
@@ -337,10 +344,10 @@ class ReportController extends Controller
         $closedCount      = $ticketsClosed;
 
         $staffDonut = [
-            ['name' => 'Assigned',    'value' => $assignedCount,   'color' => '#8B5CF6'],
-            ['name' => 'In Progress', 'value' => $inProgressCount, 'color' => '#F59E0B'],
-            ['name' => 'Resolved',    'value' => $resolvedCount,   'color' => '#10B981'],
-            ['name' => 'Closed',      'value' => $closedCount,     'color' => '#64748B'],
+            ['name' => 'Assigned',    'value' => $assignedCount,   'color' => '#ffc000'],
+            ['name' => 'In Progress', 'value' => $inProgressCount, 'color' => '#028ab6'],
+            ['name' => 'Resolved',    'value' => $resolvedCount,   'color' => '#32a249'],
+            ['name' => 'Closed',      'value' => $closedCount,     'color' => '#063765'],
         ];
         $staffDonut = array_values(array_filter($staffDonut, fn($item) => $item['value'] > 0));
 

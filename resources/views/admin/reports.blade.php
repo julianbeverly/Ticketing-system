@@ -138,7 +138,7 @@
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: #000000;
+            background: #FBBF24;
         }
         .kpi-card .kpi-label {
             font-size: 0.7rem;
@@ -870,9 +870,9 @@ window.addEventListener('click', function(e) {
 
 // ── Date Picker Toggling ───────────────────────
 function toggleDatePicker(prefix, type) {
-    const groups = ['daily','weekly','monthly','custom','custom2'];
+    const groups = ['daily-group','weekly-group','monthly-group','custom-group','custom-group2'];
     groups.forEach(g => {
-        const el = document.getElementById(prefix + '-' + g + '-group');
+        const el = document.getElementById(prefix + '-' + g);
         if (el) el.classList.remove('visible');
     });
     if (type === 'daily') {
@@ -1043,12 +1043,12 @@ function makeLine(id, labels, values, color, label) {
 function drawChartsForTab(tab) {
     if (tab === 'company') {
         makeDonut('statusDonutChart', donutData);
-        makeVBar('deptBarChart', deptData.map(d=>d.dept), deptData.map(d=>d.tickets), '#3B82F6', 'Tickets');
-        makeLine('monthlyTrendChart', monthlyTrend.map(d=>d.month), monthlyTrend.map(d=>d.tickets), '#3B82F6', 'Tickets');
+        makeVBar('deptBarChart', deptData.map(d=>d.dept), deptData.map(d=>d.tickets), '#028ab6', 'Tickets');
+        makeLine('monthlyTrendChart', monthlyTrend.map(d=>d.month), monthlyTrend.map(d=>d.tickets), '#063765', 'Tickets');
     }
     else if (tab === 'staff') {
-        makeHBar('staffWorkloadChart', staffWorkload.map(d=>d.name), staffWorkload.map(d=>d.assigned), '#3B82F6');
-        makeHBar('staffClosedChart', staffClosed.map(d=>d.name), staffClosed.map(d=>d.closed), '#10B981');
+        makeHBar('staffWorkloadChart', staffWorkload.map(d=>d.name), staffWorkload.map(d=>d.assigned), '#028ab6');
+        makeHBar('staffClosedChart', staffClosed.map(d=>d.name), staffClosed.map(d=>d.closed), '#32a249');
         // Resolution time bar — colour based on value
         destroyChart('staffResTimeChart');
         const rtCtx = document.getElementById('staffResTimeChart');
@@ -1059,7 +1059,7 @@ function drawChartsForTab(tab) {
                     labels: staffResTime.map(d=>d.name),
                     datasets:[{
                         data: staffResTime.map(d=>d.days),
-                        backgroundColor: staffResTime.map(d => d.days > 3.5 ? '#EF4444' : d.days > 2 ? '#F59E0B' : '#10B981'),
+                        backgroundColor: staffResTime.map(d => d.days > 3.5 ? '#df3846' : d.days > 2 ? '#ffc000' : '#32a249'),
                         borderRadius:4
                     }]
                 },
@@ -1073,7 +1073,7 @@ function drawChartsForTab(tab) {
         makeDonut('staffDonutChart', staffDonut);
     }
     else if (tab === 'period') {
-        makeLine('creationTrendChart', creationTrend.map(d=>d.month), creationTrend.map(d=>d.tickets), '#3B82F6', 'Created');
+        makeLine('creationTrendChart', creationTrend.map(d=>d.month), creationTrend.map(d=>d.tickets), '#063765', 'Created');
 
         // Open vs Closed grouped bar
         destroyChart('openClosedChart');
@@ -1084,8 +1084,8 @@ function drawChartsForTab(tab) {
                 data:{
                     labels: openClosed.map(d=>d.month),
                     datasets:[
-                        { label:'Open',   data:openClosed.map(d=>d.open),   backgroundColor:'#0EA5E9', borderRadius:4 },
-                        { label:'Closed', data:openClosed.map(d=>d.closed), backgroundColor:'#10B981', borderRadius:4 }
+                        { label:'Open',   data:openClosed.map(d=>d.open),   backgroundColor:'#028ab6', borderRadius:4 },
+                        { label:'Closed', data:openClosed.map(d=>d.closed), backgroundColor:'#32a249', borderRadius:4 }
                     ]
                 },
                 options:{
@@ -1098,7 +1098,7 @@ function drawChartsForTab(tab) {
 
         // Category usage bar chart
         if (categoryTrend.length > 0) {
-            makeVBar('categoryTrendChart', categoryTrend.map(d=>d.name), categoryTrend.map(d=>d.count), '#8B5CF6', 'Tickets');
+            makeVBar('categoryTrendChart', categoryTrend.map(d=>d.name), categoryTrend.map(d=>d.count), '#ffc000', 'Tickets');
         }
     }
 }
