@@ -30,9 +30,10 @@
             border-radius: 8px;
             overflow: hidden;
             background-color: #f3f4f6;
-            width: fit-content;
+            width: 100%;
         }
         .dent-tab {
+            flex: 1;
             padding: 0.7rem 2.5rem;
             font-size: 0.9rem;
             font-weight: 600;
